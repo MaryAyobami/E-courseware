@@ -1,0 +1,45 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/ageo.png",
+      "sha1": "b4b87c121cd355d06b2e6352052bbf95fe3ee2c2"
+    },
+    {
+      "path": "assets/fonts/AgeoPersonalUse-Bold.otf",
+      "sha1": "d93a8cb7fa451c4797a9f1831f32747ebaa95d04"
+    },
+    {
+      "path": "assets/fonts/AgeoPersonalUse-ExtraBold.otf",
+      "sha1": "76df44b3773f47259dd4740252584b704f0dc3d3"
+    },
+    {
+      "path": "assets/fonts/AgeoPersonalUse-Heavy.otf",
+      "sha1": "2d4757359b33e814142ccc844e0e3c47e88f5bf5"
+    },
+    {
+      "path": "assets/fonts/AgeoPersonalUse-Light.otf",
+      "sha1": "4eb2a9c73dd56c61badbaa2b88029930b997c079"
+    },
+    {
+      "path": "assets/fonts/AgeoPersonalUse-Medium.otf",
+      "sha1": "dd8faf09cf9692cda49f8ab7e5ca52019a3610ba"
+    },
+    {
+      "path": "assets/fonts/AgeoPersonalUse-SemiBold.otf",
+      "sha1": "d289e250577b3a4a8adb19fe06e5bf274addbf0e"
+    },
+    {
+      "path": "assets/fonts/AgeoPersonalUse-Thin.otf",
+      "sha1": "718b2e6ffd8cf399d21e937f7fe65759d4a8dd5b"
+    },
+    {
+      "path": "assets/fonts/AgeoPersonalUse.otf",
+      "sha1": "3669cea84ddd2d6db4eac4939502d86519557947"
+    },
+    {
+      "path": "assets/fonts/sharefonts.net.txt",
+      "sha1": "85bf45cf82ce60461ff5acb8f86b0df501090a8b"
+    }
+  ]
+}
