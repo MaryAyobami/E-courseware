@@ -23,8 +23,8 @@ const registerSchema = Joi.object({
 })
 
 const loginSchema = Joi.object({
-    email: Joi.string().required(),
-    password: Joi.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).required()
+    email: Joi.string().required().messages({"any.required": "Email is required!"}),
+    password: Joi.string().required()
 })
 const SECRET = process.env.SECRET
 //token
@@ -167,7 +167,7 @@ router.post('/api/refreshToken', async (req, res) => {
 
 // profile
  router.get('/api/profile-lecturer/:token',attachStudent,async(req,res)=>{
-   try{r
+   try{
       const lecturer = req.user.sub
       const lecturerProfile = await Lecturer.findById(lecturer)
       console.log(lecturerProfile)

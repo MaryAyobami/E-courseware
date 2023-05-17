@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TextInput, View,Image, Pressable , } from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, View,Image, Pressable , ActivityIndicator, Dimensions } from 'react-native'
 import React,{useState, useRef, useEffect, useContext} from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTogglePasswordVisibility } from '../components/hooks/useTogglePasswordVisibility';
@@ -7,9 +7,16 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 import {AuthContext} from '../components/context/AuthContext';
 import * as Keychain from 'react-native-keychain';
 import {AxiosContext} from '../components/context/AxiosContext';
+import { MMKV } from 'react-native-mmkv'
+import NetInfo from "@react-native-community/netinfo";
+import InternetCheck from '../components/InternetCheck';
+
+
+export const storage = new MMKV()
 
 const StuLogin = ({navigation}) => {
 
+  const [loading , setLoading] = useState(false)
   const validationerror = useRef('')
 
   // login details
@@ -22,11 +29,46 @@ const StuLogin = ({navigation}) => {
 
   const authContext = useContext(AuthContext);
   const {publicAxios} = useContext(AxiosContext);
+  const studentData = useRef()
 
-  // handle llogin
+  // internet check
+  const [isOffline, setOfflineStatus] = useState(false);
+  useEffect(() => {
+    const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+      const offline = !(state.isConnected && state.isInternetReachable);
+      setOfflineStatus(offline);
+    });
+   console.log('testing')
+   console.log(isOffline)
+    removeNetInfoSubscription();
+  },[]);
 
-    const handleLogin = ()=>{
-      publicAxios.post(`login-student`,{
+
+  // handle login
+
+    const handleLogin = async()=>{
+
+      try{
+  
+      if(password == '' || matricnumber == ''){
+          showMessage({
+            message: `The input fields cannot be empty!`,
+              type: "default",
+              backgroundColor: '#732955',
+            titleStyle: {
+              fontFamily:"tilda-sans_medium",
+              color:'#DFF0EB',
+              fontSize: 16,
+              padding: 4
+            },
+          })
+
+          setMatricnumber('')
+          setPassword('')
+        }
+      else{
+        setLoading(true)
+        await publicAxios.post(`/api/login-student`,{
         matricnumber, 
         password,
       }).
@@ -34,6 +76,8 @@ const StuLogin = ({navigation}) => {
         // if(response.status == 200){
         //    navigation.navigate('Main')
         // }
+        const {student} = response.data
+        studentData.current = student
         const {accessToken, refreshToken} = response.data;
         authContext.setAuthState({
           accessToken,
@@ -48,6 +92,16 @@ const StuLogin = ({navigation}) => {
             refreshToken,
           }),
         );
+        storage.set('user.name', studentData.current.name)
+        storage.set('user.level', studentData.current.level)
+        storage.set('user.email', studentData.current.email)
+        storage.set('user.department', studentData.current.department)
+        storage.set('user.matricnumber', studentData.current.matricnumber)
+     
+        isOffline && setOfflineStatus(false);
+
+        setMatricnumber('')
+        setPassword('')
         
       }).
       catch((err)=>{   
@@ -56,8 +110,19 @@ const StuLogin = ({navigation}) => {
               console.error(validationerror.current)
               showMessage({
                 message: `${validationerror.current}`,
-                  type: "danger",
+                  type: "default",
+                  titleStyle: {
+                    fontFamily:"GalanoClassicAltRegular",
+                    color:'#DFF0EB',
+                    fontSize: 16,
+                    padding: 4
+                  },
+                 backgroundColor: '#732955',
+                 color:'#DFF0EB',
               })
+
+              setMatricnumber('')
+              setPassword('')
             
          console.error("Axios request failed", err.response?.data, err.toJSON());
         } else {
@@ -65,10 +130,24 @@ const StuLogin = ({navigation}) => {
         }
   
       })
+      .finally(()=>setLoading(false))
+      }
+
     }
+    catch(e){
+      console.log(e)
+    }
+  }
 
   return (
+
     <View className="h-screen bg-white">
+      {/* internet check */}
+      <InternetCheck isOffline={isOffline}/>
+
+      {loading? <ActivityIndicator size="large" style={styles.indicator} color={'#FF8552'} />: 
+      <View>
+
      <View>
         <Image source={require('../assets/reading.png')} style={{width: '100%', height:250}} resizeMode="contain"/>
       </View>
@@ -81,13 +160,13 @@ const StuLogin = ({navigation}) => {
       </View>
       <View>
       {/* matric number */}
-      <TextInput className="font-ageonormal border border-green rounded-full text-[20px] px-4 my-3 text-black" placeholder='Matric number' onChangeText={(text)=>setMatricnumber(text)}/>
+      <TextInput className="font-ageonormal border border-green rounded-full text-[20px] px-4 my-3 text-black" placeholder='Matric number' value={matricnumber.toString()} onChangeText={(text)=>setMatricnumber(text)}/>
       {/* password */}
       <View>
           <TextInput className="font-ageonormal border border-green rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Password' name="password" 
           textContentType="newPassword"
           secureTextEntry={passwordVisibility}
-          value={password}  
+          value={password.toString()}  
           autoCorrect={false} 
           enablesReturnKeyAutomatically
           onChangeText={text => setPassword(text)}
@@ -111,12 +190,26 @@ const StuLogin = ({navigation}) => {
           <Text onPress={()=> navigation.navigate('SignUp')} className="font-ageobold text-xl underline px-4 text-black focus:text-green">Sign Up</Text>
           </Text>
          </View>
-             
+        </View>
          </View>
+}
     </View>
+  
   )
 }
 
 export default StuLogin
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  indicator: {
+    backgroundColor: '#DFF0EB',
+    height: Dimensions.get('window').height,
+  },
+
+  flashmessage: {
+    fontFamily:"GalanoClassicAltRegular",
+    color:'#DFF0EB',
+    fontSize: 16,
+    padding: 4
+  }
+})

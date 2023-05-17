@@ -7,6 +7,8 @@ const connectDB = require('./db')
 const studentRoute = require('./routes/studentRoute')
 const lecturerRoute = require('./routes/lecturerRoute')
 const resourcesRoute = require('./routes/resourcesRoute')
+const profileRoute = require('./routes/profileRoute')
+const coursesRoute = require('./routes/coursesRoute')
 
 // const {logger} = require('morgan')
 // const socketio = require('socket.io')
@@ -40,6 +42,8 @@ app.use(cookieParser());
 app.use('/',studentRoute)
 app.use('/',resourcesRoute)
 app.use('/',lecturerRoute)
+app.use('/',profileRoute)
+app.use('/',coursesRoute)
 // app.use(attachStudent)
 app.use('*', (req, res) => {
     return res.status(404).json({

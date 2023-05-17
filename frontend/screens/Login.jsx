@@ -5,10 +5,11 @@ const windowHeight = Dimensions.get('window').height;
 
 const Login = ({navigation}) => {
 
+  
   return (
     <View className="h-screen w-screen bg-teal-500">
        <View style={styles.imageContainer}>
-        <Image source={require('../assets/reading.png')} style={{width: '100%', height:'100%'}} resizeMode="contain"/>
+        <Image source={require('../assets/logo.png')} style={{width: '100%', height:'100%'}} resizeMode="contain"/>
       </View>
       
       <View className="bg-green h-full rounded-tl-[100px] pt-6">

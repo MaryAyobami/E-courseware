@@ -5,18 +5,20 @@ module.exports = {
     extend: {},
     colors:{
       green: '#297373',
-      pink: '#FF8552',
+      pink: '#732955',
       gray: '#E6E6E6',
       orange: '#E9D758',
       black: '#393937',
-      iceberg: '#74b3ce'
-    },
+      iceberg: '#87BFBF',
+      lightgreen: '#DFF0EB',
+      white: '#fff',
+      },
     fontFamily: {
-      'ageobold': ['AgeoPersonalUse-Bold'],
-      'ageoextrabold': ['AgeoPersonalUse-ExtraBold'],
-      'ageoheavy': ['AgeoPersonalUse-Heavy'],
-      'ageonormal': ['AgeoPersonalUse'],
-      'ageomedium': ['AgeoPersonalUse-Medium'],
+      'ageobold': ['tilda-sans_bold'],
+      'ageoextrabold': ['GalanoClassicAltExtraBold'],
+      'ageoheavy': ['GalanoClassicAltHeavy'],
+      'ageonormal': ['tilda-sans_regular'],
+      'ageomedium': ['tilda-sans_medium'],
     }
   },
   plugins: [],

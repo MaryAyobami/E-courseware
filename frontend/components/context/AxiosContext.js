@@ -11,11 +11,11 @@ const AxiosProvider = ({children}) => {
   const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({
-    baseURL: 'http://10.0.2.2:8000/api/',
+    baseURL: 'https://00e1-62-173-62-83.ngrok-free.app',
   });
 
   const publicAxios = axios.create({
-    baseURL: 'http://10.0.2.2:8000/api/',
+    baseURL: "https://00e1-62-173-62-83.ngrok-free.app",
   });
 
   authAxios.interceptors.request.use(
@@ -40,7 +40,7 @@ const AxiosProvider = ({children}) => {
     const options = {
       method: 'POST',
       data,
-      url: 'http://10.0.2.2:8000/api/refreshToken',
+      url: `https://00e1-62-173-62-83.ngrok-free.app/api/refreshToken`,
     };
 
     return axios(options)

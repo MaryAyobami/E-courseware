@@ -37,6 +37,10 @@ const student = mongoose.Schema({
         required: true,
         min:6
     },
+    bookmarks:{
+        type: Array,
+        required: false
+    }
 })
 
 module.exports = mongoose.model('student',student)

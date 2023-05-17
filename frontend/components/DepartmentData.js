@@ -36,6 +36,17 @@ export const data = {
       {name:"Political Science", departmentId:26, collegeId:6, level:[100,200,200,400] },
       {name:"Demography and Social Statistics", departmentId:27, collegeId:7 , level:[100,200,200,400,500]},
     ]
+    ,
+    resourceType: [
+      {id:1,name: 'LectureNote' , state: false},
+      {id:2,name: 'Journal' , state: false},
+      {id:3,name: 'Article' , state: false},
+      {id:4,name: 'Textbook' , state: false},
+      {id:5,name: 'PastQuestion' , state: false},
+      {id:6,name: 'CourseMaterial' , state: false},
+      {id:7,name: 'GNS' , state: false},
+      {id:8,name: 'CIT' , state: false}
+    ]
   
   }
 

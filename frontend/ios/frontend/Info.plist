@@ -61,6 +61,77 @@
 		<string>AgeoPersonalUse-SemiBold.otf</string>
 		<string>AgeoPersonalUse-Thin.otf</string>
 		<string>AgeoPersonalUse.otf</string>
+		<string>DarkerGrotesque-Black.ttf</string>
+		<string>DarkerGrotesque-Bold.ttf</string>
+		<string>DarkerGrotesque-ExtraBold.ttf</string>
+		<string>DarkerGrotesque-Light.ttf</string>
+		<string>DarkerGrotesque-Medium.ttf</string>
+		<string>DarkerGrotesque-Regular.ttf</string>
+		<string>DarkerGrotesque-SemiBold.ttf</string>
+		<string>tilda-sans_black.ttf</string>
+		<string>tilda-sans_bold.ttf</string>
+		<string>tilda-sans_extra-bold-.ttf</string>
+		<string>tilda-sans_light.ttf</string>
+		<string>tilda-sans_medium.ttf</string>
+		<string>tilda-sans_regular.ttf</string>
+		<string>tilda-sans_semibold.ttf</string>
+		<string>tilda-sans_vf.ttf</string>
+		<string>GalanoClassicAltBlack.otf</string>
+		<string>GalanoClassicAltBlackItalic.otf</string>
+		<string>GalanoClassicAltBold.otf</string>
+		<string>GalanoClassicAltBoldItalic.otf</string>
+		<string>GalanoClassicAltExtraBold.otf</string>
+		<string>GalanoClassicAltExtraBoldItalic.otf</string>
+		<string>GalanoClassicAltExtraLight.otf</string>
+		<string>GalanoClassicAltExtraLightItalic.otf</string>
+		<string>GalanoClassicAltHeavy.otf</string>
+		<string>GalanoClassicAltHeavyItalic.otf</string>
+		<string>GalanoClassicAltItalic.otf</string>
+		<string>GalanoClassicAltLight.otf</string>
+		<string>GalanoClassicAltLightItalic.otf</string>
+		<string>GalanoClassicAltMedium.otf</string>
+		<string>GalanoClassicAltMediumItalic.otf</string>
+		<string>GalanoClassicAltRegular.otf</string>
+		<string>GalanoClassicAltSemiBold.otf</string>
+		<string>GalanoClassicAltSemiBoldItalic.otf</string>
+		<string>GalanoClassicAltThin.otf</string>
+		<string>GalanoClassicAltThinItalic.otf</string>
+		<string>GalanoClassicBlack.otf</string>
+		<string>GalanoClassicBlackItalic.otf</string>
+		<string>GalanoClassicBold.otf</string>
+		<string>GalanoClassicBoldItalic.otf</string>
+		<string>GalanoClassicExtraBold.otf</string>
+		<string>GalanoClassicExtraBoldItalic.otf</string>
+		<string>GalanoClassicExtraLight.otf</string>
+		<string>GalanoClassicExtraLightItalic.otf</string>
+		<string>GalanoClassicHeavy.otf</string>
+		<string>GalanoClassicHeavyItalic.otf</string>
+		<string>GalanoClassicItalic.otf</string>
+		<string>GalanoClassicLight.otf</string>
+		<string>GalanoClassicLightItalic.otf</string>
+		<string>GalanoClassicMedium.otf</string>
+		<string>GalanoClassicMediumItalic.otf</string>
+		<string>GalanoClassicRegular.otf</string>
+		<string>GalanoClassicSemiBold.otf</string>
+		<string>GalanoClassicSemiBoldItalic.otf</string>
+		<string>GalanoClassicThin.otf</string>
+		<string>GalanoClassicThinItalic.otf</string>
+		<string>VisbyBold Italic.otf</string>
+		<string>VisbyBold.otf</string>
+		<string>VisbyExtrabold Italic.otf</string>
+		<string>VisbyExtrabold.otf</string>
+		<string>VisbyHeavy Italic.otf</string>
+		<string>VisbyHeavy.otf</string>
+		<string>VisbyItalic.otf</string>
+		<string>VisbyLight Italic.otf</string>
+		<string>VisbyLight.otf</string>
+		<string>VisbyMedium Italic.otf</string>
+		<string>VisbyMedium.otf</string>
+		<string>VisbyRegular.otf</string>
+		<string>VisbySemibold Italic.otf</string>
+		<string>VisbySemibold.otf</string>
+		<string>VisbyThin Italic.otf</string>
+		<string>VisbyThin.otf</string>
 	</array>
 </dict>
 </plist>

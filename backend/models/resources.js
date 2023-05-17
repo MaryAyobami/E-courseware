@@ -9,10 +9,10 @@ const resources = mongoose.Schema({
         type: String,
         required: true,
     },
-    sender:{
-        type: String,
-        required: true,
-    },
+    // sender:{
+    //     type: String,
+    //     required: true,
+    // },
     department:{
         type: String,
         required: true,

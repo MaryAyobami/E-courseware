@@ -1,15 +1,19 @@
 import { ScrollView, StyleSheet, Text, TextInput, View,Image, Pressable, Button , } from 'react-native'
-import React,{useState, useRef, useEffect} from 'react'
+import React,{useState, useRef, useEffect, useContext} from 'react'
 import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
 import {data} from '../components/DepartmentData.js'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTogglePasswordVisibility } from '../components/hooks/useTogglePasswordVisibility';
 import { showMessage, hideMessage } from "react-native-flash-message";
-
+import { AxiosContext } from '../components/context/AxiosContext.js';
+import NetInfo from "@react-native-community/netinfo";
+import InternetCheck from '../components/InternetCheck';
 
 const StuSignup = ({navigation}) => {
-  
+  const {publicAxios} = useContext(AxiosContext);
+
+  const [loading , setLoading] = useState(false)
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const validationerror = useRef('')
@@ -19,7 +23,8 @@ const StuSignup = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [matricnumber, setMatricnumber] = useState('')
   const [displayname, setDisplayname] = useState('')
-  const [colege, setColege] = useState('')
+  // const [colege, setColege] = useState('')
+  const colege = useRef('')
   const [department, setDepartment] = useState('')
   const [level, setLevel] = useState('')
 
@@ -35,8 +40,21 @@ const StuSignup = ({navigation}) => {
   const [DepartmentLevels, setDepartmentLevels] = useState([])
 
 
+// internet check
+    const [isOffline, setOfflineStatus] = useState(false);
+    useEffect(() => {
+      const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+        const offline = !(state.isConnected && state.isInternetReachable);
+        setOfflineStatus(offline);
+      });
+     console.log('testing')
+     console.log(isOffline)
+      removeNetInfoSubscription();
+    },[]);
+
+    
   const changeDepartments = (e) => {
-    //  console.log(e)
+  
      let filterDepartments = data.department.filter(   
        (item) => item.collegeId == parseInt(e.value.collegeId)
      );
@@ -45,8 +63,8 @@ const StuSignup = ({navigation}) => {
   //  console.log(departments.current)
      setCollegeDepartment(departments.current)
     //  console.log(collegeDepartment)
-     setColege(e.value.collegeName)
-     setValue(e.value.collegeName);
+    
+    //  setValue(e.value.collegeName);
   
    };
 
@@ -58,23 +76,21 @@ const StuSignup = ({navigation}) => {
     // console.log(levels.current)
     setDepartmentLevels(levels.current)
     setDepartment(e.value.name)
-    setValue(e.value.name);
+    // setValue(e.value.name);
   
     // console.log(DepartmentLevels)
   };
  
 
   // handle signup
-  const baseUrl = "http://localhost:8000"
-
   const handleSignup= ()=>{
-    axios.post(`http://10.0.2.2:8000/api/register-student`,{
+    publicAxios.post(`api/register-student`,{
       name ,
       matricnumber, 
       email ,
       password,
       department,
-      college : colege,
+      college : colege.current,
       level,
       displayname
     }).
@@ -85,25 +101,35 @@ const StuSignup = ({navigation}) => {
       console.log(response.data);
     }).
     catch((err)=>{   
-      if (axios.isAxiosError(err)) {
+
             validationerror.current = err.response.data
             console.error(validationerror.current)
             showMessage({
               message: `${validationerror.current}`,
-                type: "danger",
+                type: "default",
+                titleStyle: {
+                  fontFamily:"tilda-sans_medium",
+                  color:'#DFF0EB',
+                  fontSize: 17,
+                  padding: 4
+                },
+               backgroundColor: '#732955',
+               color:'#DFF0EB',
             })
           
        console.error("Axios request failed", err.response?.data, err.toJSON());
-      } else {
-        console.error(err);
-      }
-
+     
     })
   }
 
 
   return (
     <View className="h-screen bg-white">
+    {/* internet check */}
+    <InternetCheck isOffline={isOffline}/>
+
+    {loading? <ActivityIndicator size="large" style={styles.indicator} color={'#FF8552'} />: 
+    <View>
       <View>
         <Image source={require('../assets/reading.png')} style={{width: '100%', height:250}} resizeMode="contain"/>
       </View>
@@ -130,8 +156,13 @@ const StuSignup = ({navigation}) => {
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.placeholderStyle}
             inputSearchStyle={styles.placeholderStyle}
-            value={value}
-            onChange={(e)=> changeDepartments(e)}
+            value={colege.current}
+            onChange={(item)=> {
+              console.log(item)
+              colege.current=item.value.collegeName
+              console.log(colege.current)
+              changeDepartments(item)
+            }}
             search
             maxHeight={300}
             labelField="label"
@@ -153,8 +184,8 @@ const StuSignup = ({navigation}) => {
               placeholderStyle={styles.placeholderStyle}
               selectedTextStyle={styles.placeholderStyle}
               inputSearchStyle={styles.placeholderStyle}
-              value={value}
-              onChange={(e)=> changeLevels(e)}
+              value={department}
+              onChange={(item)=> changeLevels(item)}
               search
               maxHeight={300}
               labelField="label"
@@ -172,10 +203,9 @@ const StuSignup = ({navigation}) => {
               inputSearchStyle={styles.placeholderStyle}
               search
               maxHeight={300}
-              value={value}
+              value={level}
               onChange={item => {
                 setLevel(item.value)
-                setValue(item.value);
               }}
               labelField="label"
               valueField="value"
@@ -211,6 +241,8 @@ const StuSignup = ({navigation}) => {
          </View>
       </ScrollView>
       </View>
+     </View>
+   }
     </View>
   )
 }
@@ -220,7 +252,7 @@ export default StuSignup
 const styles = StyleSheet.create({
       placeholderStyle: {
         color:'gray',
-        fontFamily: 'AgeoPersonalUse',
+        fontFamily: 'tilda-sans_regular',
         fontSize: 20
       },
       dropdownContainer: {
@@ -231,8 +263,18 @@ const styles = StyleSheet.create({
         marginVertical: 4,
         borderColor: '#297373',
         marginBottom: 16,
-        fontFamily: 'AgeoPersonalUse',
+        fontFamily: 'tilda-sans_regular',
         fontSize: 20
+      },
+      inputSearchStyle:{
+        color: '#393937',
+        fontSize: 16,
+        fontFamily: 'tilda-sans_regular'
+      },
+      selectedTextStyle:{
+        color: '#393937',
+        fontSize: 16,
+        fontFamily: 'tilda-sans_regular'
       }
 })
 

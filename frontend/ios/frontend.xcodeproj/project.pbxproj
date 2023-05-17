@@ -24,6 +24,78 @@
 		49C0B8D586D4466FB02E064C /* AgeoPersonalUse.otf in Resources */ = {isa = PBXBuildFile; fileRef = 81271FA81DBA45038B4FC6D0 /* AgeoPersonalUse.otf */; };
 		B0538BE85B564C6F8CB228A7 /* ageo.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C7DF19205B4E9DA9433281 /* ageo.png */; };
 		282F0FD66CC64723A12BB468 /* sharefonts.net.txt in Resources */ = {isa = PBXBuildFile; fileRef = 441804E5FF314039BF59CA7E /* sharefonts.net.txt */; };
+		00EF461FD86246DEBA6909ED /* DarkerGrotesque-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A24EC1C0FFC4EEEB6D3772D /* DarkerGrotesque-Black.ttf */; };
+		E066097CAADF4AAEBDDC0AFA /* DarkerGrotesque-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33A0ED252AF34531BC7698B3 /* DarkerGrotesque-Bold.ttf */; };
+		607841054D0F43F0A6A3EAD6 /* DarkerGrotesque-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71ED888025CA4167A5223BA7 /* DarkerGrotesque-ExtraBold.ttf */; };
+		FC1BC28E91EC4E2AA6F8F83D /* DarkerGrotesque-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7C6DD28F790471488A5BDEE /* DarkerGrotesque-Light.ttf */; };
+		31664376198647198B988F67 /* DarkerGrotesque-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F1A71135F4A4319A66ACCDE /* DarkerGrotesque-Medium.ttf */; };
+		5180EE55E33C4C699D73D379 /* DarkerGrotesque-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF45DD8DFEA044809E013821 /* DarkerGrotesque-Regular.ttf */; };
+		DCA5185EAAD04F35BCE78FA6 /* DarkerGrotesque-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFA8F0EA56E42BBB8898AE2 /* DarkerGrotesque-SemiBold.ttf */; };
+		F6579FB0006748B89EA8E2F2 /* tilda-sans_black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 642FD4134DC34EE09259FB26 /* tilda-sans_black.ttf */; };
+		A5A88EAF77934A58BE6F75D9 /* tilda-sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2E7DB4EA18A488892891631 /* tilda-sans_bold.ttf */; };
+		5C6B84230C7C48F88ED0816F /* tilda-sans_extra-bold-.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E3FE36E731047BEB81E7CD6 /* tilda-sans_extra-bold-.ttf */; };
+		B47D611064F842FB86E7720B /* tilda-sans_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39DC02D202DE4B448E68948C /* tilda-sans_light.ttf */; };
+		CA19900D037A40C2956B9D83 /* tilda-sans_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFBFF6D5485A4E5ABDDCF217 /* tilda-sans_medium.ttf */; };
+		23D6246F1D4C4AD48BB7954D /* tilda-sans_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D95AE4CB9134948AD57F507 /* tilda-sans_regular.ttf */; };
+		BC7E5272DBC9475DA6B58024 /* tilda-sans_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 080E7B8A0AF74288BBCFA5AD /* tilda-sans_semibold.ttf */; };
+		059CF3A1081E42FD835DC255 /* tilda-sans_vf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3673D8B08D2B4616A4FB8053 /* tilda-sans_vf.ttf */; };
+		77E442E6A024441792C56586 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 62B480EE2D3E4962BF13FCE4 /* OFL.txt */; };
+		6066E54B18FC462C9ADB783A /* GalanoClassicAltBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8498DDF1573042A4AD8DE598 /* GalanoClassicAltBlack.otf */; };
+		DAAA79E80EB44C4BACA23128 /* GalanoClassicAltBlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D89BDE2A56147B0BB44589F /* GalanoClassicAltBlackItalic.otf */; };
+		EC8B7362CF48420BB7E8CFC5 /* GalanoClassicAltBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA113FA8168842CB9089E1D0 /* GalanoClassicAltBold.otf */; };
+		427FCDE34CB641B7AE8E1CD5 /* GalanoClassicAltBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 74E6621CF39A4FBCA2592E66 /* GalanoClassicAltBoldItalic.otf */; };
+		380DC610B1254EE3A88BA840 /* GalanoClassicAltExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD3B32C1B6A94C97BD19390A /* GalanoClassicAltExtraBold.otf */; };
+		23C5C49B848443BC8407CEE9 /* GalanoClassicAltExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B1FA6C987C8544739A94C855 /* GalanoClassicAltExtraBoldItalic.otf */; };
+		254792FA8BC941F2A6928C54 /* GalanoClassicAltExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8632CE79EFF14507BB907EAD /* GalanoClassicAltExtraLight.otf */; };
+		D81B79752EFF491195AF36B1 /* GalanoClassicAltExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9682766BF08A47458E63BD66 /* GalanoClassicAltExtraLightItalic.otf */; };
+		F078F1C975A04DE7B866318D /* GalanoClassicAltHeavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB78D8DED61248379CD9C546 /* GalanoClassicAltHeavy.otf */; };
+		6D015F612CB54CD8A42ABC2C /* GalanoClassicAltHeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25DDBDDEFFC6432BAF0CD211 /* GalanoClassicAltHeavyItalic.otf */; };
+		809D30592F2C4719B4413089 /* GalanoClassicAltItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1002C0C5A46C437EBADB4B00 /* GalanoClassicAltItalic.otf */; };
+		DC6B8168A2414D36BD8940AB /* GalanoClassicAltLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3D33EBE78C04F6AB1CCE11B /* GalanoClassicAltLight.otf */; };
+		5902295D38A94AA489A88B8B /* GalanoClassicAltLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA0D94770F034BE8A9D3BBEE /* GalanoClassicAltLightItalic.otf */; };
+		DB4843D185594484A2DBB4C9 /* GalanoClassicAltMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47A9E189ED294CD6AC957013 /* GalanoClassicAltMedium.otf */; };
+		E724BD53FB164B7B84E61592 /* GalanoClassicAltMediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFF4CAF133B84DD687948894 /* GalanoClassicAltMediumItalic.otf */; };
+		5DF2878AC5E346319E55D0A9 /* GalanoClassicAltRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A7A7715A36D24C6C90A11DE1 /* GalanoClassicAltRegular.otf */; };
+		1A1C43AE0EBB41BC953D5633 /* GalanoClassicAltSemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11A98DC39F3D4B91B1C9748A /* GalanoClassicAltSemiBold.otf */; };
+		AB67C8ABE41648ED8DA2021A /* GalanoClassicAltSemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8AEBAFAAA45C080C63483 /* GalanoClassicAltSemiBoldItalic.otf */; };
+		3C517D1E0AA5404BB62A3965 /* GalanoClassicAltThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD32266FBF5048F686975CBD /* GalanoClassicAltThin.otf */; };
+		2D110566214E42C5A1DE1CF3 /* GalanoClassicAltThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A4CD483623C949A28E90B6EB /* GalanoClassicAltThinItalic.otf */; };
+		3CB770F711F44A9BB1F74573 /* GalanoClassicBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2816ED2263F49148E68AC46 /* GalanoClassicBlack.otf */; };
+		66BF690E5DAF47C9A45210FF /* GalanoClassicBlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A28AF0D01684EFD95892E95 /* GalanoClassicBlackItalic.otf */; };
+		9A9C48A074754144A75B4022 /* GalanoClassicBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D192B70E0837419FB752617E /* GalanoClassicBold.otf */; };
+		41ED90F9562A473F98997F5D /* GalanoClassicBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 351F4CC6843F408793FDBCE0 /* GalanoClassicBoldItalic.otf */; };
+		0B58F2D560254702B29880CB /* GalanoClassicExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3614478A6F1F4D9A8382ABC4 /* GalanoClassicExtraBold.otf */; };
+		EE85FCE3D689477E8AD1F855 /* GalanoClassicExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04D462E1ACD3451BB192C4F9 /* GalanoClassicExtraBoldItalic.otf */; };
+		D7C8466341C743FD8427B064 /* GalanoClassicExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2FB4CE0F86D47E6BA4B99D9 /* GalanoClassicExtraLight.otf */; };
+		68D32358397848BBB7ACBDDA /* GalanoClassicExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9EC1B3E6541F4A14A772683B /* GalanoClassicExtraLightItalic.otf */; };
+		24B9F4429E654B44BA58737F /* GalanoClassicHeavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A407ED8C82A4443B3F2646E /* GalanoClassicHeavy.otf */; };
+		9FBC16B4F0D042E79E73FB3F /* GalanoClassicHeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0CE9833E9D39406396AEC981 /* GalanoClassicHeavyItalic.otf */; };
+		08B130E0C1864F2CB9F15F0C /* GalanoClassicItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A0793B512C9476E908FA07D /* GalanoClassicItalic.otf */; };
+		369C54A527BB483D8C38AB09 /* GalanoClassicLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5CB0365B9974C3F902A0003 /* GalanoClassicLight.otf */; };
+		10660BCEE1D94B1987F90178 /* GalanoClassicLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 54A79E33D9B64B90B641A044 /* GalanoClassicLightItalic.otf */; };
+		754294E409774B2DBC492CBF /* GalanoClassicMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5FD60F2C50194D6B87FEE79F /* GalanoClassicMedium.otf */; };
+		4BF76E03FAB24DD58517850C /* GalanoClassicMediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6CDC694DDA704E78A31C01E0 /* GalanoClassicMediumItalic.otf */; };
+		65080E1E4CE148B68351646B /* GalanoClassicRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B2B0F2DA53C4878878573A7 /* GalanoClassicRegular.otf */; };
+		90788575D2904946BBE9154C /* GalanoClassicSemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 874D371C266A4C8CA8A62831 /* GalanoClassicSemiBold.otf */; };
+		652B3F9D97A14AC7961E6431 /* GalanoClassicSemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1D486DBB35E4AD5B54C4351 /* GalanoClassicSemiBoldItalic.otf */; };
+		769C0E68686E442CB4FF1E14 /* GalanoClassicThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = BD75642DF9CB49458CD5E955 /* GalanoClassicThin.otf */; };
+		8E7EA75AC55C44A7B69DA344 /* GalanoClassicThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4784C6DDD5664393BA492216 /* GalanoClassicThinItalic.otf */; };
+		6CB73C7E456F4BBB8C6F1968 /* VisbyBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27EC85534B4749F4A44F013B /* VisbyBold Italic.otf */; };
+		C8C2F002A2454B6598CD99CB /* VisbyBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D1FFC4F9FA4144BAA3BB6C6A /* VisbyBold.otf */; };
+		49B67039EFAF44D7BD410847 /* VisbyExtrabold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3076849BA1A849F6B9267DCD /* VisbyExtrabold Italic.otf */; };
+		3876B454046A483A9E02F5EA /* VisbyExtrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3CF341FAC4092B7003086 /* VisbyExtrabold.otf */; };
+		C06F1891BACE43329D958B2D /* VisbyHeavy Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49A6957B7C2047FFB4DA6768 /* VisbyHeavy Italic.otf */; };
+		E304069D275A4E438BD550A0 /* VisbyHeavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6BA44DC0008A4F6AB7864325 /* VisbyHeavy.otf */; };
+		D9F386C9C0CE473AB7FFFE50 /* VisbyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5A37E145991F4BA8A093FA0D /* VisbyItalic.otf */; };
+		6D5925AC01E94A6C9F157743 /* VisbyLight Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 05FA9EBEF14948E7853FDB39 /* VisbyLight Italic.otf */; };
+		12EFC6CAD33C4193AD678AF4 /* VisbyLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7F0E20D45FA4C8880FC87BC /* VisbyLight.otf */; };
+		0CD378590D994C7E833B94C8 /* VisbyMedium Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C1CB30811E14915AD0AC8D1 /* VisbyMedium Italic.otf */; };
+		E60593EB19574DE7B4ABD7F3 /* VisbyMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = BD06809B27ED4EB983383F89 /* VisbyMedium.otf */; };
+		DA2FB12C585F40A38995FE62 /* VisbyRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2787264C59AE465C8BC20887 /* VisbyRegular.otf */; };
+		56E23E666F234CECB7D8E3D7 /* VisbySemibold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A1A96FF96A744B292D26791 /* VisbySemibold Italic.otf */; };
+		00215EF3AAA1412595953CD5 /* VisbySemibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A7B029EE810404993DF60CE /* VisbySemibold.otf */; };
+		87BBCFA0961C45A5A04758FE /* VisbyThin Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 66A4E2BDAA37421D89B7EE6A /* VisbyThin Italic.otf */; };
+		20110409744A43EC81E1AE92 /* VisbyThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 296641B7342B47A1AE8EC928 /* VisbyThin.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +136,78 @@
 		81271FA81DBA45038B4FC6D0 /* AgeoPersonalUse.otf */ = {isa = PBXFileReference; name = "AgeoPersonalUse.otf"; path = "../assets/fonts/AgeoPersonalUse.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		16C7DF19205B4E9DA9433281 /* ageo.png */ = {isa = PBXFileReference; name = "ageo.png"; path = "../assets/fonts/ageo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		441804E5FF314039BF59CA7E /* sharefonts.net.txt */ = {isa = PBXFileReference; name = "sharefonts.net.txt"; path = "../assets/fonts/sharefonts.net.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0A24EC1C0FFC4EEEB6D3772D /* DarkerGrotesque-Black.ttf */ = {isa = PBXFileReference; name = "DarkerGrotesque-Black.ttf"; path = "../assets/fonts/DarkerGrotesque-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		33A0ED252AF34531BC7698B3 /* DarkerGrotesque-Bold.ttf */ = {isa = PBXFileReference; name = "DarkerGrotesque-Bold.ttf"; path = "../assets/fonts/DarkerGrotesque-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		71ED888025CA4167A5223BA7 /* DarkerGrotesque-ExtraBold.ttf */ = {isa = PBXFileReference; name = "DarkerGrotesque-ExtraBold.ttf"; path = "../assets/fonts/DarkerGrotesque-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D7C6DD28F790471488A5BDEE /* DarkerGrotesque-Light.ttf */ = {isa = PBXFileReference; name = "DarkerGrotesque-Light.ttf"; path = "../assets/fonts/DarkerGrotesque-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3F1A71135F4A4319A66ACCDE /* DarkerGrotesque-Medium.ttf */ = {isa = PBXFileReference; name = "DarkerGrotesque-Medium.ttf"; path = "../assets/fonts/DarkerGrotesque-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EF45DD8DFEA044809E013821 /* DarkerGrotesque-Regular.ttf */ = {isa = PBXFileReference; name = "DarkerGrotesque-Regular.ttf"; path = "../assets/fonts/DarkerGrotesque-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DBFA8F0EA56E42BBB8898AE2 /* DarkerGrotesque-SemiBold.ttf */ = {isa = PBXFileReference; name = "DarkerGrotesque-SemiBold.ttf"; path = "../assets/fonts/DarkerGrotesque-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		642FD4134DC34EE09259FB26 /* tilda-sans_black.ttf */ = {isa = PBXFileReference; name = "tilda-sans_black.ttf"; path = "../assets/fonts/tilda-sans_black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D2E7DB4EA18A488892891631 /* tilda-sans_bold.ttf */ = {isa = PBXFileReference; name = "tilda-sans_bold.ttf"; path = "../assets/fonts/tilda-sans_bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7E3FE36E731047BEB81E7CD6 /* tilda-sans_extra-bold-.ttf */ = {isa = PBXFileReference; name = "tilda-sans_extra-bold-.ttf"; path = "../assets/fonts/tilda-sans_extra-bold-.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		39DC02D202DE4B448E68948C /* tilda-sans_light.ttf */ = {isa = PBXFileReference; name = "tilda-sans_light.ttf"; path = "../assets/fonts/tilda-sans_light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DFBFF6D5485A4E5ABDDCF217 /* tilda-sans_medium.ttf */ = {isa = PBXFileReference; name = "tilda-sans_medium.ttf"; path = "../assets/fonts/tilda-sans_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2D95AE4CB9134948AD57F507 /* tilda-sans_regular.ttf */ = {isa = PBXFileReference; name = "tilda-sans_regular.ttf"; path = "../assets/fonts/tilda-sans_regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		080E7B8A0AF74288BBCFA5AD /* tilda-sans_semibold.ttf */ = {isa = PBXFileReference; name = "tilda-sans_semibold.ttf"; path = "../assets/fonts/tilda-sans_semibold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3673D8B08D2B4616A4FB8053 /* tilda-sans_vf.ttf */ = {isa = PBXFileReference; name = "tilda-sans_vf.ttf"; path = "../assets/fonts/tilda-sans_vf.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		62B480EE2D3E4962BF13FCE4 /* OFL.txt */ = {isa = PBXFileReference; name = "OFL.txt"; path = "../assets/fonts/OFL.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8498DDF1573042A4AD8DE598 /* GalanoClassicAltBlack.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltBlack.otf"; path = "../assets/fonts/GalanoClassicAltBlack.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6D89BDE2A56147B0BB44589F /* GalanoClassicAltBlackItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltBlackItalic.otf"; path = "../assets/fonts/GalanoClassicAltBlackItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DA113FA8168842CB9089E1D0 /* GalanoClassicAltBold.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltBold.otf"; path = "../assets/fonts/GalanoClassicAltBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		74E6621CF39A4FBCA2592E66 /* GalanoClassicAltBoldItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltBoldItalic.otf"; path = "../assets/fonts/GalanoClassicAltBoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AD3B32C1B6A94C97BD19390A /* GalanoClassicAltExtraBold.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltExtraBold.otf"; path = "../assets/fonts/GalanoClassicAltExtraBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B1FA6C987C8544739A94C855 /* GalanoClassicAltExtraBoldItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltExtraBoldItalic.otf"; path = "../assets/fonts/GalanoClassicAltExtraBoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8632CE79EFF14507BB907EAD /* GalanoClassicAltExtraLight.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltExtraLight.otf"; path = "../assets/fonts/GalanoClassicAltExtraLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9682766BF08A47458E63BD66 /* GalanoClassicAltExtraLightItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltExtraLightItalic.otf"; path = "../assets/fonts/GalanoClassicAltExtraLightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CB78D8DED61248379CD9C546 /* GalanoClassicAltHeavy.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltHeavy.otf"; path = "../assets/fonts/GalanoClassicAltHeavy.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		25DDBDDEFFC6432BAF0CD211 /* GalanoClassicAltHeavyItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltHeavyItalic.otf"; path = "../assets/fonts/GalanoClassicAltHeavyItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1002C0C5A46C437EBADB4B00 /* GalanoClassicAltItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltItalic.otf"; path = "../assets/fonts/GalanoClassicAltItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F3D33EBE78C04F6AB1CCE11B /* GalanoClassicAltLight.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltLight.otf"; path = "../assets/fonts/GalanoClassicAltLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CA0D94770F034BE8A9D3BBEE /* GalanoClassicAltLightItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltLightItalic.otf"; path = "../assets/fonts/GalanoClassicAltLightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		47A9E189ED294CD6AC957013 /* GalanoClassicAltMedium.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltMedium.otf"; path = "../assets/fonts/GalanoClassicAltMedium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FFF4CAF133B84DD687948894 /* GalanoClassicAltMediumItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltMediumItalic.otf"; path = "../assets/fonts/GalanoClassicAltMediumItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A7A7715A36D24C6C90A11DE1 /* GalanoClassicAltRegular.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltRegular.otf"; path = "../assets/fonts/GalanoClassicAltRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		11A98DC39F3D4B91B1C9748A /* GalanoClassicAltSemiBold.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltSemiBold.otf"; path = "../assets/fonts/GalanoClassicAltSemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2AC8AEBAFAAA45C080C63483 /* GalanoClassicAltSemiBoldItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltSemiBoldItalic.otf"; path = "../assets/fonts/GalanoClassicAltSemiBoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FD32266FBF5048F686975CBD /* GalanoClassicAltThin.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltThin.otf"; path = "../assets/fonts/GalanoClassicAltThin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A4CD483623C949A28E90B6EB /* GalanoClassicAltThinItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicAltThinItalic.otf"; path = "../assets/fonts/GalanoClassicAltThinItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C2816ED2263F49148E68AC46 /* GalanoClassicBlack.otf */ = {isa = PBXFileReference; name = "GalanoClassicBlack.otf"; path = "../assets/fonts/GalanoClassicBlack.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1A28AF0D01684EFD95892E95 /* GalanoClassicBlackItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicBlackItalic.otf"; path = "../assets/fonts/GalanoClassicBlackItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D192B70E0837419FB752617E /* GalanoClassicBold.otf */ = {isa = PBXFileReference; name = "GalanoClassicBold.otf"; path = "../assets/fonts/GalanoClassicBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		351F4CC6843F408793FDBCE0 /* GalanoClassicBoldItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicBoldItalic.otf"; path = "../assets/fonts/GalanoClassicBoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3614478A6F1F4D9A8382ABC4 /* GalanoClassicExtraBold.otf */ = {isa = PBXFileReference; name = "GalanoClassicExtraBold.otf"; path = "../assets/fonts/GalanoClassicExtraBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		04D462E1ACD3451BB192C4F9 /* GalanoClassicExtraBoldItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicExtraBoldItalic.otf"; path = "../assets/fonts/GalanoClassicExtraBoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D2FB4CE0F86D47E6BA4B99D9 /* GalanoClassicExtraLight.otf */ = {isa = PBXFileReference; name = "GalanoClassicExtraLight.otf"; path = "../assets/fonts/GalanoClassicExtraLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9EC1B3E6541F4A14A772683B /* GalanoClassicExtraLightItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicExtraLightItalic.otf"; path = "../assets/fonts/GalanoClassicExtraLightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1A407ED8C82A4443B3F2646E /* GalanoClassicHeavy.otf */ = {isa = PBXFileReference; name = "GalanoClassicHeavy.otf"; path = "../assets/fonts/GalanoClassicHeavy.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0CE9833E9D39406396AEC981 /* GalanoClassicHeavyItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicHeavyItalic.otf"; path = "../assets/fonts/GalanoClassicHeavyItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3A0793B512C9476E908FA07D /* GalanoClassicItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicItalic.otf"; path = "../assets/fonts/GalanoClassicItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C5CB0365B9974C3F902A0003 /* GalanoClassicLight.otf */ = {isa = PBXFileReference; name = "GalanoClassicLight.otf"; path = "../assets/fonts/GalanoClassicLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		54A79E33D9B64B90B641A044 /* GalanoClassicLightItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicLightItalic.otf"; path = "../assets/fonts/GalanoClassicLightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5FD60F2C50194D6B87FEE79F /* GalanoClassicMedium.otf */ = {isa = PBXFileReference; name = "GalanoClassicMedium.otf"; path = "../assets/fonts/GalanoClassicMedium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6CDC694DDA704E78A31C01E0 /* GalanoClassicMediumItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicMediumItalic.otf"; path = "../assets/fonts/GalanoClassicMediumItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5B2B0F2DA53C4878878573A7 /* GalanoClassicRegular.otf */ = {isa = PBXFileReference; name = "GalanoClassicRegular.otf"; path = "../assets/fonts/GalanoClassicRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		874D371C266A4C8CA8A62831 /* GalanoClassicSemiBold.otf */ = {isa = PBXFileReference; name = "GalanoClassicSemiBold.otf"; path = "../assets/fonts/GalanoClassicSemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F1D486DBB35E4AD5B54C4351 /* GalanoClassicSemiBoldItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicSemiBoldItalic.otf"; path = "../assets/fonts/GalanoClassicSemiBoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BD75642DF9CB49458CD5E955 /* GalanoClassicThin.otf */ = {isa = PBXFileReference; name = "GalanoClassicThin.otf"; path = "../assets/fonts/GalanoClassicThin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4784C6DDD5664393BA492216 /* GalanoClassicThinItalic.otf */ = {isa = PBXFileReference; name = "GalanoClassicThinItalic.otf"; path = "../assets/fonts/GalanoClassicThinItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		27EC85534B4749F4A44F013B /* VisbyBold Italic.otf */ = {isa = PBXFileReference; name = "VisbyBold Italic.otf"; path = "../assets/fonts/VisbyBold Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D1FFC4F9FA4144BAA3BB6C6A /* VisbyBold.otf */ = {isa = PBXFileReference; name = "VisbyBold.otf"; path = "../assets/fonts/VisbyBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3076849BA1A849F6B9267DCD /* VisbyExtrabold Italic.otf */ = {isa = PBXFileReference; name = "VisbyExtrabold Italic.otf"; path = "../assets/fonts/VisbyExtrabold Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BEE3CF341FAC4092B7003086 /* VisbyExtrabold.otf */ = {isa = PBXFileReference; name = "VisbyExtrabold.otf"; path = "../assets/fonts/VisbyExtrabold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		49A6957B7C2047FFB4DA6768 /* VisbyHeavy Italic.otf */ = {isa = PBXFileReference; name = "VisbyHeavy Italic.otf"; path = "../assets/fonts/VisbyHeavy Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6BA44DC0008A4F6AB7864325 /* VisbyHeavy.otf */ = {isa = PBXFileReference; name = "VisbyHeavy.otf"; path = "../assets/fonts/VisbyHeavy.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5A37E145991F4BA8A093FA0D /* VisbyItalic.otf */ = {isa = PBXFileReference; name = "VisbyItalic.otf"; path = "../assets/fonts/VisbyItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		05FA9EBEF14948E7853FDB39 /* VisbyLight Italic.otf */ = {isa = PBXFileReference; name = "VisbyLight Italic.otf"; path = "../assets/fonts/VisbyLight Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C7F0E20D45FA4C8880FC87BC /* VisbyLight.otf */ = {isa = PBXFileReference; name = "VisbyLight.otf"; path = "../assets/fonts/VisbyLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0C1CB30811E14915AD0AC8D1 /* VisbyMedium Italic.otf */ = {isa = PBXFileReference; name = "VisbyMedium Italic.otf"; path = "../assets/fonts/VisbyMedium Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BD06809B27ED4EB983383F89 /* VisbyMedium.otf */ = {isa = PBXFileReference; name = "VisbyMedium.otf"; path = "../assets/fonts/VisbyMedium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2787264C59AE465C8BC20887 /* VisbyRegular.otf */ = {isa = PBXFileReference; name = "VisbyRegular.otf"; path = "../assets/fonts/VisbyRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6A1A96FF96A744B292D26791 /* VisbySemibold Italic.otf */ = {isa = PBXFileReference; name = "VisbySemibold Italic.otf"; path = "../assets/fonts/VisbySemibold Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4A7B029EE810404993DF60CE /* VisbySemibold.otf */ = {isa = PBXFileReference; name = "VisbySemibold.otf"; path = "../assets/fonts/VisbySemibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		66A4E2BDAA37421D89B7EE6A /* VisbyThin Italic.otf */ = {isa = PBXFileReference; name = "VisbyThin Italic.otf"; path = "../assets/fonts/VisbyThin Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		296641B7342B47A1AE8EC928 /* VisbyThin.otf */ = {isa = PBXFileReference; name = "VisbyThin.otf"; path = "../assets/fonts/VisbyThin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +326,78 @@
 				81271FA81DBA45038B4FC6D0 /* AgeoPersonalUse.otf */,
 				16C7DF19205B4E9DA9433281 /* ageo.png */,
 				441804E5FF314039BF59CA7E /* sharefonts.net.txt */,
+				0A24EC1C0FFC4EEEB6D3772D /* DarkerGrotesque-Black.ttf */,
+				33A0ED252AF34531BC7698B3 /* DarkerGrotesque-Bold.ttf */,
+				71ED888025CA4167A5223BA7 /* DarkerGrotesque-ExtraBold.ttf */,
+				D7C6DD28F790471488A5BDEE /* DarkerGrotesque-Light.ttf */,
+				3F1A71135F4A4319A66ACCDE /* DarkerGrotesque-Medium.ttf */,
+				EF45DD8DFEA044809E013821 /* DarkerGrotesque-Regular.ttf */,
+				DBFA8F0EA56E42BBB8898AE2 /* DarkerGrotesque-SemiBold.ttf */,
+				642FD4134DC34EE09259FB26 /* tilda-sans_black.ttf */,
+				D2E7DB4EA18A488892891631 /* tilda-sans_bold.ttf */,
+				7E3FE36E731047BEB81E7CD6 /* tilda-sans_extra-bold-.ttf */,
+				39DC02D202DE4B448E68948C /* tilda-sans_light.ttf */,
+				DFBFF6D5485A4E5ABDDCF217 /* tilda-sans_medium.ttf */,
+				2D95AE4CB9134948AD57F507 /* tilda-sans_regular.ttf */,
+				080E7B8A0AF74288BBCFA5AD /* tilda-sans_semibold.ttf */,
+				3673D8B08D2B4616A4FB8053 /* tilda-sans_vf.ttf */,
+				62B480EE2D3E4962BF13FCE4 /* OFL.txt */,
+				8498DDF1573042A4AD8DE598 /* GalanoClassicAltBlack.otf */,
+				6D89BDE2A56147B0BB44589F /* GalanoClassicAltBlackItalic.otf */,
+				DA113FA8168842CB9089E1D0 /* GalanoClassicAltBold.otf */,
+				74E6621CF39A4FBCA2592E66 /* GalanoClassicAltBoldItalic.otf */,
+				AD3B32C1B6A94C97BD19390A /* GalanoClassicAltExtraBold.otf */,
+				B1FA6C987C8544739A94C855 /* GalanoClassicAltExtraBoldItalic.otf */,
+				8632CE79EFF14507BB907EAD /* GalanoClassicAltExtraLight.otf */,
+				9682766BF08A47458E63BD66 /* GalanoClassicAltExtraLightItalic.otf */,
+				CB78D8DED61248379CD9C546 /* GalanoClassicAltHeavy.otf */,
+				25DDBDDEFFC6432BAF0CD211 /* GalanoClassicAltHeavyItalic.otf */,
+				1002C0C5A46C437EBADB4B00 /* GalanoClassicAltItalic.otf */,
+				F3D33EBE78C04F6AB1CCE11B /* GalanoClassicAltLight.otf */,
+				CA0D94770F034BE8A9D3BBEE /* GalanoClassicAltLightItalic.otf */,
+				47A9E189ED294CD6AC957013 /* GalanoClassicAltMedium.otf */,
+				FFF4CAF133B84DD687948894 /* GalanoClassicAltMediumItalic.otf */,
+				A7A7715A36D24C6C90A11DE1 /* GalanoClassicAltRegular.otf */,
+				11A98DC39F3D4B91B1C9748A /* GalanoClassicAltSemiBold.otf */,
+				2AC8AEBAFAAA45C080C63483 /* GalanoClassicAltSemiBoldItalic.otf */,
+				FD32266FBF5048F686975CBD /* GalanoClassicAltThin.otf */,
+				A4CD483623C949A28E90B6EB /* GalanoClassicAltThinItalic.otf */,
+				C2816ED2263F49148E68AC46 /* GalanoClassicBlack.otf */,
+				1A28AF0D01684EFD95892E95 /* GalanoClassicBlackItalic.otf */,
+				D192B70E0837419FB752617E /* GalanoClassicBold.otf */,
+				351F4CC6843F408793FDBCE0 /* GalanoClassicBoldItalic.otf */,
+				3614478A6F1F4D9A8382ABC4 /* GalanoClassicExtraBold.otf */,
+				04D462E1ACD3451BB192C4F9 /* GalanoClassicExtraBoldItalic.otf */,
+				D2FB4CE0F86D47E6BA4B99D9 /* GalanoClassicExtraLight.otf */,
+				9EC1B3E6541F4A14A772683B /* GalanoClassicExtraLightItalic.otf */,
+				1A407ED8C82A4443B3F2646E /* GalanoClassicHeavy.otf */,
+				0CE9833E9D39406396AEC981 /* GalanoClassicHeavyItalic.otf */,
+				3A0793B512C9476E908FA07D /* GalanoClassicItalic.otf */,
+				C5CB0365B9974C3F902A0003 /* GalanoClassicLight.otf */,
+				54A79E33D9B64B90B641A044 /* GalanoClassicLightItalic.otf */,
+				5FD60F2C50194D6B87FEE79F /* GalanoClassicMedium.otf */,
+				6CDC694DDA704E78A31C01E0 /* GalanoClassicMediumItalic.otf */,
+				5B2B0F2DA53C4878878573A7 /* GalanoClassicRegular.otf */,
+				874D371C266A4C8CA8A62831 /* GalanoClassicSemiBold.otf */,
+				F1D486DBB35E4AD5B54C4351 /* GalanoClassicSemiBoldItalic.otf */,
+				BD75642DF9CB49458CD5E955 /* GalanoClassicThin.otf */,
+				4784C6DDD5664393BA492216 /* GalanoClassicThinItalic.otf */,
+				27EC85534B4749F4A44F013B /* VisbyBold Italic.otf */,
+				D1FFC4F9FA4144BAA3BB6C6A /* VisbyBold.otf */,
+				3076849BA1A849F6B9267DCD /* VisbyExtrabold Italic.otf */,
+				BEE3CF341FAC4092B7003086 /* VisbyExtrabold.otf */,
+				49A6957B7C2047FFB4DA6768 /* VisbyHeavy Italic.otf */,
+				6BA44DC0008A4F6AB7864325 /* VisbyHeavy.otf */,
+				5A37E145991F4BA8A093FA0D /* VisbyItalic.otf */,
+				05FA9EBEF14948E7853FDB39 /* VisbyLight Italic.otf */,
+				C7F0E20D45FA4C8880FC87BC /* VisbyLight.otf */,
+				0C1CB30811E14915AD0AC8D1 /* VisbyMedium Italic.otf */,
+				BD06809B27ED4EB983383F89 /* VisbyMedium.otf */,
+				2787264C59AE465C8BC20887 /* VisbyRegular.otf */,
+				6A1A96FF96A744B292D26791 /* VisbySemibold Italic.otf */,
+				4A7B029EE810404993DF60CE /* VisbySemibold.otf */,
+				66A4E2BDAA37421D89B7EE6A /* VisbyThin Italic.otf */,
+				296641B7342B47A1AE8EC928 /* VisbyThin.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -293,6 +509,78 @@
 				49C0B8D586D4466FB02E064C /* AgeoPersonalUse.otf in Resources */,
 				B0538BE85B564C6F8CB228A7 /* ageo.png in Resources */,
 				282F0FD66CC64723A12BB468 /* sharefonts.net.txt in Resources */,
+				00EF461FD86246DEBA6909ED /* DarkerGrotesque-Black.ttf in Resources */,
+				E066097CAADF4AAEBDDC0AFA /* DarkerGrotesque-Bold.ttf in Resources */,
+				607841054D0F43F0A6A3EAD6 /* DarkerGrotesque-ExtraBold.ttf in Resources */,
+				FC1BC28E91EC4E2AA6F8F83D /* DarkerGrotesque-Light.ttf in Resources */,
+				31664376198647198B988F67 /* DarkerGrotesque-Medium.ttf in Resources */,
+				5180EE55E33C4C699D73D379 /* DarkerGrotesque-Regular.ttf in Resources */,
+				DCA5185EAAD04F35BCE78FA6 /* DarkerGrotesque-SemiBold.ttf in Resources */,
+				F6579FB0006748B89EA8E2F2 /* tilda-sans_black.ttf in Resources */,
+				A5A88EAF77934A58BE6F75D9 /* tilda-sans_bold.ttf in Resources */,
+				5C6B84230C7C48F88ED0816F /* tilda-sans_extra-bold-.ttf in Resources */,
+				B47D611064F842FB86E7720B /* tilda-sans_light.ttf in Resources */,
+				CA19900D037A40C2956B9D83 /* tilda-sans_medium.ttf in Resources */,
+				23D6246F1D4C4AD48BB7954D /* tilda-sans_regular.ttf in Resources */,
+				BC7E5272DBC9475DA6B58024 /* tilda-sans_semibold.ttf in Resources */,
+				059CF3A1081E42FD835DC255 /* tilda-sans_vf.ttf in Resources */,
+				77E442E6A024441792C56586 /* OFL.txt in Resources */,
+				6066E54B18FC462C9ADB783A /* GalanoClassicAltBlack.otf in Resources */,
+				DAAA79E80EB44C4BACA23128 /* GalanoClassicAltBlackItalic.otf in Resources */,
+				EC8B7362CF48420BB7E8CFC5 /* GalanoClassicAltBold.otf in Resources */,
+				427FCDE34CB641B7AE8E1CD5 /* GalanoClassicAltBoldItalic.otf in Resources */,
+				380DC610B1254EE3A88BA840 /* GalanoClassicAltExtraBold.otf in Resources */,
+				23C5C49B848443BC8407CEE9 /* GalanoClassicAltExtraBoldItalic.otf in Resources */,
+				254792FA8BC941F2A6928C54 /* GalanoClassicAltExtraLight.otf in Resources */,
+				D81B79752EFF491195AF36B1 /* GalanoClassicAltExtraLightItalic.otf in Resources */,
+				F078F1C975A04DE7B866318D /* GalanoClassicAltHeavy.otf in Resources */,
+				6D015F612CB54CD8A42ABC2C /* GalanoClassicAltHeavyItalic.otf in Resources */,
+				809D30592F2C4719B4413089 /* GalanoClassicAltItalic.otf in Resources */,
+				DC6B8168A2414D36BD8940AB /* GalanoClassicAltLight.otf in Resources */,
+				5902295D38A94AA489A88B8B /* GalanoClassicAltLightItalic.otf in Resources */,
+				DB4843D185594484A2DBB4C9 /* GalanoClassicAltMedium.otf in Resources */,
+				E724BD53FB164B7B84E61592 /* GalanoClassicAltMediumItalic.otf in Resources */,
+				5DF2878AC5E346319E55D0A9 /* GalanoClassicAltRegular.otf in Resources */,
+				1A1C43AE0EBB41BC953D5633 /* GalanoClassicAltSemiBold.otf in Resources */,
+				AB67C8ABE41648ED8DA2021A /* GalanoClassicAltSemiBoldItalic.otf in Resources */,
+				3C517D1E0AA5404BB62A3965 /* GalanoClassicAltThin.otf in Resources */,
+				2D110566214E42C5A1DE1CF3 /* GalanoClassicAltThinItalic.otf in Resources */,
+				3CB770F711F44A9BB1F74573 /* GalanoClassicBlack.otf in Resources */,
+				66BF690E5DAF47C9A45210FF /* GalanoClassicBlackItalic.otf in Resources */,
+				9A9C48A074754144A75B4022 /* GalanoClassicBold.otf in Resources */,
+				41ED90F9562A473F98997F5D /* GalanoClassicBoldItalic.otf in Resources */,
+				0B58F2D560254702B29880CB /* GalanoClassicExtraBold.otf in Resources */,
+				EE85FCE3D689477E8AD1F855 /* GalanoClassicExtraBoldItalic.otf in Resources */,
+				D7C8466341C743FD8427B064 /* GalanoClassicExtraLight.otf in Resources */,
+				68D32358397848BBB7ACBDDA /* GalanoClassicExtraLightItalic.otf in Resources */,
+				24B9F4429E654B44BA58737F /* GalanoClassicHeavy.otf in Resources */,
+				9FBC16B4F0D042E79E73FB3F /* GalanoClassicHeavyItalic.otf in Resources */,
+				08B130E0C1864F2CB9F15F0C /* GalanoClassicItalic.otf in Resources */,
+				369C54A527BB483D8C38AB09 /* GalanoClassicLight.otf in Resources */,
+				10660BCEE1D94B1987F90178 /* GalanoClassicLightItalic.otf in Resources */,
+				754294E409774B2DBC492CBF /* GalanoClassicMedium.otf in Resources */,
+				4BF76E03FAB24DD58517850C /* GalanoClassicMediumItalic.otf in Resources */,
+				65080E1E4CE148B68351646B /* GalanoClassicRegular.otf in Resources */,
+				90788575D2904946BBE9154C /* GalanoClassicSemiBold.otf in Resources */,
+				652B3F9D97A14AC7961E6431 /* GalanoClassicSemiBoldItalic.otf in Resources */,
+				769C0E68686E442CB4FF1E14 /* GalanoClassicThin.otf in Resources */,
+				8E7EA75AC55C44A7B69DA344 /* GalanoClassicThinItalic.otf in Resources */,
+				6CB73C7E456F4BBB8C6F1968 /* VisbyBold Italic.otf in Resources */,
+				C8C2F002A2454B6598CD99CB /* VisbyBold.otf in Resources */,
+				49B67039EFAF44D7BD410847 /* VisbyExtrabold Italic.otf in Resources */,
+				3876B454046A483A9E02F5EA /* VisbyExtrabold.otf in Resources */,
+				C06F1891BACE43329D958B2D /* VisbyHeavy Italic.otf in Resources */,
+				E304069D275A4E438BD550A0 /* VisbyHeavy.otf in Resources */,
+				D9F386C9C0CE473AB7FFFE50 /* VisbyItalic.otf in Resources */,
+				6D5925AC01E94A6C9F157743 /* VisbyLight Italic.otf in Resources */,
+				12EFC6CAD33C4193AD678AF4 /* VisbyLight.otf in Resources */,
+				0CD378590D994C7E833B94C8 /* VisbyMedium Italic.otf in Resources */,
+				E60593EB19574DE7B4ABD7F3 /* VisbyMedium.otf in Resources */,
+				DA2FB12C585F40A38995FE62 /* VisbyRegular.otf in Resources */,
+				56E23E666F234CECB7D8E3D7 /* VisbySemibold Italic.otf in Resources */,
+				00215EF3AAA1412595953CD5 /* VisbySemibold.otf in Resources */,
+				87BBCFA0961C45A5A04758FE /* VisbyThin Italic.otf in Resources */,
+				20110409744A43EC81E1AE92 /* VisbyThin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

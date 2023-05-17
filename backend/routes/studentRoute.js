@@ -14,10 +14,10 @@ const attachStudent = require('../auth/attachStudent')
 dotenv.config()
 // validation with joi
 const registerSchema = Joi.object({
-    name: Joi.string().min(3).required(),
-    matricnumber: Joi.string().min(6).required(),
+    name: Joi.string().min(3).required().messages({"any.required": "Name is required!"}),
+    matricnumber: Joi.string().min(6).messages({"any.required": "Matric number is required!"}),
     department: Joi.string().required(),
-    email: Joi.string().required(),
+    email: Joi.string().required().messages({"any.required": "Email is required!"}),
     displayname: Joi.string().required(),
     level: Joi.number().required(),
     college: Joi.string().required(),
@@ -25,8 +25,8 @@ const registerSchema = Joi.object({
 })
 
 const loginSchema = Joi.object({
-    matricnumber: Joi.string().min(6).required(),
-    password: Joi.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).required()
+    matricnumber: Joi.string().required().messages({"any.required": "Matric number is required!"}),
+    password: Joi.string().required().messages({"any.required": "Password is required!", "any.only": "Incorrect Password"})
 })
 const SECRET = process.env.SECRET
 //token
@@ -99,7 +99,7 @@ router.post('/api/register-student' , async(req,res)=>{
     }
     catch(err){
         console.log(err)
-        res.status(400).send(`An error ocurred. DETAILS : ${err}`);
+        res.status(400).send(`An error ocurred. Retry`);
     }
 })
 
@@ -121,7 +121,7 @@ router.post('/api/login-student', async (req,res)=>{
     // check password validity
     const validPassword = await bcrypt.compare(req.body.password , student.password)
     if(!validPassword){
-        return res.status(400).send('Invalid Password')
+        return res.status(400).send('Incorrect Password')
     }
     else{
         const accessToken = generateToken(student)
@@ -133,8 +133,7 @@ router.post('/api/login-student', async (req,res)=>{
         await storedRefreshToken.save()
         res.status(200).json({
             message: "You have successfully log in",
-            _id: student.id,
-            department: student.department,
+            student: student,
             accessToken,
             expiresAt: accessTokenExpiresAt,
             refreshToken
@@ -183,6 +182,10 @@ router.post('/api/refreshToken', async (req, res) => {
     console.log(err)
     res.status(400).send(`An error ocurred. DETAILS : ${err}`);
    }
+ })
+
+ router.get('/api/testing', async(req,res)=>{
+   res.send({message: 'hellooo testing'})
  })
 
 module.exports= router

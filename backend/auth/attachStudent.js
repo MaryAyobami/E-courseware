@@ -3,8 +3,8 @@ const jsonwebtoken = require('jsonwebtoken');
 const jwt = require('express-jwt');
 
 const attachStudent = (req, res, next) => {
-   //const token = req.headers.authorization
-    const token = req.params.token;
+   const token = req.headers.authorization
+
     if (!token) {
       return res
         .status(401)
