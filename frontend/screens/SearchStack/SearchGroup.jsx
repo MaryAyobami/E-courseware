@@ -12,7 +12,7 @@ const SearchGroup = ({navigation}) => {
     <View className='flex flex-row '>
       <View className='bg-gray w-[35%] h-screen p-4'>
    
-        <Text className='text-green font-ageobold text-xl mt-6 text-center '>Academic Libraries</Text>
+        <Text className='text-main font-ageobold text-xl mt-6 text-center '>Academic Libraries</Text>
           <View className="flex-1">
             
                  <View className='text-center mt-20'>
@@ -27,8 +27,14 @@ const SearchGroup = ({navigation}) => {
                     </TouchableOpacity>
                   </View>
 
-                  <View className='text-center my-6'>
-                    <TouchableOpacity>
+                  <View className='text-center my-6' 
+                  
+                  >
+                    <TouchableOpacity
+                     onPress={() => {
+                      navigation.navigate('Google Scholar');
+                      }}
+                    >
                       <Text className='text-grey-800 text-center font-ageonormal text-[16px]'>GOOGLE SCHOLAR</Text>
                     </TouchableOpacity>
                   </View>
@@ -48,7 +54,7 @@ const SearchGroup = ({navigation}) => {
       </View>
       </View>
          
-         <Pressable    className=' flex flex-row justify-between border text-center border-green p-4 items-center rounded-full h-[8%] w-[60%] my-6 mx-auto'       
+         <Pressable    className=' flex flex-row justify-between border text-center border-main p-4 items-center rounded-full h-[8%] w-[60%] my-6 mx-auto'       
           onPress={() => {
           navigation.navigate('SearchScreen');
           }}>
@@ -63,7 +69,8 @@ const SearchGroup = ({navigation}) => {
                     color="#297373"
                     style={{ 
                    
-                      height: '100%'
+                      height: '150%',
+                      // marginBottom: 12
                       
                     }}
                     />

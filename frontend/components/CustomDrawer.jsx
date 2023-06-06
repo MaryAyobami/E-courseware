@@ -16,6 +16,8 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import { AuthContext } from '../components/context/AuthContext'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { storage } from '../screens/StuLogin';
+import { MMKV } from 'react-native-mmkv'
 
 const CustomDrawer = props => {
   const authContext = useContext(AuthContext);
@@ -73,10 +75,10 @@ const CustomDrawer = props => {
             style={{
               color: '#fff',
               fontSize: 20,
-              fontFamily: 'AgeoPersonalUse-Medium',
+              fontFamily: 'tilda-sans_medium',
               marginBottom: 5,
             }}>
-            Mary Ayobami
+          {storage.getString('user.name')}
           </Text>
         </ImageBackground>
         <View style={{flex: 1, backgroundColor: '#fff', paddingTop: 20}}>
@@ -89,7 +91,9 @@ const CustomDrawer = props => {
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc' , backgroundColor: '#fff'} }>
 
         <TouchableOpacity 
-         onPress={ () => authContext.logout()} 
+         onPress={ () => {
+          authContext.logout()
+         }} 
          style={{paddingVertical: 15, flexDirection: 'row', alignItems:"flex-start" , justifyContent:'space-between' , width: '50%', }}
          
          >
@@ -98,7 +102,7 @@ const CustomDrawer = props => {
             <Text
               style={{
                 fontSize: 17,
-                fontFamily: 'AgeoPersonalUse-Medium',
+                fontFamily: 'tilda-sans_medium',
                 color:'#732955'
                 // marginLeft: 20,
               }}>

@@ -25,7 +25,7 @@ const LectSignup = ({navigation}) => {
   //const [level, setLevel] = useState('')
 
 // password visibility
-  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =axio
   useTogglePasswordVisibility();
   const [password, setPassword] = useState('')
  
@@ -89,7 +89,15 @@ const LectSignup = ({navigation}) => {
             console.error(validationerror.current)
             showMessage({
               message: `${validationerror.current}`,
-                type: "danger",
+                type: "default",
+                titleStyle: {
+                  fontFamily:"tilda-sans_medium",
+                  color:'#DFF0EB',
+                  fontSize: 17,
+                  padding: 4
+                },
+               backgroundColor: '#3b2e2a',
+               color:'#DFF0EB',
             })
           
        console.error("Axios request failed", err.response?.data, err.toJSON());
@@ -102,12 +110,12 @@ const LectSignup = ({navigation}) => {
 
 
   return (
-      <View className="h-screen bg-white">
+      <View className="h-screen bg-bgcolor">
       <View>
-        <Image source={require('../assets/reading.png')} style={{width: '100%', height:250}} resizeMode="contain"/>
+        <Image source={require('../assets/logo.png')} style={{width: '100%', height:250}} resizeMode="contain"/>
       </View>
       <View className='pb-8'>
-      <Text className="font-ageoheavy text-4xl text-center text-green">Sign Up</Text>
+      <Text className="font-ageoheavy text-4xl text-center text-main">Sign Up</Text>
       </View>
       <View className='flex-1 w-[90%] mx-auto pb-16' >
       <ScrollView
@@ -118,8 +126,8 @@ const LectSignup = ({navigation}) => {
       keyboardDismissMode= "on-drag"
       scrollToOverflowEnabled= {true}
       >
-         <TextInput className="font-ageonormal border border-green rounded-full text-[20px] px-4 my-2 text-black" placeholder='Name' onChangeText={(text)=>setName(text)} />
-         <TextInput className="font-ageonormal border border-green rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Email' inputMode='email' onChangeText={(text)=>setEmail(text)} />
+         <TextInput className="font-ageonormal border border-main rounded-full text-[20px] px-4 my-2 text-black" placeholder='Name' onChangeText={(text)=>setName(text)} />
+         <TextInput className="font-ageonormal border border-main rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Email' inputMode='email' onChangeText={(text)=>setEmail(text)} />
 
          
          {/* college */}
@@ -182,9 +190,9 @@ const LectSignup = ({navigation}) => {
               searchPlaceholder="Search..."         
           /> */}
 
-         <TextInput className="font-ageonormal border border-green rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Displayname' onChangeText={(text)=>setDisplayname(text)}/>
+         <TextInput className="font-ageonormal border border-main rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Displayname' onChangeText={(text)=>setDisplayname(text)}/>
          <View>
-          <TextInput className="font-ageonormal border border-green rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Password' name="password" 
+          <TextInput className="font-ageonormal border border-main rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Password' name="password" 
           textContentType="newPassword"
           secureTextEntry={passwordVisibility}
           value={password}  
@@ -199,13 +207,13 @@ const LectSignup = ({navigation}) => {
          </View>
         
          
-          <Pressable className="items-center mt-4 rounded-full bg-green" onPress={handleSignup}>
+          <Pressable className="items-center mt-4 rounded-full bg-main" onPress={handleSignup}>
             <Text className="text-gray text-xl font-ageomedium py-4 px-12  " >SIGNUP</Text>
           </Pressable>
          <View className="flex  items-center p-4">
-          <Text className="font-ageobold text-xl text-green">Register as a Student</Text>
-          <Text className="font-ageobold text-xl text-green py-3">Have an account?   
-          <Text onPress={()=> navigation.navigate('Login')} className="font-ageobold text-xl underline px-4 text-black focus:text-green">Sign In</Text>
+          <Text className="font-ageobold text-xl text-main">Register as a Student</Text>
+          <Text className="font-ageobold text-xl text-main py-3">Have an account?   
+          <Text onPress={()=> navigation.navigate('Login')} className="font-ageobold text-xl underline px-4 text-black focus:text-main">Sign In</Text>
           </Text>
          </View>
       </ScrollView>

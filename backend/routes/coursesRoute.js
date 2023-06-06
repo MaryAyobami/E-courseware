@@ -9,9 +9,9 @@ router.get('/api/student-resources', attachStudent, async(req,res)=>{
     try{
         const student = req.user.sub
         const studentProfile = await Student.findById(student)
-        console.log(req.query.type)
-
+  console.log(studentProfile)      
         const resources = await Resources.find({level:studentProfile.level, department: studentProfile.department, type:req.query.type})
+        console.log(resources)
         res.status(200).send({
             resources: resources
         })

@@ -82,9 +82,16 @@ const TabNavigator = () => {
   >
     <Tab.Screen
       name="Home"
-      component={Home}
+      component={CoursesStackNavigator}
       options={{
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
+        tabBarLabelStyle:{
+          fontSize: 13,
+          fontFamily: 'tilda-sans_medium',
+          color:'#732955',
+          paddingBottom: 8 
+      },
+      
         tabBarIcon: () => (
           <Icon name="home-variant-outline" color='#732955' size={30} />
       ),
@@ -94,35 +101,57 @@ const TabNavigator = () => {
       name="Search"
       component={SearchStackNavigator}
       options={{
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
+        tabBarLabelStyle:{
+            fontSize: 13,
+            fontFamily: 'tilda-sans_medium',
+            color:'#732955',
+            paddingBottom: 8 
+        },
         tabBarIcon: ({ color, size }) => (
           <Icon name="magnify" color='#732955' size={30} />
         ),
       
       }}
     />
+
     <Tab.Screen
-      name="Courses"
-      component={CoursesStackNavigator}
+      name="Chat Forum"
+      component={GroupChat}
       options={{
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
+        tabBarLabelStyle:{
+          fontSize: 13,
+          fontFamily: 'tilda-sans_medium',
+          color:'#732955',
+          paddingBottom: 8 
+      },
+      
         tabBarIcon: ({ color, size }) => (
-          <Icon name="notebook-multiple" color='#732955' size={30} />
+          <Icon name="chat" color='#732955' size={30} />
         ),
-        
+        tabBarBadge: 3,
       }}
     />
     <Tab.Screen
-      name="ProfileDetails"
+      name="Account"
       component={ProfileDrawerNavigator}
       options={{
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
+        tabBarLabelStyle:{
+          fontSize: 13,
+          fontFamily: 'tilda-sans_medium',
+          color:'#732955',
+          paddingBottom: 8 
+      },
+      
         tabBarIcon: ({ color, size }) => (
           <Icon name="account" color='#732955' size={30} />
         ),
         // tabBarBadge: 3,
       }}
     />
+
   </Tab.Navigator>
   </View>
   )

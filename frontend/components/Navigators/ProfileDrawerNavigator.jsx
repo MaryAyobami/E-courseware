@@ -42,7 +42,7 @@ const ProfileDrawerNavigator = () => {
           // marginLeft: -25,
          // fontFamily: 'Roboto-Medium',  
           fontSize: 20,
-          fontFamily: 'AgeoPersonalUse-Medium',
+          fontFamily: 'tilda-sans_medium',
      
         },
       }
@@ -60,7 +60,7 @@ const ProfileDrawerNavigator = () => {
                 // marginLeft: -25,
                // fontFamily: 'Roboto-Medium',  
                 fontSize: 18,
-                fontFamily: 'AgeoPersonalUse',
+                fontFamily: 'tilda-sans_medium',
            
               },
               drawerActiveBackgroundColor:  '#297373',
@@ -80,7 +80,7 @@ const ProfileDrawerNavigator = () => {
                 // marginLeft: -25,
                // fontFamily: 'Roboto-Medium',  
                 fontSize: 18,
-                fontFamily: 'AgeoPersonalUse',
+                fontFamily: 'tilda-sans_medium',
            
               },
               drawerActiveBackgroundColor:  '#297373',
@@ -98,7 +98,7 @@ const ProfileDrawerNavigator = () => {
             // marginLeft: -25,
            // fontFamily: 'Roboto-Medium',  
             fontSize: 18,
-            fontFamily: 'AgeoPersonalUse',
+            fontFamily:'tilda-sans_medium',
        
           },
           drawerActiveBackgroundColor:  '#297373',
@@ -116,8 +116,7 @@ const ProfileDrawerNavigator = () => {
             // marginLeft: -25,
            // fontFamily: 'Roboto-Medium',  
             fontSize: 18,
-            fontFamily: 'AgeoPersonalUse',
-       
+            fontFamily: 'tilda-sans_medium',
           },
           drawerActiveBackgroundColor:  '#297373',
           drawerInactiveTintColor: '#297373',
@@ -134,7 +133,7 @@ const ProfileDrawerNavigator = () => {
             // marginLeft: -25,
            // fontFamily: 'Roboto-Medium',  
             fontSize: 18,
-            fontFamily: 'AgeoPersonalUse',
+            fontFamily: 'tilda-sans_medium',
        
           },
           drawerActiveBackgroundColor:  '#297373',

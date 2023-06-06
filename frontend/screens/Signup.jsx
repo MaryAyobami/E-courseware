@@ -6,23 +6,23 @@ const windowHeight = Dimensions.get('window').height;
 const SignUp = ({navigation}) => {
 
   return (
-    <View className="h-screen w-screen bg-ray">
+    <View className="h-screen w-screen bg-bgcolor">
        <View style={styles.imageContainer}>
-        <Image source={require('../assets/reading.png')} style={{width: '100%', height:'100%'}} resizeMode="contain"/>
+        <Image source={require('../assets/logo.png')} style={{width: '100%', height:'85%'}} resizeMode="contain"/>
       </View>
       
-      <View className="bg-green h-full rounded-tl-[100px] pt-6">
+      <View className="bg-main h-full rounded-tl-[100px] pt-6">
       <View className='items-center'>
-      <Text className="font-ageoheavy text-4xl text-start text-gray ">SignUp</Text>
+      <Text className="font-ageoheavy text-4xl text-start text-bgcolor ">SignUp</Text>
          <View className='w-[95%] mx-auto text-center justify-center items-center h-[300px]'>
-          <Pressable onPress={()=> navigation.navigate('StudentSignup') }className='py-4 w-[70%]  bg-gray rounded-full '><Text className='font-ageomedium text-xl text-center '> Student</Text></Pressable>
+          <Pressable onPress={()=> navigation.navigate('StudentSignup') }className='py-4 w-[70%]  rounded-full border bg-bgcolor border-lightmain  '><Text className='font-ageomedium text-xl text-center text-main'> Student</Text></Pressable>
           <Text className='my-2'></Text>
-          <Pressable onPress={()=> navigation.navigate('LecturerSignup')} className='py-4 w-[70%]  bg-gray rounded-full '><Text className='font-ageomedium text-xl text-center '> Lecturer </Text></Pressable>
+          <Pressable onPress={()=> navigation.navigate('LecturerSignup')} className='py-4 w-[70%]  rounded-full border bg-bgcolor border-lightmain  '><Text className='font-ageomedium text-xl text-center text-main'> Lecturer </Text></Pressable>
          </View>
         
       <Pressable style={styles.button}>
-      <Text className="font-ageonormal text-xl text-orange py-3 text-center">Have an account?   
-          <Text onPress={()=> navigation.navigate('Login')} className="font-ageonormal text-xl underline px-4 text-orange">Sign In</Text>
+      <Text className="font-ageonormal text-xl text-orange py-3 text-center  text-lightmain">Have an account?   
+          <Text onPress={()=> navigation.navigate('Login')} className="font-ageonormal text-xl underline px-4 text-orange"> Sign In</Text>
           </Text>
       </Pressable>
       </View>
@@ -38,7 +38,9 @@ export default SignUp
 
 const styles = StyleSheet.create({
   imageContainer:{
-    height: windowHeight/3.3,
+    height: windowHeight/2.8,
+    paddingTop: 20,
+    paddingLeft: 20
   },
   button:{
     // flex:1,

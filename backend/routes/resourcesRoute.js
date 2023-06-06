@@ -9,6 +9,10 @@ const path = require('path');
 const attachStudent = require('../auth/attachStudent');
 const Student = require('../models/student')
 const Lecturer = require('../models/lecturers')
+const SerpApi = require('google-search-results-nodejs');
+const search = new SerpApi.GoogleSearch("3d8ded321f6009b48d30e82f287a0b2f23389ac006db4744f67df42aa45548fc");
+const admin = require("firebase-admin");
+const serviceAccount = require("../firebase.json");
 
 // aws credentials
 AWS.config.update({
@@ -42,9 +46,17 @@ const upload = multer({
 
 
 //uupload
-router.post('/api/send-resource',upload.single('resource'),async(req,res)=>{
+// push notifications
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+
+router.post('/api/send-resource',upload.single('resource'),attachStudent,async(req,res)=>{
     try{
-      console.log(req.file)
+      const sender = await Student.findById(req.user.sub)
+      console.log(sender)
+      // console.log(req.file)
       const resource = req.file.location
         //console.log(req.body.resource)
       console.log(resource)
@@ -55,12 +67,34 @@ router.post('/api/send-resource',upload.single('resource'),async(req,res)=>{
             name: req.file.originalname,
             type: req.body.type,
             department: req.body.department,
-            level: req.body.level
+            level: req.body.level,
+            sender: req.body.sender
         })
         await newResource.save()
-        res.status(201).json({
-          message: 'Resource uploaded successfully'
+
+        // res.status(201).json({
+        //   message: 'Resource uploaded successfully'
+        // })
+       
+        const relatedStudents = await Student.find({department: sender.department})
+
+        const tokens = []
+        relatedStudents.map(item=>{
+          if(item.token != undefined){
+            tokens.push(item.token)
+          }
+
         })
+        console.log(tokens)
+
+        await admin.messaging().sendMulticast({
+          tokens,
+          notification:{
+            body: 'testing application'
+          } 
+        });
+        res.status(200).json({ message: "Successfully sent notifications!" });
+
     }
     catch(e){
         console.log(e)
@@ -117,4 +151,32 @@ router.put('/api/save-resource',attachStudent, async(req,res) => {
     res.status(404).send(`An error occured`)
   }
 })
+
+// external api
+// serp- google scholar apu
+
+router.get('/api/search-googlescholar' , async(req,res)=>{
+  try{
+    console.log(req.query.searchterm)
+    const params = {
+      engine: "google_scholar",
+      q: `${req.query.searchterm}`
+    };
+    
+    const callback = function(data) {
+      console.log(data["organic_results"]);
+    };
+    
+    // Show result as JSON
+    const resultdata = search.json(params, callback)
+    res.status(200).send(JSON.stringify(resultdata))
+    console.log('testing')
+    console.log(resultdata)
+  }
+  catch(e){
+    console.log(e)
+    res.status(404).send(`An error occured`)
+  }
+})
+
 module.exports = router

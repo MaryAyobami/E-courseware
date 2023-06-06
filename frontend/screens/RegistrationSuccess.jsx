@@ -14,12 +14,12 @@ const RegistrationSuccess = ({navigation}) => {
          <Icon name="check-all" size={300} color="#297373" />
        </View>
         <View className='w-[90%] mx-auto'> 
-            <Text className="font-ageobold text-4xl text-green text-center">Registration Successful!</Text>
+            <Text className="font-ageobold text-4xl text-main text-center">Registration Successful!</Text>
          
         </View>
         </View>
         <Pressable style={styles.button}>
-            <Text onPress={()=> navigation.navigate('Login')} className="font-ageonormal border-2 border-green rounded-full px-6 py-4 text-xl text-orange bg-green focus:text-green">Start Learning</Text>
+            <Text onPress={()=> navigation.navigate('Login')} className="font-ageonormal border-2 border-main rounded-full px-6 py-4 text-xl text-orange bg-main focus:text-main">Start Learning</Text>
             </Pressable>
     </SafeAreaView>
   )

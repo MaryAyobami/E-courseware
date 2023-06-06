@@ -37,6 +37,10 @@ const student = mongoose.Schema({
         required: true,
         min:6
     },
+    token:{
+        type: String,
+        required: true,
+    },
     bookmarks:{
         type: Array,
         required: false

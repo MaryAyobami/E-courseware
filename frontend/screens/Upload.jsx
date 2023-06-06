@@ -135,15 +135,15 @@ const handleUpload = async()=>{
 
        <View className='w-[95%] mx-auto pt-10'>
                   {/* file */}
-                  <Pressable className="items-center rounded-full border border-green mt-2 bg-" onPress={handleDocumentSelection}>
-            <Text className="text-green  text-xl font-ageomedium py-4 px-12  " >Select File</Text>
+                  <Pressable className="items-center rounded-full border border-main mt-2 bg-" onPress={handleDocumentSelection}>
+            <Text className="text-main  text-xl font-ageomedium py-4 px-12  " >Select File</Text>
           </Pressable>
-            <Text className="text-green text-xl font-ageomedium text-center">{filename}</Text>
+            <Text className="text-main text-xl font-ageomedium text-center">{filename}</Text>
 
           {/* name */}
           {/* <View className='py-2'>
             <Text className='text-xl font-ageomedium text-grey-800'>Name</Text>
-            <TextInput className="font-ageonormal border border-green rounded-full text-[20px] px-4 my-3 text-black" placeholder="e.g CSC 411 Lecture Note" onChangeText={(text)=>setName(text)}/>
+            <TextInput className="font-ageonormal border border-main rounded-full text-[20px] px-4 my-3 text-black" placeholder="e.g CSC 411 Lecture Note" onChangeText={(text)=>setName(text)}/>
           </View> */}
           {/* type */}
           <View className='py-2'>
@@ -217,7 +217,7 @@ const handleUpload = async()=>{
 
 
         {/* upload button */}
-        <Pressable className="items-center mt-4 rounded-full bg-green" onPress={handleUpload}>
+        <Pressable className="items-center mt-4 rounded-full bg-main" onPress={handleUpload}>
             <Text className="text-gray text-xl font-ageomedium py-4 px-12  " >Upload</Text>
           </Pressable>
        </View>

@@ -11,6 +11,7 @@ const axios = require('axios');
 const dotenv = require('dotenv')
 const randToken = require('rand-token'); 
 const attachStudent = require('../auth/attachStudent')
+
 dotenv.config()
 // validation with joi
 const registerSchema = Joi.object({
@@ -21,7 +22,8 @@ const registerSchema = Joi.object({
     displayname: Joi.string().required(),
     level: Joi.number().required(),
     college: Joi.string().required(),
-    password: Joi.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).required()
+    password: Joi.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).required(),
+    token: Joi.string().required(),
 })
 
 const loginSchema = Joi.object({
@@ -75,7 +77,8 @@ router.post('/api/register-student' , async(req,res)=>{
                 department : req.body.department,
                 college : req.body.college,
                 level: req.body.level,
-                displayname: req.body.displayname
+                displayname: req.body.displayname,
+                token: req.body.token,
 
             })
             const newStudent = await student.save()
@@ -140,6 +143,40 @@ router.post('/api/login-student', async (req,res)=>{
         })
     }
 })
+
+// edit profile imformation
+
+router.put('/api/editprofile-student' ,attachStudent, async(req,res)=>{
+  // validation
+  const { error } = registerSchema.validate(req.body)
+  if (error) {
+      return res.status(400).send(error.details[0].message)
+  }
+
+  try{
+           const student = req.user.sub
+           await Student.findByIdAndUpdate(student._id,{
+              name : req.body.name,
+              matricnumber : req.body.matricnumber, 
+              email : req.body.email,
+              department : req.body.department,
+              college : req.body.college,
+              level: req.body.level,
+          })
+       
+
+              res.status(200).json({
+                  message: "You have successfully edited your profile"
+                 
+              }) 
+     }
+
+  catch(err){
+      console.log(err)
+      res.status(400).send(`An error ocurred. Retry`);
+  }
+})
+
 
 // refresh token
 router.post('/api/refreshToken', async (req, res) => {

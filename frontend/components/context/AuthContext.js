@@ -1,5 +1,6 @@
 import React, {createContext, useState} from 'react';
 import * as Keychain from 'react-native-keychain';
+import { storage } from '../../screens/StuLogin';
 
 const AuthContext = createContext(null);
 const {Provider} = AuthContext;
@@ -13,6 +14,7 @@ const AuthProvider = ({children}) => {
 
   const logout = async () => {
     await Keychain.resetGenericPassword();
+    storage.clearAll()
     setAuthState({
       accessToken: null,
       refreshToken: null,

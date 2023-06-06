@@ -2,39 +2,51 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {
   View,
+  Button,
   StyleSheet,
   FlatList,
   Image,
+  TouchableOpacity,
   Text,
   Dimensions,
   SafeAreaView,
   Modal
 } from 'react-native';
-import NetInfo from "@react-native-community/netinfo";
+import LottieView from "lottie-react-native";
 
 const InternetCheck = (prop) => {
-    const {isOffline} = prop
+    const {isOffline, onRetry} = prop
 
-    // const Button = ({children, ...props}) => (
-    //     <TouchableOpacity style={styles.button} {...props}>
-    //       <Text style={styles.buttonText}>{children}</Text>
-    //     </TouchableOpacity>
-    //   );
+    const Button = ({children, ...props}) => (
+        <TouchableOpacity style={styles.button} {...props}>
+          <Text style={styles.buttonText}>Retry</Text>
+        </TouchableOpacity>
+      );
       
  return (
-    <View>
+    <View className="w-screen h-screen">
         <Modal 
             visible={isOffline} 
             animationType="slide"
             style={styles.modal} animationInTiming={600}>
             <View style={styles.modalContainer}>
-                <Text style={styles.modalTitle}>Connection Error</Text>
-                <Text style={styles.modalText}>
-                Oops! Looks like your device is not connected to the Internet.
-                </Text>
-                {/* <Button onPress={onRetry} disabled={isRetrying}>
-                Try Again
+                {/* <Text style={styles.modalTitle}>Connection Error</Text> */}
+                <View className='flex-1 pt-20 px-4'>
+                  <LottieView
+                    source={require("../assets/no-internet.json")}
+                    style={styles.animation}
+                    autoPlay
+                />
+                  <Text style={styles.modalText}>
+                  Oops! Looks like your device is not connected to the Internet.
+                  </Text>
+                </View>
+     
+                {/* <Button onPress={onRetry}>
                 </Button> */}
+                <TouchableOpacity style={styles.button} onPress={onRetry}>
+                  <Text style={styles.buttonText}>Retry</Text>
+                </TouchableOpacity>
             </View>
             </Modal>
     </View>
@@ -48,41 +60,51 @@ export default InternetCheck
 const styles = StyleSheet.create({
     // ...
     modal: {
-      justifyContent: 'flex-end',
+      height: '100%',
+    
       margin: 0,
     
     },
     modalContainer: {
-      backgroundColor:  '#732955',
+      backgroundColor:  '#ee6c4d',
       paddingHorizontal: 16,
       paddingTop: 20,
       paddingBottom: 40,
       alignItems: 'center',
+      flex:1,
+      height: '100%',
+      justifyContent: 'flex-end',
     },
     modalTitle: {
       fontSize: 22,
       fontWeight: '600',
-      color: '#fff',
+      color: '#eaeaea',
       fontFamily: 'GalanoClassicAltMedium'
     },
     modalText: {
-      fontSize: 19,
-      color: '#fff',
+      fontSize: 24,
+      color:'#eaeaea',
       marginTop: 14,
       textAlign: 'center',
       marginBottom: 10,
       fontFamily: 'tilda-sans_medium'
     },
     button: {
-      backgroundColor: '#000',
+      backgroundColor: '#3d5a80',
       paddingVertical: 12,
       paddingHorizontal: 16,
       width: '100%',
       alignItems: 'center',
       marginTop: 10,
+      
     },
     buttonText: {
-      color: '#fff',
+      color:'#eaeaea',
       fontSize: 20,
+      fontFamily: 'tilda-sans_medium'
     },
+    animation:{
+      // height: '100%',
+      width: '100%'
+    }
   });

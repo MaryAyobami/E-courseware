@@ -10,9 +10,12 @@ import {AxiosContext} from '../components/context/AxiosContext';
 import { MMKV } from 'react-native-mmkv'
 import NetInfo from "@react-native-community/netinfo";
 import InternetCheck from '../components/InternetCheck';
-
+import Loader from './Loader';
 
 export const storage = new MMKV()
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const StuLogin = ({navigation}) => {
 
@@ -33,15 +36,15 @@ const StuLogin = ({navigation}) => {
 
   // internet check
   const [isOffline, setOfflineStatus] = useState(false);
-  useEffect(() => {
-    const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
-      const offline = !(state.isConnected && state.isInternetReachable);
-      setOfflineStatus(offline);
-    });
-   console.log('testing')
-   console.log(isOffline)
-    removeNetInfoSubscription();
-  },[]);
+  // useEffect(() => {
+  //   const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+  //     const offline = !(state.isConnected && state.isInternetReachable);
+  //     setOfflineStatus(offline);
+  //   });
+  //  console.log('testing')
+  //  console.log(isOffline)
+  //   removeNetInfoSubscription();
+  // },[]);
 
 
   // handle login
@@ -54,20 +57,28 @@ const StuLogin = ({navigation}) => {
           showMessage({
             message: `The input fields cannot be empty!`,
               type: "default",
-              backgroundColor: '#732955',
+              backgroundColor: '#3b2e2a',
             titleStyle: {
               fontFamily:"tilda-sans_medium",
-              color:'#DFF0EB',
+              color:'#f8f1e9',
               fontSize: 16,
               padding: 4
             },
           })
 
-          setMatricnumber('')
-          setPassword('')
+          // setMatricnumber('')
+          // setPassword('')
         }
       else{
         setLoading(true)
+        // internet check
+        const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+          const offline = !(state.isConnected && state.isInternetReachable);
+          setOfflineStatus(offline);
+        });
+     
+        removeNetInfoSubscription();
+        // send request
         await publicAxios.post(`/api/login-student`,{
         matricnumber, 
         password,
@@ -100,8 +111,8 @@ const StuLogin = ({navigation}) => {
      
         isOffline && setOfflineStatus(false);
 
-        setMatricnumber('')
-        setPassword('')
+        // setMatricnumber('')
+        // setPassword('')
         
       }).
       catch((err)=>{   
@@ -117,7 +128,7 @@ const StuLogin = ({navigation}) => {
                     fontSize: 16,
                     padding: 4
                   },
-                 backgroundColor: '#732955',
+                 backgroundColor:'#3b2e2a',
                  color:'#DFF0EB',
               })
 
@@ -141,29 +152,31 @@ const StuLogin = ({navigation}) => {
 
   return (
 
-    <View className="h-screen bg-white">
+    <View className="bg-bgcolor flex-1">
+ 
       {/* internet check */}
-      <InternetCheck isOffline={isOffline}/>
-
-      {loading? <ActivityIndicator size="large" style={styles.indicator} color={'#FF8552'} />: 
+      <InternetCheck isOffline={isOffline} onRetry={handleLogin}/>
+      {loading? <Loader/> : 
       <View>
 
-     <View>
+     {/* <View>
         <Image source={require('../assets/reading.png')} style={{width: '100%', height:250}} resizeMode="contain"/>
-      </View>
+      </View> */}
 
 {/* main content */}
       <View className='w-[90%] mx-auto' >
  
-      <View className='pb-8' >
-      <Text className="font-ageoheavy text-4xl text-start text-green">Login</Text>
+      <View className='pb-16 pt-10' >
+      <Text className="font-ageoheavy text-4xl text-start text-main">Login</Text>
       </View>
       <View>
       {/* matric number */}
-      <TextInput className="font-ageonormal border border-green rounded-full text-[20px] px-4 my-3 text-black" placeholder='Matric number' value={matricnumber.toString()} onChangeText={(text)=>setMatricnumber(text)}/>
+      <Text className='font-ageonormal  text-xl text-grey-800 p-0 m-0 '>Matric Number</Text>
+      <TextInput className="font-ageonormal border border-main rounded-lg text-[20px] px-4 my-3 text-black  focus:border-orange" value={matricnumber.toString()} onChangeText={(text)=>setMatricnumber(text)}/>
       {/* password */}
-      <View>
-          <TextInput className="font-ageonormal border border-green rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Password' name="password" 
+      <View className='py-2'>
+          <Text className='font-ageonormal  text-xl text-grey-800 p-0 m-0'>Password</Text>
+          <TextInput className="font-ageonormal border border-main rounded-lg px-4 my-2 text-[20px]  text-black  focus:border-orange" name="password" 
           textContentType="newPassword"
           secureTextEntry={passwordVisibility}
           value={password.toString()}  
@@ -172,27 +185,31 @@ const StuLogin = ({navigation}) => {
           onChangeText={text => setPassword(text)}
           />
 
-          <Pressable onPress={handlePasswordVisibility} className='absolute top-6 right-4'>
-              <Icon name={rightIcon} size={22} color="#297373" />
+          <Pressable onPress={handlePasswordVisibility} className='absolute top-4 right-4'>
+              <Icon name={rightIcon} size={22} color="#ee6c4d" />
           </Pressable>
     </View>
-   
-   
-     <Pressable className="items-center rounded-full mt-4 bg-green" onPress={handleLogin} >
-            <Text className="text-gray text-xl font-ageomedium py-4 px-12">LOGIN</Text>
-          </Pressable>
-          <Text onPress={()=> navigation.navigate('ForgotPassword')}  className="text-[15px] pt-2 text-grey text-center ">Forgot Password?</Text>
-
-     
      </View>
-      <View className=" flex  items-center p-4">
-          <Text className="font-ageobold text-xl text-green py-3">New Here??   
-          <Text onPress={()=> navigation.navigate('SignUp')} className="font-ageobold text-xl underline px-4 text-black focus:text-green">Sign Up</Text>
-          </Text>
-         </View>
+
+     {/* login  */}
+     <View className='py-2'>
+       
+     <Pressable className="items-center rounded-lg mt-4 bg-main" onPress={handleLogin} >
+            <Text className="text-lightmain text-xl font-ageomedium py-4 px-12">LOGIN</Text>
+          </Pressable>
+          <Text onPress={()=> navigation.navigate('ForgotPassword')}  className="text-[15px] pt-2 text-black text-center ">Forgot Password?</Text>
+
+   
+    </View>
         </View>
          </View>
 }
+
+    <View className=" flex  items-center p-4" style={styles.logindownside}>
+              <Text className="font-ageobold text-xl text-main py-3 text-center">New Here??   
+              <Text onPress={()=> navigation.navigate('SignUp')} className="font-ageobold text-xl underline px-4 text-black focus:text-main text-center"> Sign Up</Text>
+              </Text>
+            </View>
     </View>
   
   )
@@ -202,14 +219,29 @@ export default StuLogin
 
 const styles = StyleSheet.create({
   indicator: {
-    backgroundColor: '#DFF0EB',
+    backgroundColor: '#e0fbfc',
     height: Dimensions.get('window').height,
+    opacity: 0.5,
   },
 
   flashmessage: {
     fontFamily:"GalanoClassicAltRegular",
-    color:'#DFF0EB',
+    color:'#f8f1e9',
     fontSize: 16,
     padding: 4
+  },
+  logindownside: {
+    position: 'absolute',
+    bottom: windowHeight*0,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    alignContent: 'center',
+    paddingBottom: 4,
+    justifyContent: 'center'
+    // top: windowHeight*0,
+    // height: Dimensions.get('window').height,
+    // flex: 1,
+    // justifyContent: 'flex-end',
   }
 })

@@ -12,7 +12,7 @@ const RecoverPassword = ({navigation}) => {
 
   return (
     <SafeAreaView>
-      <View className="w-screen h-screen bg-green">
+      <View className="w-screen h-screen bg-main">
          <View className='w-[90%] mx-auto'>
            <Text className='font-ageobold text-gray text-3xl text-center pt-20 pb-16'>Reset your Password</Text>
           <View>
@@ -44,7 +44,7 @@ const RecoverPassword = ({navigation}) => {
           </Pressable>
     </View>
 
-    <Text onPress={()=> navigation.navigate('PasswordRecoverySuccessful')} className="font-ageomedium text-center border-2 border-green rounded-full px-6 py-4 my-4 text-xl text-green bg-orange focus:text-green ">Change Password</Text>
+    <Text onPress={()=> navigation.navigate('PasswordRecoverySuccessful')} className="font-ageomedium text-center border-2 border-main rounded-full px-6 py-4 my-4 text-xl text-main bg-orange focus:text-main ">Change Password</Text>
          </View>
       </View>
     </SafeAreaView>

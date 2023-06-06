@@ -10,7 +10,7 @@ const CoursesStackNavigator = () => {
   return (
     <Stack.Navigator initialRouteName='Courses' >
         <Stack.Screen name="Learning Materials" component={Courses} options={{headerShown: false}} />       
-        <Stack.Screen name="Lecture Notes" component={LectureNotes} options={{headerShown: true}} />       
+        <Stack.Screen name="AcademicResources" component={LectureNotes} options={{headerShown: false}} />       
    
     </Stack.Navigator>
   )

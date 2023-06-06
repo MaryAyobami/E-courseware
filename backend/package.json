@@ -21,6 +21,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-jwt": "^8.4.1",
+    "firebase-admin": "^11.8.0",
+    "google-search-results-nodejs": "^2.1.0",
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
     "mongoose": "^7.0.1",

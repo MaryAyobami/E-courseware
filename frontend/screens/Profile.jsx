@@ -42,18 +42,23 @@ const Profile = ({navigation}) => {
  }
   
   return (
-    <View className="w-screen h-screen bg-white">
+    <View className="w-screen h-screen bg-bgcolor">
 
-      <View className='bg-green rounded-bl-[60px]  rounded-br-[60px] h-[40%]'>
+      <View className='bg-main rounded-bl-[60px]  rounded-br-[60px] h-[40%]'>
       <View className='flex flex-row py-4'>
-        <TouchableOpacity   onPress={()=>navigation.openDrawer()}>
+        <TouchableOpacity   onPress={()=>
+          {
+            navigation.openDrawer()
+            console.log('pressed!')
+          }
+          }>
           <Icon
           name="reorder-horizontal"
           size={35}
           color='#fff' 
           style={{
            paddingHorizontal: 6
-          }}//////////////////////////////////
+          }}
           />
 
         </TouchableOpacity>
@@ -84,7 +89,7 @@ const Profile = ({navigation}) => {
             <View className='w-[60%] mx-auto items-center p-4'>
               <Text className='font-ageobold text-3xl text-white'>{name}</Text>
               <TouchableOpacity>
-              <Text className='text-[12px] text-lightgreen font-ageonormal'>Edit Profile Information
+              <Text className='text-[12px] text-lightmain font-ageonormal'>Edit Profile Information
                 <Icon
                  name="pencil" 
                  color='#DFF0EB' 

@@ -4,7 +4,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FileViewer from 'react-native-file-viewer';
 import {AxiosContext} from '../components/context/AxiosContext';
 import { storage } from '../screens/StuLogin';
-import RNFS from 'react-native-fs'
+// import RNFS from 'react-native-fs'
+import ReactNativeBlobUtil from 'react-native-blob-util'
+import RNFetchBlob from 'react-native-blob-util';
 
 const Resource = (props) => {
     const{name,link , resourceId, sender, fileSize, type, fileFormat} = props
@@ -21,21 +23,41 @@ const Resource = (props) => {
         uri = res.uri.replace('file://', '');
       }
       console.log('URI : ' + uri);
-      const localFile = `${RNFS.DocumentDirectoryPath}/temporaryfile.${name}`
-      RNFS.downloadFile({
-        fromUrl: `${uri}`,
-        toFile: localFile
-        }).promise.then(
-        ()=>{
-          FileViewer.open(uri,{ showOpenWithDialog: true })
-          .then(() => {
-            console.log('Success');
-          })
-          .catch(_err => {
-            console.log(_err);
-          }); 
-        }
-        );
+
+      const docPath = RNFetchBlob.fs.dirs.DocumentDir;
+      const filePath = `${docPath}/${name}`;
+      ReactNativeBlobUtil
+        .config({
+            // add this option that makes response data to be stored as a file,
+            // this is much more performant.
+            path: filePath,
+            fileCache: true,
+        })
+        .fetch('GET', `${link}`, {
+            //some headers ..
+        })
+        .then((res) => {
+            // the temp file path
+            console.log(res)
+            console.log('The file saved to ', res.path())
+            FileViewer.open(res.path())
+            .then(() => {
+              console.log('Success');
+            })
+            .catch(_err => {
+              console.log(_err);
+            }); 
+        })
+
+      // const localFile = `${RNFS.DocumentDirectoryPath}/temporaryfile.${name}`
+      // RNFS.downloadFile({
+      //   fromUrl: `${uri}`,
+      //   toFile: localFile
+      //   }).promise.then(
+      //   ()=>{
+        
+      //   }
+      //   );
         
         // const path = ${RNFS.DocumentDirectoryPath}/sample.pdf;
         // const fileExists = await RNFS.exists(path);
@@ -45,7 +67,7 @@ const Resource = (props) => {
         // url: "file://" + path,
         // };    
     
-
+      }
    const saveResource  = () =>{
         try{
           savedFiles.push({'name':name,'uri': link})
@@ -104,9 +126,9 @@ const Resource = (props) => {
       {/* details */}
       <View  className= {clicked ? "flex flex-row bg-gray w-[35%] justify-end  relative -top-12 left-50 z-1 " : "hidden" } >
         <View className='pl-4'>
-        <Text className="font-ageonormal text-xl text-green p-2 pt-4">Details</Text>
-        <Text className="font-ageonormal text-xl text-green p-2 " onPress={saveResource}>Save</Text>
-        <Text className="font-ageonormal text-xl text-green p-2 " onPress={() => Linking.openURL(link)} >Download</Text>
+        <Text className="font-ageonormal text-xl text-main p-2 pt-4">Details</Text>
+        <Text className="font-ageonormal text-xl text-main p-2 " onPress={saveResource}>Save</Text>
+        <Text className="font-ageonormal text-xl text-main p-2 " onPress={() => Linking.openURL(link)} >Download</Text>
         </View>
         <View>
         <TouchableOpacity onPress={()=>setClicked(false)}>
