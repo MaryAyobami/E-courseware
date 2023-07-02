@@ -71,7 +71,8 @@ router.post('/api/register-lecturer' , async(req,res)=>{
                 password : hashedpassword,
                 department : req.body.department,
                 college : req.body.college,
-                displayname: req.body.displayname
+                displayname: req.body.displayname,
+                token: req.body.token,
 
             })
             const newLecturer = await lecturer.save()
