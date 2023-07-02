@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Touchable, TouchableOpacity, View , Linking, Platform, Pressable } from 'react-native'
+import { StyleSheet, Text, Touchable, TouchableOpacity, View ,Alert, Linking, Platform, Pressable } from 'react-native'
 import React,{useState,useContext} from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FileViewer from 'react-native-file-viewer';
@@ -9,7 +9,7 @@ import ReactNativeBlobUtil from 'react-native-blob-util'
 import RNFetchBlob from 'react-native-blob-util';
 
 const Resource = (props) => {
-    const{name,link , resourceId, sender, fileSize, type, fileFormat} = props
+    const{name, link , _id , sender, fileSize, type, fileFormat, department, title} = props.res
     const [clicked, setClicked] = useState(false)
     const {authAxios} = useContext(AxiosContext);
     
@@ -40,7 +40,7 @@ const Resource = (props) => {
             // the temp file path
             console.log(res)
             console.log('The file saved to ', res.path())
-            FileViewer.open(res.path())
+            FileViewer.open(res.path(), { showOpenWithDialog: true })
             .then(() => {
               console.log('Success');
             })
@@ -48,32 +48,36 @@ const Resource = (props) => {
               console.log(_err);
             }); 
         })
-
-      // const localFile = `${RNFS.DocumentDirectoryPath}/temporaryfile.${name}`
-      // RNFS.downloadFile({
-      //   fromUrl: `${uri}`,
-      //   toFile: localFile
-      //   }).promise.then(
-      //   ()=>{
-        
-      //   }
-      //   );
-        
-        // const path = ${RNFS.DocumentDirectoryPath}/sample.pdf;
-        // const fileExists = await RNFS.exists(path);
-        // if (fileExists) {
-        // //we already have it in local storage
-        // return {
-        // url: "file://" + path,
-        // };    
     
       }
    const saveResource  = () =>{
         try{
-          savedFiles.push({'name':name,'uri': link})
-          storage.set('savedResources', JSON.stringify(savedFiles))
-          
-          authAxios.put(`/api/save-resource`,{resourceId})
+         
+
+          const docPath = RNFetchBlob.fs.dirs.DocumentDir;
+          const filePath = `${docPath}/${name}`;
+          ReactNativeBlobUtil
+            .config({
+                // add this option that makes response data to be stored as a file,
+                // this is much more performant.
+                path: filePath,
+                fileCache: true,
+            })
+            .fetch('GET', `${link}`, {
+                //some headers ..
+            })
+            .then((res) => {
+                // the temp file path
+                console.log(res)
+                console.log('The file saved to ', res.path())
+                savedFiles.push({'name':name,'uri': res.path()})
+                storage.set('savedResources', JSON.stringify(savedFiles))
+                
+               
+            })
+
+
+          authAxios.put(`/api/save-resource`,{_id})
           .then((response)=>
 
           {
@@ -96,25 +100,46 @@ const Resource = (props) => {
 
 
   return (
-    <View className='border border-b-gray border-x-0 border-t-0 w-screen '  >
-      <Pressable onPress={openResource} className='w-[96%] mx-auto  '>
+    <View className='w-screen py-2 relative'>
+      <Pressable className='w-[96%]  mx-auto bg-bgcolor rounded-lg shadow-2xl '>
       <View className="flex flex-row w-[100%] items-center justify-between mx-auto my-2 ">
         
-        <View className='flex flex-row'>
+        <View className='flex flex-row w-[90%]'>
         <Icon
           name="square-small"
           size={30}
-          color="#297373"
+          color= '#3d5a80'
           style={{ marginLeft: 1 }}
         />
-        <Text className="font-ageonormal text-xl text-grey-800 ">{name}</Text>
+        <Text 
+        onPress = {
+          ()=>{
+            name?
+
+            Alert.alert('Details',`
+            Name : ${name}
+            Department : ${department}
+            Level : ${level}
+            Resource Type :
+            Size :
+            Sender :
+            `)
+            :
+            
+            Alert.alert('Details',
+            'hhdhhd'
+            )
+          }
+        }
+        
+        className="font-ageonormal text-xl text-grey-800 w-[95%]">{name? name: title }</Text>
         </View>
 
         <TouchableOpacity onPress={()=> setClicked(true)}>
           <Icon
             name="dots-vertical"
             size={30}
-            color="#297373"
+            color='#ee6c4d'
             style={{ marginLeft: 1 }}
           />
           </TouchableOpacity> 
@@ -124,18 +149,18 @@ const Resource = (props) => {
         </View>
 
       {/* details */}
-      <View  className= {clicked ? "flex flex-row bg-gray w-[35%] justify-end  relative -top-12 left-50 z-1 " : "hidden" } >
+      <View  className= {clicked ? "flex flex-row bg-main w-[35%] justify-end absolute right-0 " : "hidden" } >
         <View className='pl-4'>
-        <Text className="font-ageonormal text-xl text-main p-2 pt-4">Details</Text>
-        <Text className="font-ageonormal text-xl text-main p-2 " onPress={saveResource}>Save</Text>
-        <Text className="font-ageonormal text-xl text-main p-2 " onPress={() => Linking.openURL(link)} >Download</Text>
+        <Text className="font-ageonormal text-xl text-bgcolor p-2 pt-4" onPress={openResource}>View</Text>
+        <Text className="font-ageonormal text-xl text-bgcolor p-2 " onPress={saveResource}>Save</Text>
+        <Text className="font-ageonormal text-xl text-bgcolor p-2 " onPress={() => Linking.openURL(link)} >Download</Text>
         </View>
         <View>
         <TouchableOpacity onPress={()=>setClicked(false)}>
           <Icon
             name="close"
             size={25}
-            color="#297373"
+            color='#eaeaea'
             style={{paddingRight: 4}}
 
           />

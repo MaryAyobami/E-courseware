@@ -3,6 +3,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import Courses from '../../screens/CoursesStack/Courses';
 import LectureNotes from '../../screens/CoursesStack/LectureNotes';
+import Assignments from '../../screens/CoursesStack/Assignments';
 
 const Stack = createStackNavigator();
 
@@ -11,6 +12,7 @@ const CoursesStackNavigator = () => {
     <Stack.Navigator initialRouteName='Courses' >
         <Stack.Screen name="Learning Materials" component={Courses} options={{headerShown: false}} />       
         <Stack.Screen name="AcademicResources" component={LectureNotes} options={{headerShown: false}} />       
+        <Stack.Screen name="Assignments" component={Assignments} options={{headerShown: false}} />       
    
     </Stack.Navigator>
   )

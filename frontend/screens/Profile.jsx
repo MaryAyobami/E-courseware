@@ -1,13 +1,12 @@
-import { StyleSheet, Text, View ,Image, Dimensions} from 'react-native'
+import { StyleSheet, Text, View ,Image, Dimensions, TouchableOpacity, ScrollView} from 'react-native'
 import React,{useCallback,useContext,useEffect,useState,useRef} from 'react'
 import * as Keychain from 'react-native-keychain';
 import { Spinner } from '../screens/Spinner';
 import {AxiosContext} from '../components/context/AxiosContext';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { storage } from './StuLogin';
-
+import { DrawerActions } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -37,25 +36,21 @@ const Profile = ({navigation}) => {
 
  ,[])
 
- const editProfile = ()=>{
-
- }
   
   return (
     <View className="w-screen h-screen bg-bgcolor">
 
       <View className='bg-main rounded-bl-[60px]  rounded-br-[60px] h-[40%]'>
       <View className='flex flex-row py-4'>
-        <TouchableOpacity   onPress={()=>
-          {
-            navigation.openDrawer()
-            console.log('pressed!')
-          }
+        <TouchableOpacity  onPress={()=>
+          navigation.dispatch(DrawerActions.openDrawer())
+          
           }>
+
           <Icon
           name="reorder-horizontal"
           size={35}
-          color='#fff' 
+          color='#ee6c4d' 
           style={{
            paddingHorizontal: 6
           }}
@@ -92,7 +87,7 @@ const Profile = ({navigation}) => {
               <Text className='text-[12px] text-lightmain font-ageonormal'>Edit Profile Information
                 <Icon
                  name="pencil" 
-                 color='#DFF0EB' 
+                 color='#e0fbfc' 
                  size={20} 
                 />
 
@@ -111,19 +106,19 @@ const Profile = ({navigation}) => {
       <ScrollView className='mt-8 w-[98%] mx-auto pb-40 flex-1' showsVerticalScrollIndicator={true}
       >
    
-            <View className='border-t border-b border-gray p-5 '>
+            <View className='border-t  border-lightmain p-5 '>
               <Text className='text-[16px] font-ageonormal text-black mb-3'>Department</Text>
               <Text className='text-xl font-ageomedium text-black'>{department}</Text>
             </View>
-            <View className='border-t border-b border-gray p-5 '>
+            <View className='border-t border-lightmain p-5 '>
               <Text className='text-[16px] font-ageonormal text-black mb-3'>Level</Text>
               <Text className='text-xl font-ageomedium text-black'>{level}</Text>
             </View>
-            <View className='border-t border-b border-gray p-5 '>
+            <View className='border-t border-lightmain p-5 '>
               <Text className='text-[16px] font-ageonormal text-black mb-3'>Matric Number</Text>
               <Text className='text-xl font-ageomedium text-black'>{matricno}</Text>
             </View>
-            <View className='border-t border-b border-gray p-5 '>
+            <View className='border-t border-b border-lightmain p-5 '>
               <Text className='text-[16px] font-ageonormal text-black mb-3'>Email</Text>
               <Text className='text-xl font-ageomedium text-black'>{email}</Text>
             </View>

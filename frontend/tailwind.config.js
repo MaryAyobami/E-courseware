@@ -18,7 +18,6 @@ module.exports = {
       // green: '#62997a',
       // pink: '#d61c59',
       // black: '#3b2e2a',
-
       main: '#3d5a80',
       darkmain: '#14213d',
       orange: '#ee6c4d',
@@ -26,14 +25,14 @@ module.exports = {
       white: '#fff',
       black: '#293241',
       blue: '#98c1d9' ,
-      lightmain: '#e0fbfc' ,
+      lightmain: '#c9d1d3',
+      //  '#e0fbfc' ,
       bgcolor: '#eaeaea',
-     
-     
-      // bgcolor: '#f8f1e9'
+      bg: '#d3d3d3'
+      // bg: '#f8f1e9'
 
       //  '#fef1e0' 
-      //  , #c9d1d3
+      //  ,
       },
     fontFamily: {
       'ageobold': ['tilda-sans_bold'],

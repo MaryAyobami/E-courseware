@@ -154,6 +154,8 @@ android {
     }
 }
 
+
+
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
@@ -170,7 +172,13 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-    // implementation project(':react-native-fs')
+ 
+
+    implementation platform('com.google.firebase:firebase-bom:32.1.1')
+
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // implementation 'rn-text-detector'
   
 }
 

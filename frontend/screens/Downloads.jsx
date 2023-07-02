@@ -5,7 +5,7 @@ import Empty from './Empty'
 
 const Downloads = ({navigation}) => {
   return (
-    <View>
+    <View className='bg-bgcolor h-full'>
       <Header name="Downloads" open={()=>navigation.openDrawer()}/>
       <Empty content="You have no downloads"/>
     </View>

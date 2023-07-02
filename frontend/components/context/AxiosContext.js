@@ -4,34 +4,20 @@ import {AuthContext} from './AuthContext';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import * as Keychain from 'react-native-keychain';
 import NetInfo from "@react-native-community/netinfo";
-import InternetCheck from '../InternetCheck';
 
 const AxiosContext = createContext();
 const {Provider} = AxiosContext;
 
 const AxiosProvider = ({children}) => {
   
-  // internet check
-  const [isOffline, setOfflineStatus] = useState(false);
-  useEffect(() => {
-    const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
-      const offline = !(state.isConnected && state.isInternetReachable);
-      setOfflineStatus(offline);
-    });
-   console.log('testing')
-   console.log(isOffline)
-    removeNetInfoSubscription();
-  },[]);
-
-
   const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({
-    baseURL: 'https://0b34-62-173-62-83.ngrok-free.app',
+    baseURL: 'https://ac01-105-113-20-251.ngrok-free.app',
   });
 
   const publicAxios = axios.create({
-    baseURL: "https://0b34-62-173-62-83.ngrok-free.app",
+    baseURL: "https://f78c-62-173-62-83.ngrok-free.app",
   });
 
   authAxios.interceptors.request.use(
@@ -56,7 +42,7 @@ const AxiosProvider = ({children}) => {
     const options = {
       method: 'POST',
       data,
-      url: `https://0b34-62-173-62-83.ngrok-free.app/api/refreshToken`,
+      url: `https://f78c-62-173-62-83.ngrok-free.app/api/refreshToken`,
     };
 
     return axios(options)
@@ -96,8 +82,7 @@ const AxiosProvider = ({children}) => {
         publicAxios,
       }}>
       {children}
-           {/* internet check */}
-      <InternetCheck isOffline={isOffline}/>
+          
     </Provider>
   );
 };

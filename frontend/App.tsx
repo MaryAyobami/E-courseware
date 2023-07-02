@@ -5,7 +5,7 @@
  * @format
  */
 //import "react-native-gesture-handler";
-import React from 'react';
+import React, { useEffect } from 'react';
 import Signup from './screens/Signup.jsx'
 import type {PropsWithChildren} from 'react';
 import {
@@ -27,7 +27,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
  import Router from './components/Router.jsx';
  import FlashMessage from "react-native-flash-message";
-
+ import SplashScreen from 'react-native-splash-screen'
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -61,6 +61,9 @@ function Section({children, title}: SectionProps): JSX.Element {
 }
 
 function App(): JSX.Element {
+  useEffect(()=>{
+    SplashScreen.hide()
+  },[])
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {

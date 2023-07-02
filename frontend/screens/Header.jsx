@@ -11,11 +11,11 @@ const Header = (props) => {
 
   return (
     <View style={styles.header}>
-        <View className='h-full flex flex-row  pt-2'>
+        <View className='h-full flex flex-row  items-end pt-2'>
             <TouchableOpacity onPress={props.open}>
-            <Icon name="reorder-horizontal" size={35} color='#297373'  />
+            <Icon name="reorder-horizontal" size={35} color='#ee6c4d' />
             </TouchableOpacity> 
-        <Text className="text-4xl font-ageobold text-main text-center flex-1">{props.name}</Text>
+        <Text className="text-4xl font-ageobold text-main text-center flex-1 -ml-12">{props.name}</Text>
         </View>
           
     </View>
@@ -26,8 +26,8 @@ export default Header
 
 const styles = StyleSheet.create({
     header:{
-        backgroundColor: '#fff',
-        height: windowHeight/14.5,
+        backgroundColor: '#eaeaea',
+        height: windowHeight/11,
         padding: 4,
 
     }

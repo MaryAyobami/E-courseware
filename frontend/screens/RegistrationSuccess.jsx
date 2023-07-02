@@ -11,7 +11,7 @@ const RegistrationSuccess = ({navigation}) => {
     <SafeAreaView>
         <View className="h-screen bg-orange">
        <View className='flex justify-center items-center p-8'>
-         <Icon name="check-all" size={300} color="#297373" />
+         <Icon name="check-all" size={300} color='#3d5a80'/>
        </View>
         <View className='w-[90%] mx-auto'> 
             <Text className="font-ageobold text-4xl text-main text-center">Registration Successful!</Text>

@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { NativeViewGestureHandler } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import GroupChat from '../../screens/GroupChat';
+import GroupChat from '../../screens/ChatStack/GroupChat';
 import Home from '../../screens/Home';
 import { StyleSheet, Text, View , Image, Dimensions,Pressable} from 'react-native'
 import { Link } from '@react-navigation/native';
@@ -12,10 +12,12 @@ import Logout from '../../screens/Logout';
 
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Upload from '../../screens/Upload';
+import Upload from '../../screens/UploadVerification/Upload';
 import SearchStackNavigator from './SearchStackNavigator';
 import ProfileDrawerNavigator from './ProfileDrawerNavigator';
 import CoursesStackNavigator from './CoursesStackNavigator';
+import ChatStackNavigator from './ChatStackNavigator';
+import ChatStack from './ChatStack';
 
 const { width, height } = Dimensions.get("window")
 const Drawer = createDrawerNavigator();
@@ -88,12 +90,12 @@ const TabNavigator = () => {
         tabBarLabelStyle:{
           fontSize: 13,
           fontFamily: 'tilda-sans_medium',
-          color:'#732955',
+          color: '#ee6c4d',
           paddingBottom: 8 
       },
       
         tabBarIcon: () => (
-          <Icon name="home-variant-outline" color='#732955' size={30} />
+          <Icon name="home-variant-outline" color= '#ee6c4d' size={30} />
       ),
       }}
     />
@@ -105,11 +107,11 @@ const TabNavigator = () => {
         tabBarLabelStyle:{
             fontSize: 13,
             fontFamily: 'tilda-sans_medium',
-            color:'#732955',
+            color: '#ee6c4d',
             paddingBottom: 8 
         },
         tabBarIcon: ({ color, size }) => (
-          <Icon name="magnify" color='#732955' size={30} />
+          <Icon name="magnify" color= '#ee6c4d' size={30} />
         ),
       
       }}
@@ -117,18 +119,18 @@ const TabNavigator = () => {
 
     <Tab.Screen
       name="Chat Forum"
-      component={GroupChat}
+      component={ChatStack}
       options={{
         tabBarShowLabel: true,
         tabBarLabelStyle:{
           fontSize: 13,
           fontFamily: 'tilda-sans_medium',
-          color:'#732955',
+          color: '#ee6c4d',
           paddingBottom: 8 
       },
       
         tabBarIcon: ({ color, size }) => (
-          <Icon name="chat" color='#732955' size={30} />
+          <Icon name="chat" color= '#ee6c4d' size={30} />
         ),
         tabBarBadge: 3,
       }}
@@ -141,12 +143,12 @@ const TabNavigator = () => {
         tabBarLabelStyle:{
           fontSize: 13,
           fontFamily: 'tilda-sans_medium',
-          color:'#732955',
+          color: '#ee6c4d',
           paddingBottom: 8 
       },
       
         tabBarIcon: ({ color, size }) => (
-          <Icon name="account" color='#732955' size={30} />
+          <Icon name="account" color= '#ee6c4d' size={30} />
         ),
         // tabBarBadge: 3,
       }}

@@ -8,8 +8,9 @@ const LectureNotes = ({route,navigation}) => {
   console.log(resources)
   return (
     <View className='bg-bgcolor h-screen w-screen'>
-     <View className='h-16  w-screen '>
-       <Text className='p-4 text-center text-blackk font-ageobold text-4xl'>{title}s</Text>
+     <View className='h-24  w-screen justify-center items-center flex flex-row'> 
+     <Icon name="book-open-page-variant-outline" size={30} color='#ee6c4d'  style={{paddingVertical:4}} onPress={()=> navigation.goBack()} />
+       <Text className='p-4 text-center text-main font-ageobold text-4xl'>{title}s</Text>
      </View>
      {/* resources */}
      
@@ -19,7 +20,7 @@ const LectureNotes = ({route,navigation}) => {
       <FlatList
               data={resources}
               renderItem = {({item})=>
-                <Resource name={item.name} link={item.link} resourceId={item._id}/>    
+                <Resource res={item} />    
               }
               keyExtractor={item => item._id}
               // contentContainerStyle={{
@@ -33,10 +34,10 @@ const LectureNotes = ({route,navigation}) => {
         
      </View>
      :
-     <View className=''>
-        <Icon name="book-open-page-variant-outline" size={30} color="#c0576f" />
-        <Text> No availeble material for this option</Text>
-        <Text> You can try  searching</Text>
+     <View className='flex-1 justify-center pb-40 items-center'>
+        <Icon name="book-open-page-variant-outline" size={200} color='#ee6c4d' />
+        <Text className='font-ageobold text-grey-800 text-center text-3xl'> No available material for this option</Text>
+        <Text  className='font-ageonormal text-grey-800 text-center text-xl'> You can try <Text className='font-ageonormal  underline text-center text-xl' onPress={()=> navigation.navigate('Search')}>searching</Text></Text>
       </View>
     }
      

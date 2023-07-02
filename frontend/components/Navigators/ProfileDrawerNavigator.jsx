@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Upload from '../../screens/Upload';
+import Upload from '../../screens/UploadVerification/Upload';
 import Profile from '../../screens/Profile';
 import Saved from '../../screens/Saved';
 import Logout from '../../screens/Logout';
@@ -12,44 +12,23 @@ import Downloads from '../../screens/Downloads';
 import Settings from '../../screens/Settings';
 import CustomDrawer from '../CustomDrawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import UploadStackNavigator from './UploadStackNavigator';
+import { storage } from '../../screens/StuLogin';
 
 const Drawer = createDrawerNavigator();
 
 const ProfileDrawerNavigator = () => {
+  const [status , setStatus] = useState(storage.getString('user.userStaus'))
   return (
     <Drawer.Navigator
     initialRouteName="Profile"
     drawerContent={props => <CustomDrawer {...props} />}
     screenOptions={{
       headerShown: false,
-      // overlayColor: '#DFF0EB',
-      // header: ({ navigation, route, options }) => {
-      //   const title = getHeaderTitle(options, route.name);
-      
-      //   return <ProfileHeader title={title} />;
-      // }
-      // ,
-      headerStyle:{
-        height: 80,
-        backgroundColor: '#fff',
-        headerShown: false,
-        drawerActiveBackgroundColor:  '#297373',
-        drawerInactiveTintColor: '#297373',
-        drawerActiveTintColor: '#fff',
-        drawerInactiveTintColor: '#333',
-        drawerItemStyle: {
-          // marginLeft: -25,
-         // fontFamily: 'Roboto-Medium',  
-          fontSize: 20,
-          fontFamily: 'tilda-sans_medium',
-     
-        },
       }
-     }
     
 
-    }
+  }
     >
         <Drawer.Screen name="Profile" component={Profile} 
             options={{
@@ -57,16 +36,17 @@ const ProfileDrawerNavigator = () => {
                 <Icon name="account" size={22} color={color} />
               ),
               drawerLabelStyle: {
-                // marginLeft: -25,
-               // fontFamily: 'Roboto-Medium',  
                 fontSize: 18,
                 fontFamily: 'tilda-sans_medium',
            
               },
-              drawerActiveBackgroundColor:  '#297373',
-              drawerInactiveTintColor: '#297373',
-              drawerActiveTintColor: '#fff',
-              drawerInactiveTintColor: '#333',
+              drawerActiveBackgroundColor: '#98c1d9',
+              drawerInactiveTintColor: '#3d5a80',
+              drawerActiveTintColor: '#3d5a80',
+              drawerInactiveTintColor: '#293241',
+              drawerStyle:{
+                backgroundColor:  '#d3d3d3',
+              }
             }}
         />
 
@@ -83,13 +63,13 @@ const ProfileDrawerNavigator = () => {
                 fontFamily: 'tilda-sans_medium',
            
               },
-              drawerActiveBackgroundColor:  '#297373',
-              drawerInactiveTintColor: '#297373',
-              drawerActiveTintColor: '#fff',
-              drawerInactiveTintColor: '#333',
+              drawerActiveBackgroundColor: '#98c1d9',
+              drawerInactiveTintColor: '#3d5a80',
+              drawerActiveTintColor: '#3d5a80',
+              drawerInactiveTintColor: '#293241',
           }}
         />
-        <Drawer.Screen name="Downloads" component={Downloads}
+        {/* <Drawer.Screen name="Downloads" component={Downloads}
         options={{
           drawerIcon: ({color}) => (
             <Icon name="download-multiple" size={22} color={color} />
@@ -101,30 +81,54 @@ const ProfileDrawerNavigator = () => {
             fontFamily:'tilda-sans_medium',
        
           },
-          drawerActiveBackgroundColor:  '#297373',
-          drawerInactiveTintColor: '#297373',
-          drawerActiveTintColor: '#fff',
-          drawerInactiveTintColor: '#333',
+          drawerActiveBackgroundColor: '#98c1d9',
+          drawerInactiveTintColor: '#3d5a80',
+          drawerActiveTintColor: '#3d5a80',
+          drawerInactiveTintColor: '#293241',
         }}
-        />
-        <Drawer.Screen name="Share" component={Upload}
-        options={{
-          drawerIcon: ({color}) => (
-            <Icon name="cloud-upload-outline" size={22} color={color} />
-          ),
-          drawerLabelStyle: {
-            // marginLeft: -25,
-           // fontFamily: 'Roboto-Medium',  
-            fontSize: 18,
-            fontFamily: 'tilda-sans_medium',
-          },
-          drawerActiveBackgroundColor:  '#297373',
-          drawerInactiveTintColor: '#297373',
-          drawerActiveTintColor: '#fff',
-          drawerInactiveTintColor: '#333',
-        }}
-        />
-        <Drawer.Screen name="Settings" component={Settings}
+        /> */}
+        {
+          status? 
+          <Drawer.Screen name="Share" component={UploadStackNavigator}
+          options={{
+            drawerIcon: ({color}) => (
+              
+              <Icon name="cloud-upload-outline"  size={22} color={color} />
+            ),
+            drawerLabelStyle: {
+              // marginLeft: -25,
+             // fontFamily: 'Roboto-Medium',  
+              fontSize: 18,
+              fontFamily: 'tilda-sans_medium',
+            },
+            drawerActiveBackgroundColor: '#98c1d9',
+            drawerInactiveTintColor: '#3d5a80',
+            drawerActiveTintColor: '#3d5a80',
+            drawerInactiveTintColor: '#293241',
+          }}
+          />
+          :
+          <Drawer.Screen name="Share" component={UploadStackNavigator}
+          options={{
+            drawerIcon: ({color}) => (
+              
+              <Icon name="lock"  size={22} color={color} />
+            ),
+            drawerLabelStyle: {
+              // marginLeft: -25,
+             // fontFamily: 'Roboto-Medium',  
+              fontSize: 18,
+              fontFamily: 'tilda-sans_medium',
+            },
+            drawerActiveBackgroundColor: '#eaeaea',
+            drawerInactiveTintColor: '#eaeaea',
+            drawerActiveTintColor: '#eaeaea',
+            drawerInactiveTintColor: '#eaeaea',
+          }}
+          />
+        }
+     
+        <Drawer.Screen name="Notification" component={Settings}
         options={{
           drawerIcon: ({color}) => (
             <Icon name="cogs" size={22} color={color} />
@@ -136,10 +140,10 @@ const ProfileDrawerNavigator = () => {
             fontFamily: 'tilda-sans_medium',
        
           },
-          drawerActiveBackgroundColor:  '#297373',
-          drawerInactiveTintColor: '#297373',
-          drawerActiveTintColor: '#fff',
-          drawerInactiveTintColor: '#333',
+          drawerActiveBackgroundColor: '#98c1d9',
+          drawerInactiveTintColor: '#3d5a80',
+          drawerActiveTintColor: '#3d5a80',
+          drawerInactiveTintColor: '#293241',
         }}
         />
         {/* <Drawer.Screen name="Logout" component={Logout} 

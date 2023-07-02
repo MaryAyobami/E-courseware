@@ -9,10 +9,14 @@ import InternetCheck from '../../components/InternetCheck';
 import {data} from '../../components/DepartmentData.js'
 import { Dropdown } from 'react-native-element-dropdown';
 import CheckBox from '@react-native-community/checkbox';
+import Axios from 'axios';
+import Loader from '../Loader';
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 
 const GoogleScholarSearch  = () => {
   
-  const {authAxios} = useContext(AxiosContext);
+  const {publicAxios} = useContext(AxiosContext);
 
   const [ searchterm , setSearchterm] = useState('')
   const [ clicked, setClicked] = useState()
@@ -34,21 +38,40 @@ const GoogleScholarSearch  = () => {
 
   const handleSearch = async() => {
     try{
+       Keyboard.dismiss()
       setLoading(true)
-      authAxios.get(`/api/search-googlescholar/?searchterm=${searchterm}`)
-      .then((response)=>
-      {
-     
-      console.log(response.data)
-      resources.current = response.data
-      setSearchResult(resources.current)
-      console.log(searchResult)
+      // await publicAxios.get(`/api/search-googlescholar/?searchterm=${searchterm}`)
+      if(searchterm == ''){
+        showMessage({
+          message: `The search field cannot be empty!`,
+            type: "default",
+            backgroundColor: '#3b2e2a',
+          titleStyle: {
+            fontFamily:"tilda-sans_medium",
+            color:'#f8f1e9',
+            fontSize: 16,
+            padding: 4
+          },
+        })
       }
-      )
-      .catch((err)=>console.log(err))
-      .finally(() => {
-        setLoading(false);
-      });
+      else{
+        await Axios.get(`https://serpapi.com/search.json?engine=google_scholar&q=${searchterm}&api_key=3d8ded321f6009b48d30e82f287a0b2f23389ac006db4744f67df42aa45548fc
+        `).then((response)=>
+        {
+       
+        // console.log(response.data)
+        resources.current = response.data.organic_results
+        console.log(resources.current)
+        setSearchResult(resources.current)
+        // console.log(searchResult)
+        }
+        )
+        .catch((err)=>console.log(err))
+        .finally(() => {
+          setLoading(false);
+        });
+      }
+
     }
     catch(err){
       if (axios.isAxiosError(err)) {
@@ -63,7 +86,7 @@ const GoogleScholarSearch  = () => {
   return (
 
     <View className={showFilter? 'bg-lightmain w-screen h-full': ' w-screen '}>
-      
+
     <View className= 'w-[96%] flex flex-row my-4 py-2 mx-auto'>
     {clicked && (
       <View className='p-2'>
@@ -72,6 +95,9 @@ const GoogleScholarSearch  = () => {
             setSearchterm("")
             Keyboard.dismiss();
             setClicked(false);
+            setSearchResult('')
+            setLoading(false)
+
           }}
         >
           <Text className="text-pink text-xl font-ageobold">Cancel</Text>
@@ -122,7 +148,7 @@ const GoogleScholarSearch  = () => {
    
 {/* search and filter */}
 
-{loading? <ActivityIndicator size="large" style={styles.indicator} color={'#FF8552'} />: 
+{loading? <Loader/>: 
 
 // overlay
 
@@ -130,35 +156,29 @@ const GoogleScholarSearch  = () => {
     <View className=' w-screen'>
       <View className='flex flex-row w-[96%] mx-auto'>
 
-      <Text  className={showFilter? "hidden" : "font-ageobold p-2 px-8 text-xl text-grey-800"}>Search Result</Text>
+      <Text  className="font-ageobold p-2  text-xl text-grey-800">Search Result</Text>
       </View>
-      
 
-<View  className='absolute top-10'>
-
-
-</View>
-         
           {/* resource list */}
 
-      {/* <View className='w-[98%] mx-auto pt-8 ' >
+      <View className='w-[98%] mx-auto pt-2' >
     
         <FlatList
                 data={searchResult}
                 renderItem = {({item})=>
-                  <Resource name={item.name} link={item.link} resourceId={item._id}/>    
+                  <Resource res={item} />    
                 }
-                keyExtractor={item => item._id}
+                keyExtractor={item => item.result_id}
                 // contentContainerStyle={{
                 //   flexGrow: 1,
                 //   }}
               
                 // refreshControl={
-                //   <RefreshControl refreshing={refreshing} onRefresh={getTasks} size={'large'} colors={['gray']} />
+                //   <RefreshControl  size={'large'} colors={['gray']} />
                 // }
                 />
           
-       </View> */}
+       </View> 
 
  </View>
 }

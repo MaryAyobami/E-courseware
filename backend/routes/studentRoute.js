@@ -19,7 +19,7 @@ const registerSchema = Joi.object({
     matricnumber: Joi.string().min(6).messages({"any.required": "Matric number is required!"}),
     department: Joi.string().required(),
     email: Joi.string().required().messages({"any.required": "Email is required!"}),
-    displayname: Joi.string().required(),
+    // displayname: Joi.string().required(),
     level: Joi.number().required(),
     college: Joi.string().required(),
     password: Joi.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).required(),
@@ -48,6 +48,7 @@ const generateToken = student => {
   return token
 }
 
+const createRefreshToken = () => randToken.uid(256)
 
 // routes
 
@@ -77,7 +78,7 @@ router.post('/api/register-student' , async(req,res)=>{
                 department : req.body.department,
                 college : req.body.college,
                 level: req.body.level,
-                displayname: req.body.displayname,
+                // displayname: req.body.displayname,
                 token: req.body.token,
 
             })

@@ -10,10 +10,10 @@ const Stack = createStackNavigator();
 const SearchStackNavigator = () => {
   return (
     <Stack.Navigator>
-        <Stack.Screen name="SearchGroup" component={SearchGroup} options={{headerShown: false}} />       
-        <Stack.Screen name="SearchScreen" component={Search} options={{headerShown: true}} />       
+        {/* <Stack.Screen name="SearchGroup" component={SearchGroup} options={{headerShown: false}} />        */}
+        <Stack.Screen name="SearchScreen" component={Search} options={{headerShown: false}} />       
        
-        <Stack.Screen name="Google Scholar" component={GoogleScholarSearch} options={{headerShown: true}} />       
+        <Stack.Screen name="Web Search" component={GoogleScholarSearch} options={{headerShown: true}} />       
        
     </Stack.Navigator>
   )

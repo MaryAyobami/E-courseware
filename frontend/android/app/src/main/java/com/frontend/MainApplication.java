@@ -10,6 +10,7 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 import com.vinzscam.reactnativefileviewer.RNFileViewerPackage;
+import com.fetchsky.RNTextDetector.RNTextDetectorPackage;
 
 import com.rnfs.RNFSPackage; // <------- add package
 
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           new RNFileViewerPackage();
+          new RNTextDetectorPackage();
           return packages;
         }
 

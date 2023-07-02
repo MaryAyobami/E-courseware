@@ -3,7 +3,7 @@ import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 export const Spinner = () => (
   <View style={styles.container}>
-    <ActivityIndicator size="large" color="#470d3b" />
+    <ActivityIndicator size="large" color='#ee6c4d' />
   </View>
 );
 
@@ -13,6 +13,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f1e9',
+    backgroundColor:'#3d5a80',
   },
 });

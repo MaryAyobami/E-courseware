@@ -1,15 +1,21 @@
 import { ScrollView, StyleSheet, Text, TextInput, View,Image, Pressable, Button , } from 'react-native'
-import React,{useState, useRef, useEffect} from 'react'
+import React,{useState, useRef, useEffect, useContext} from 'react'
 import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
 import {data} from '../components/DepartmentData.js'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTogglePasswordVisibility } from '../components/hooks/useTogglePasswordVisibility';
 import { showMessage, hideMessage } from "react-native-flash-message";
+import NetInfo from "@react-native-community/netinfo";
+import InternetCheck from '../components/InternetCheck';
 
-
+import { AxiosContext } from '../components/context/AxiosContext.js';
+import Loader from './Loader.jsx';
 
 const LectSignup = ({navigation}) => {
+  const {publicAxios} = useContext(AxiosContext);
+
+  const [loading , setLoading] = useState(false)
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -25,9 +31,9 @@ const LectSignup = ({navigation}) => {
   //const [level, setLevel] = useState('')
 
 // password visibility
-  const { passwordVisibility, rightIcon, handlePasswordVisibility } =axio
-  useTogglePasswordVisibility();
+  const { passwordVisibility, rightIcon, handlePasswordVisibility }= useTogglePasswordVisibility();
   const [password, setPassword] = useState('')
+  const [passwordmsg, setMsg] = useState(false)
  
 // department,college,level
   const departments = useRef([]);
@@ -36,6 +42,9 @@ const LectSignup = ({navigation}) => {
   const [DepartmentLevels, setDepartmentLevels] = useState([])
 
 
+  // internet check
+  const [isOffline, setOfflineStatus] = useState(false); 
+    
   const changeDepartments = (e) => {
     //  console.log(e)
      let filterDepartments = data.department.filter(   
@@ -69,68 +78,104 @@ const LectSignup = ({navigation}) => {
   const baseUrl = "http://localhost:8000"
 
   const handleSignup= ()=>{
-    axios.post(`http://10.0.2.2:8000/api/register-lecturer`,{
-      name ,
-      email ,
-      password,
-      department,
-      college : colege,
-      displayname
-    }).
-    then((response) => {
-      if(response.status == 201){
-         navigation.navigate('RegistrationSuccess')
-      }
-      console.log(response.data);
-    }).
-    catch((err)=>{   
-      if (axios.isAxiosError(err)) {
-            validationerror.current = err.response.data
-            console.error(validationerror.current)
-            showMessage({
-              message: `${validationerror.current}`,
-                type: "default",
-                titleStyle: {
-                  fontFamily:"tilda-sans_medium",
-                  color:'#DFF0EB',
-                  fontSize: 17,
-                  padding: 4
-                },
-               backgroundColor: '#3b2e2a',
-               color:'#DFF0EB',
-            })
-          
-       console.error("Axios request failed", err.response?.data, err.toJSON());
-      } else {
-        console.error(err);
-      }
 
-    })
+    try{
+      if(
+        name=='' || email== '' || password=='' || college=='' || department==''
+      ){
+        showMessage({
+          message: `The input fields cannot be empty!`,
+            type: "default",
+            backgroundColor: '#3b2e2a',
+          titleStyle: {
+            fontFamily:"tilda-sans_medium",
+            color:'#f8f1e9',
+            fontSize: 16,
+            padding: 4
+          },
+        })
+      }
+      else{
+        setLoading(true)
+        const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+          const offline = !(state.isConnected && state.isInternetReachable);
+          setOfflineStatus(offline);
+        });
+      
+        removeNetInfoSubscription();
+    
+        publicAxios.post(`api/register-lecturer`,{
+          name ,
+          email ,
+          password,
+          department,
+          college : colege,
+          displayname
+        }).
+        then((response) => {
+          if(response.status == 201){
+             navigation.navigate('RegistrationSuccess')
+          }
+          console.log(response.data);
+        }).
+        catch((err)=>{   
+          if (axios.isAxiosError(err)) {
+                validationerror.current = err.response.data
+                console.error(validationerror.current)
+                showMessage({
+                  message: `${validationerror.current}`,
+                    type: "default",
+                    titleStyle: {
+                      fontFamily:"tilda-sans_medium",
+                      color:'#DFF0EB',
+                      fontSize: 17,
+                      padding: 4
+                    },
+                   backgroundColor: '#3b2e2a',
+                   color:'#DFF0EB',
+                })
+              
+           console.error("Axios request failed", err.response?.data, err.toJSON());
+          } else {
+            console.error(err);
+          }
+    
+        }).finally(()=>setLoading(false))
+      }
+    }
+    catch(e){
+      console.log(e)
+    }
   }
 
 
   return (
-      <View className="h-screen bg-bgcolor">
-      <View>
-        <Image source={require('../assets/logo.png')} style={{width: '100%', height:250}} resizeMode="contain"/>
+      <View className="h-screen bg-bgcolor ">
+        <InternetCheck isOffline={isOffline} isRetry={handleSignup}/>
+         {loading? <Loader/> : <></>}
+    
+    
+    <View className='h-full w-[94%] mx-auto'>
+      <View className='pb-12 pt-28'>
+      <Text className="font-ageoheavy text-4xl  text-main">Sign Up</Text>
       </View>
-      <View className='pb-8'>
-      <Text className="font-ageoheavy text-4xl text-center text-main">Sign Up</Text>
-      </View>
-      <View className='flex-1 w-[90%] mx-auto pb-16' >
+     
       <ScrollView
       showsVerticalScrollIndicator= {false}
 
-      style={{flex:1, paddingBottom: 30 }}
+      style={{flex:1, paddingBottom: 60 }}
       automaticallyAdjustKeyboardInsets = {true}
       keyboardDismissMode= "on-drag"
       scrollToOverflowEnabled= {true}
       >
-         <TextInput className="font-ageonormal border border-main rounded-full text-[20px] px-4 my-2 text-black" placeholder='Name' onChangeText={(text)=>setName(text)} />
-         <TextInput className="font-ageonormal border border-main rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Email' inputMode='email' onChangeText={(text)=>setEmail(text)} />
+         <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >Name</Text>
+         <TextInput className="font-ageonormal border border-main rounded-lg text-[20px] px-4 mt-0 mb-4 text-black focus:border-orange"  onChangeText={(text)=>setName(text)} />
+         <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >Email</Text>
+         <TextInput className="font-ageonormal border border-main rounded-lg px-4 mt-0 mb-4 text-[20px]  text-black  focus:border-orange" inputMode='email' onChangeText={(text)=>setEmail(text)} />
 
          
          {/* college */}
+         <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >College</Text>
          <Dropdown
             data={data.college.map((item) => ({ value: item, label: `${item.collegeName}` }))}
             style={styles.dropdownContainer}
@@ -143,7 +188,7 @@ const LectSignup = ({navigation}) => {
             maxHeight={300}
             labelField="label"
             valueField="value"
-            placeholder="College"
+            placeholder=""
             searchPlaceholder="Search..."
      
         // onChange={item => {
@@ -154,6 +199,7 @@ const LectSignup = ({navigation}) => {
       />
 
           {/* department */}
+          <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >Department</Text>
           <Dropdown  
               data={departments.current.map((item) => ({ value: item , label: `${item.name}` }))}
               style={styles.dropdownContainer}
@@ -166,7 +212,7 @@ const LectSignup = ({navigation}) => {
               maxHeight={300}
               labelField="label"
               valueField="value"
-              placeholder="Department"
+              placeholder=""
               searchPlaceholder="Search..."         
           />
 
@@ -190,34 +236,37 @@ const LectSignup = ({navigation}) => {
               searchPlaceholder="Search..."         
           /> */}
 
-         <TextInput className="font-ageonormal border border-main rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Displayname' onChangeText={(text)=>setDisplayname(text)}/>
+         {/* <TextInput className="font-ageonormal border border-main rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Displayname' onChangeText={(text)=>setDisplayname(text)}/> */}
          <View>
-          <TextInput className="font-ageonormal border border-main rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Password' name="password" 
+         <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >Password</Text>
+         <Text className={passwordmsg?'text-orange font-ageobold mb-4 mt-0 pt-0 text-center': 'hidden'}>Must include: At least one UPPERCASE LETTER and SYMBOL. </Text>
+          <TextInput className="font-ageonormal border border-main rounded-lg  focus:border-orange px-4 my-2 text-[20px]  text-black" name="password" 
           textContentType="newPassword"
           secureTextEntry={passwordVisibility}
           value={password}  
           autoCorrect={false} 
           enablesReturnKeyAutomatically
           onChangeText={text => setPassword(text)}
+          onFocus={()=>setMsg(true)}
           />
 
-          <Pressable onPress={handlePasswordVisibility} className='absolute top-6 right-4'>
-              <Icon name={rightIcon} size={22} color="#297373" />
+          <Pressable onPress={handlePasswordVisibility} className='absolute top-0 right-4'>
+              <Icon name={rightIcon} size={22} color='#ee6c4d'/>
           </Pressable>
          </View>
         
          
-          <Pressable className="items-center mt-4 rounded-full bg-main" onPress={handleSignup}>
-            <Text className="text-gray text-xl font-ageomedium py-4 px-12  " >SIGNUP</Text>
+          <Pressable className="items-center mt-6 rounded-lg bg-main" onPress={handleSignup}>
+            <Text className="text-bgcolor text-xl font-ageomedium py-4 px-12  " >SIGNUP</Text>
           </Pressable>
          <View className="flex  items-center p-4">
           <Text className="font-ageobold text-xl text-main">Register as a Student</Text>
           <Text className="font-ageobold text-xl text-main py-3">Have an account?   
-          <Text onPress={()=> navigation.navigate('Login')} className="font-ageobold text-xl underline px-4 text-black focus:text-main">Sign In</Text>
+          <Text onPress={()=> navigation.navigate('Login')} className="font-ageobold text-xl underline px-4 text-orange focus:text-main">Sign In</Text>
           </Text>
          </View>
       </ScrollView>
-      </View>
+ </View>
     </View>
   )
 }
@@ -231,14 +280,15 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   dropdownContainer: {
-    borderRadius: 50,
+    borderRadius: 5,
     height: 50,
     borderWidth: 1,
     padding: 16,
-    marginVertical: 4,
-    borderColor: '#297373',
+
+    borderColor:'#3d5a80',
     marginBottom: 16,
     fontFamily: 'AgeoPersonalUse',
-    fontSize: 20
+    fontSize: 20,
+    marginBottom:20
   }
 })

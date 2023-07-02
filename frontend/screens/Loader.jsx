@@ -9,12 +9,18 @@ const windowHeight = Dimensions.get('window').height;
 const Loader = () => {
     
   return (
-    <View style={styles.animation} >
+    <View  style={styles.animation}>
         <LottieView
             source={require("../assets/loader2.json")}
             autoPlay
+            style={{
+              // marginTop: 20,
+              // flex:1,
+              // width: '60%'
+             
+            }}
         />
-        <Text className='text-main text-xl font-ageobold absolute top-0 bottom-0'>Loading...</Text>
+        {/* <Text className='text-main text-xl font-ageobold p-20'>Loading...</Text> */}
     </View>
   )
 }
@@ -25,5 +31,6 @@ const styles = StyleSheet.create({
     animation: {
         width: windowWidth,
         height: windowHeight,
+        // flex:1
       },
 })

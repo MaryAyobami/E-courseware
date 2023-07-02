@@ -1,15 +1,22 @@
-import { StyleSheet, Text, View,TextInput,Pressable} from 'react-native'
+import { StyleSheet, Text, View,TextInput,Pressable, TouchableOpacity, Dimensions} from 'react-native'
 import React,{useState,useRef,useCallback,useContext} from 'react'
-import {data} from '../components/DepartmentData.js'
-import { Spinner } from '../screens/Spinner';
-import {AxiosContext} from '../components/context/AxiosContext';
+import {data} from '../../components/DepartmentData.js'
+import { Spinner } from '../Spinner.jsx';
+import {AxiosContext} from '../../components/context/AxiosContext.js';
 import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import DocumentPicker from 'react-native-document-picker';
-import { AuthContext } from '../components/context/AuthContext.js';
-import Header from './Header.jsx';
+import { AuthContext } from '../../components/context/AuthContext.js';
+import Header from '../Header.jsx';
+import { DrawerActions } from '@react-navigation/native';
 
+import Pdf from 'react-native-pdf';
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Upload = ({navigation}) => {
 
@@ -60,7 +67,7 @@ const handleDocumentSelection = useCallback(async () => {
       fileResponse.current = response[0]
       console.log(fileResponse.current)
 
-      setFilename(response.name)//
+      setFilename(fileResponse.current.name)//
       
   } catch (err) {
     console.warn(err);
@@ -72,7 +79,22 @@ const handleDocumentSelection = useCallback(async () => {
 //  handle upload
 const handleUpload = async()=>{
    try{
-      const fdata = new FormData()
+
+    if(type.current == '' || level.current == ''){
+      showMessage({
+        message: `The input fields cannot be empty!`,
+          type: "default",
+          backgroundColor: '#3b2e2a',
+        titleStyle: {
+          fontFamily:"tilda-sans_medium",
+          color:'#f8f1e9',
+          fontSize: 16,
+          padding: 4
+        },
+      })
+    }
+ else{
+  const fdata = new FormData()
       console.log(type.current, department.current, level.current)
       console.log(fileResponse.current)
       
@@ -81,19 +103,7 @@ const handleUpload = async()=>{
       fdata.append("department", department.current)
       fdata.append("level", level.current)
        
-
-
-    // for (const pair of filedata.entries()) {
-    //   console.log(`${pair[0]}, ${pair[1]}`);
-    // }
-
     await authAxios.postForm(`/api/send-resource`, fdata
-    // {
-    //   resource: JSON.stringify(fileResponse.current[0]),
-    //   type,
-    //   level,
-    //   department
-    // }
     
     ).
     then((response) => {
@@ -118,27 +128,68 @@ const handleUpload = async()=>{
       }
   
     })
+ }
+    
    }
  catch(e){
   console.log(e)
  }
 }
 
+const handlePreview = ()=>{
+  const source = {uri: fileResponse.current}
+           return(
+              <View style={styles.container}>
+                  <Pdf
+                      source={source}
+                      onLoadComplete={(numberOfPages,filePath) => {
+                          console.log(`Number of pages: ${numberOfPages}`);
+                      }}
+                      onPageChanged={(page,numberOfPages) => {
+                          console.log(`Current page: ${page}`);
+                      }}
+                      onError={(error) => {
+                          console.log(error);
+                      }}
+                      onPressLink={(uri) => {
+                          console.log(`Link pressed: ${uri}`);
+                      }}
+                      style={styles.pdf}/>
+              </View>
+           )
+}
+
 
   return (
-    <View className='w-screen h-screen bg-white'>
-       <Header name="Share" open={()=>navigation.openDrawer()}/>
-       <View className='w-[95%] mx-auto py-6'>
+    <View className='w-screen h-screen bg-bgcolor '>
+        <View style={styles.header}>
+        <View className='h-full flex flex-row  items-end pt-2'>
+            <TouchableOpacity onPress={()=> navigation.openDrawer()}>
+               <Icon name="reorder-horizontal" size={35} color='#ee6c4d' />
+            </TouchableOpacity> 
+        <Text className="text-4xl font-ageobold text-main text-center flex-1 -ml-12">Share</Text>
+        </View>
+          
+        </View>
+
+       <View className='w-[95%] mx-auto pt-6'>
          
-          <Text className='font-ageonormal text-xl text-grey-800'>The learning materials uploaded here will be saved to the central database.</Text>
+          <Text className='font-ageonormal text-[12px] text-center text-grey-800'>The learning materials uploaded here will be saved to the central database.</Text>
        </View>
 
        <View className='w-[95%] mx-auto pt-10'>
-                  {/* file */}
-                  <Pressable className="items-center rounded-full border border-main mt-2 bg-" onPress={handleDocumentSelection}>
-            <Text className="text-main  text-xl font-ageomedium py-4 px-12  " >Select File</Text>
-          </Pressable>
-            <Text className="text-main text-xl font-ageomedium text-center">{filename}</Text>
+                {/* file */}   
+          
+         
+          <TouchableOpacity className="items-center rounded-full border border-main mt-2 bg-" onPress={handleDocumentSelection}>
+           <Text className="text-main  text-xl font-ageomedium py-4 px-12  ">Select File</Text>
+          </TouchableOpacity>
+            
+          <Text className="text-main  text-xl font-ageomedium py-4 px-12  ">{filename} </Text>
+          {
+            filename && <Text className="text-orange  text-xl font-ageoheavy py-1 px-12  ">PREVIEW FILE</Text>
+          }
+        
 
           {/* name */}
           {/* <View className='py-2'>
@@ -154,7 +205,7 @@ const handleUpload = async()=>{
               placeholderStyle={styles.placeholderStyle}
               selectedTextStyle={styles.placeholderStyle}
               inputSearchStyle={styles.placeholderStyle}
-              value={type}
+              value={type.current}
               onChange={(e)=> 
                 {
                  type.current = e.value.name
@@ -163,8 +214,8 @@ const handleUpload = async()=>{
               search
               maxHeight={300}
               labelField="label"
-              valueField={type}
-              placeholder=""
+              valueField={type.current}
+              placeholder="Resource Type"
               searchPlaceholder="Search..."         
           />
           </View>
@@ -178,13 +229,13 @@ const handleUpload = async()=>{
               placeholderStyle={styles.placeholderStyle}
               selectedTextStyle={styles.placeholderStyle}
               inputSearchStyle={styles.placeholderStyle}
-              value={department}
+              value={department.current}
               onChange={changeLevels}
               search
               maxHeight={300}
               labelField="label"
-              valueField={department}
-              placeholder=""
+              valueField={department.current}
+              placeholder="Department"
               searchPlaceholder="Search..."         
           />
 
@@ -201,14 +252,14 @@ const handleUpload = async()=>{
                inputSearchStyle={styles.placeholderStyle}
                search
                maxHeight={300}
-               value={level}
+               value={level.current}
                onChange={item => {
                  level.current = item.value
             
                }}
                labelField="label"
-               valueField={level}
-               placeholder=""
+               valueField={level.current}
+               placeholder="Level"
                searchPlaceholder="Search..."     
           />
 
@@ -217,9 +268,9 @@ const handleUpload = async()=>{
 
 
         {/* upload button */}
-        <Pressable className="items-center mt-4 rounded-full bg-main" onPress={handleUpload}>
-            <Text className="text-gray text-xl font-ageomedium py-4 px-12  " >Upload</Text>
-          </Pressable>
+        <TouchableOpacity className="items-center mt-4 rounded-lg bg-main justify-end " onPress={handleUpload}>
+            <Text className="text-lightmain text-xl font-ageomedium py-4 px-12  " >Upload</Text>
+          </TouchableOpacity>
        </View>
     </View>
   )
@@ -229,19 +280,36 @@ export default Upload
 
 const styles = StyleSheet.create({
   placeholderStyle: {
-    color:'gray',
-    fontFamily: 'AgeoPersonalUse',
-    fontSize: 20
+    color: '#393937',
+    fontFamily: 'tilda-sans_regular',
+    fontSize: 20,
   },
   dropdownContainer: {
-    borderRadius: 50,
+    borderRadius: 5,
     height: 50,
     borderWidth: 1,
     padding: 16,
     marginVertical: 4,
-    borderColor: '#297373',
+    borderColor: '#3d5a80',
     marginBottom: 16,
-    fontFamily: 'AgeoPersonalUse',
+    fontFamily: 'tilda-sans_regular',
     fontSize: 20
-  }
+  },
+  header:{
+    backgroundColor: '#eaeaea',
+    height: windowHeight/11,
+    padding: 4,
+
+},
+container: {
+  flex: 1,
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  marginTop: 25,
+},
+pdf: {
+  flex:1,
+  width:Dimensions.get('window').width,
+  height:Dimensions.get('window').height,
+}
 })

@@ -60,18 +60,18 @@ const CustomDrawer = props => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <View className='flex-1 bg-bgcolor'>
       <DrawerContentScrollView
         {...props}
-        contentContainerStyle={{backgroundColor:  '#297373'}}>
-        <ImageBackground
-          source={require('../assets/drawer-bg.jpg')}
-          style={{padding: 20}}>
+        contentContainerStyle={{backgroundColor: '#98c1d9'}}>
+        {/* <ImageBackground
+          source={require('../assets/logoo.png')}
+          style={{padding: 20}}> */}
           <Image
-            source={require('../assets/drawer-bg.jpg')}
-            style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10}}
+            source={require('../assets/Bibliophile.gif')}
+            style={{height: 200, width: '100%', borderRadius: 10, marginBottom: 0}}
           />
-          <Text
+          {/* <Text
             style={{
               color: '#fff',
               fontSize: 20,
@@ -80,33 +80,44 @@ const CustomDrawer = props => {
             }}>
           {storage.getString('user.name')}
           </Text>
-        </ImageBackground>
-        <View style={{flex: 1, backgroundColor: '#fff', paddingTop: 20}}>
+        </ImageBackground> */}
+        <View style={{flex: 1, backgroundColor: '#eaeaea' , paddingTop: 40}}>
           <DrawerItemList {...props}
            
           />
         </View>
       </DrawerContentScrollView>
       
-      <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc' , backgroundColor: '#fff'} }>
+      <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ee6c4d' , backgroundColor: '#eaeaea'} }>
 
         <TouchableOpacity 
          onPress={ () => {
-          authContext.logout()
+          Alert.alert('Logout', 'Are you sure you want to logout?',[
+            {
+              text: 'Cancel',
+              // onPress: () => console.log('Ask me later pressed'),
+            },
+            {
+              text: 'Yes',
+              onPress: () => authContext.logout(),
+              
+            },
+          ])
+      
          }} 
          style={{paddingVertical: 15, flexDirection: 'row', alignItems:"flex-start" , justifyContent:'space-between' , width: '50%', }}
          
          >
     
-            <Ionicons name="exit-outline" size={22} color='#732955'/>
+            <Ionicons name="exit-outline" size={22} color='#ee6c4d' />
             <Text
               style={{
                 fontSize: 17,
                 fontFamily: 'tilda-sans_medium',
-                color:'#732955'
+                color:'#ee6c4d'
                 // marginLeft: 20,
               }}>
-              Sign Out
+              Logout
             </Text>
     
         </TouchableOpacity>

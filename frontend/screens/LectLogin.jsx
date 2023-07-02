@@ -10,6 +10,8 @@ import {AxiosContext} from '../components/context/AxiosContext';
 import NetInfo from "@react-native-community/netinfo";
 import InternetCheck from '../components/InternetCheck';
 import { MMKV } from 'react-native-mmkv'
+import Loader from './Loader';
+
 
 export const storage = new MMKV()
 const LectLogin = ({navigation}) => {
@@ -31,20 +33,12 @@ const LectLogin = ({navigation}) => {
 
     // internet check
   const [isOffline, setOfflineStatus] = useState(false);
-  useEffect(() => {
-    const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
-      const offline = !(state.isConnected && state.isInternetReachable);
-      setOfflineStatus(offline);
-    });
-   console.log('testing')
-   console.log(isOffline)
-    removeNetInfoSubscription();
-  },[]);
+
 
 
   // handle login
 
-    const handleLogin = ()=>{
+    const handleLogin = async ()=>{
       try{
             
             if(password == '' || email == ''){
@@ -65,7 +59,14 @@ const LectLogin = ({navigation}) => {
             }
 
            else{
-            publicAxios.post(`/api/login-lecturer`,{
+            setLoading(true)
+            const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+              const offline = !(state.isConnected && state.isInternetReachable);
+              setOfflineStatus(offline);
+            });
+          
+            removeNetInfoSubscription();
+           await publicAxios.post(`/api/login-lecturer`,{
               email, 
               password,
             }).
@@ -115,7 +116,7 @@ const LectLogin = ({navigation}) => {
                 console.error(err);
               }
         
-            })
+            }).finally(()=>setLoading(false))
            }
       }
      catch(e){
@@ -124,20 +125,18 @@ const LectLogin = ({navigation}) => {
     }
 
   return (
-    <View className="h-screen bg-bgcolor">
+    <View className="h-screen flex-1 bg-bgcolor">
 
-      <InternetCheck isOffline={isOffline}/>
+      <InternetCheck isOffline={isOffline} isRetry={handleLogin}/>
 
-      {loading? <ActivityIndicator size="large" style={styles.indicator} color={'#ee6c4d'} />: 
+      {loading? <Loader/> : <></>}
       <View>
-        <View>
-            <Image source={require('../assets/logo.png')} style={{width: '100%', height:250}} resizeMode="contain"/>
-          </View>
+      
 
     {/* main content */}
           <View className='w-[90%] mx-auto' >
     
-          <View className='pb-8' >
+          <View className='pb-12 pt-10' >
           <Text className="font-ageoheavy text-4xl text-start text-main">Login</Text>
           </View>
           <View>
@@ -156,17 +155,17 @@ const LectLogin = ({navigation}) => {
               onChangeText={text => setPassword(text)}
               />
 
-              <Pressable onPress={handlePasswordVisibility} className='absolute top-6 right-4'>
+              <Pressable onPress={handlePasswordVisibility} className='absolute top-2 right-4'>
                   <Icon name={rightIcon} size={22} color="#ee6c4d"/>
               </Pressable>
         </View>
       
       
       
-              <Pressable className="items-center rounded-lg mt-4 bg-main" onPress={handleLogin} >
-              <TouchableOpacity>
-                <Text className="text-gray text-xl font-ageomedium py-4 px-12">LOGIN</Text>
-                </TouchableOpacity>
+              <Pressable className="items-center rounded-lg mt-6 bg-main" onPress={handleLogin} >
+      
+                <Text className="text-lightmain text-xl font-ageomedium py-4 px-12">LOGIN</Text>
+           
               </Pressable>
       
 
@@ -174,16 +173,15 @@ const LectLogin = ({navigation}) => {
 
         
         </View>
-          <View className=" flex  items-center p-4">
+       
+                
+            </View>
+        </View>
+        <View className="absolute bottom-0 left-0 right-0 items-center p-4">
               <Text className="font-ageobold text-xl text-main py-3">New Here??   
               <Text onPress={()=> navigation.navigate('SignUp')} className="font-ageobold text-xl underline px-4 text-black focus:text-main">Sign Up</Text>
               </Text>
             </View>
-      
-                
-            </View>
-        </View>
-        }
     </View>
   )
 }

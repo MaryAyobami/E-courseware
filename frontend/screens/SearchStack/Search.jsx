@@ -4,19 +4,24 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Resource from '../../components/Resource';
 import {AxiosContext} from '../../components/context/AxiosContext';
-import InternetCheck from '../../components/InternetCheck';
 import {data} from '../../components/DepartmentData.js'
 import { Dropdown } from 'react-native-element-dropdown';
 import CheckBox from '@react-native-community/checkbox';
+import { Spinner } from '../Spinner';
+import Loader from '../Loader';
+import { showMessage, hideMessage } from "react-native-flash-message";
+import NetInfo from "@react-native-community/netinfo";
+import InternetCheck from '../../components/InternetCheck';
 
-const Search = () => {
+const Search = ({navigation}) => {
   
-  const {authAxios} = useContext(AxiosContext);
+  const {publicAxios} = useContext(AxiosContext);
 
   const [ searchterm , setSearchterm] = useState('')
   const [ clicked, setClicked] = useState()
   const [ showFilter, setShowFilter] =useState(false)
   const [ loading, setLoading] = useState()
+  const [websearch, setwebsearch] = useState(false)
   // const [ filterdepartment, setfilterdepartment] = useState()
   // const [ filtertype, setfiltertype] = useState()
   // const [ filterlevel, setfilterlevel] = useState()
@@ -30,12 +35,16 @@ const Search = () => {
     setData(datasClone);
     }
 
+// internet connection check
+const [isOffline, setOfflineStatus] = useState(false) 
+    
+
   const resources = useRef([])
-  const [searchResult, setSearchResult] = useState([])
+  const [searchResult, setSearchResult] = useState()
     // filter
-    const type = useRef('')
-    const department = useRef('')
-    const level = useRef('')
+    const type = useRef('Type')
+    const department = useRef('Department')
+    const level = useRef('Level')
   
     const levels = useRef([])
     const [DepartmentLevels, setDepartmentLevels] = useState([])
@@ -64,48 +73,106 @@ const Search = () => {
       }
   }
 
-  // filtering
-  
-  // useEffect(()=>{
-  //     console.log(searchResult)
-  //     console.log(department.current)
-  //     if(department.current != ''){
-  //       const filteredresources = searchResult.filter((item)=>item.department == department.current )
-  //       resources.cu
-  //     }
-     
-  //     console.log(filteredresources)
-    
-  // //   }
-  // //  else{ 
-  // //   setSearchResult(resources.current)
+ // filtering
+  let filteredresources;
 
-  // //  }
-  //   console.log(searchResult)
-  // },[department.current])
+  useEffect(()=>{
+      console.log(department.current,type.current,level.current)
+    
+      if(searchResult != null && department.current != '' || type.current != '' || level.current != ''){
+        filteredresources = resources.current.filter((item)=>item.department == department.current || item.level == level.current && item.type || type.current )
+        setSearchResult(filteredresources)
+      }
+     
+      console.log(filteredresources)
+    
+  //   }
+  //  else{ 
+  //   setSearchResult(resources.current)
+
+  //  }
+    console.log(searchResult)
+  },[department.current])
 
 
   const handleSearch = async() => {
     try{
-      setLoading(true)
-      authAxios.get(`/api/search/?searchterm=${searchterm}`)
-      .then((response)=>
-      {
-     
-      console.log(response.data)
-      resources.current = response.data
-      setSearchResult(resources.current)
-      console.log(searchResult)
+      Keyboard.dismiss()
+      if(searchterm == ''){
+        showMessage({
+          message: `The search field cannot be empty!`,
+            type: "default",
+            backgroundColor: '#3b2e2a',
+          titleStyle: {
+            fontFamily:"tilda-sans_medium",
+            color:'#f8f1e9',
+            fontSize: 16,
+            padding: 4
+          },
+        })
       }
-      )
-      .catch((err)=>console.log(err))
-      .finally(() => {
-        setLoading(false);
-      });
+      else{
+
+        setLoading(true)
+        publicAxios.get(`/api/search/?searchterm=${searchterm}`)
+        .then((response)=>
+        {
+       
+        console.log(response.data)
+        resources.current = response.data
+        setSearchResult(resources.current)
+        console.log(searchResult)
+        }
+        )
+        .catch(err=>{
+          console.log(err)
+            if (err.response) {
+              showMessage({
+                message: `A server error has occured, please try again!`,
+                  type: "default",
+                  backgroundColor:  '#ee6c4d',
+                titleStyle: {
+                  fontFamily:"tilda-sans_medium",
+                  color:'#f8f1e9',
+                  fontSize: 16,
+                  padding: 4
+                },
+              })
+          
+            }
+            else if(err.request) {
+    
+             const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+                const offline = !(state.isConnected && state.isInternetReachable);
+                setOfflineStatus(offline);
+              });
+               
+
+              removeNetInfoSubscription();
+              console.log(isOffline)
+            }
+          
+          })
+        .finally(() => {
+          setLoading(false);
+        });
+      }
+
     }
     catch(err){
-      if (axios.isAxiosError(err)) {
-        console.error("Axios request failed", err.response?.data, err.toJSON());
+      if (err.response) {
+        console.log(err.response)
+        showMessage({
+          message: `A server error has occured, please try again!`,
+            type: "default",
+            backgroundColor:  '#ee6c4d',
+          titleStyle: {
+            fontFamily:"tilda-sans_medium",
+            color:'#f8f1e9',
+            fontSize: 16,
+            padding: 4
+          },
+        })
   } else {
     console.error(err);
   }
@@ -115,9 +182,15 @@ const Search = () => {
 
   return (
 
-    <View className={showFilter? 'bg-lightmain w-screen h-full': ' w-screen '}>
-      
-    <View className= 'w-[96%] flex flex-row my-4 py-2 mx-auto'>
+    <View className='w-screen flex-1 bg-bgcolor'>
+        <InternetCheck isOffline={isOffline} isRetry={handleSearch}/>
+       <View className='h-24  w-screen justify-center items-center flex flex-row'> 
+     {/* <Icon name="book-open-page-variant-outline" size={30} color='#ee6c4d'  style={{paddingVertical:4}} onPress={()=> navigation.goBack()} /> */}
+       <Text className='p-4 text-center text-main font-ageobold text-4xl'>Search</Text>
+     </View>
+
+
+    <View className= 'w-[96%] flex flex-row  py-2 mx-auto'>
     {clicked && (
       <View className='p-2'>
         <TouchableOpacity
@@ -125,9 +198,11 @@ const Search = () => {
             setSearchterm("")
             Keyboard.dismiss();
             setClicked(false);
+            setLoading(false)
+            setSearchResult('')
           }}
         >
-          <Text className="text-pink text-xl font-ageobold">Cancel</Text>
+          <Text className="text-orange text-xl font-ageobold">Cancel</Text>
         </TouchableOpacity>
       </View>
     )}
@@ -158,7 +233,7 @@ const Search = () => {
         <Icon
           name="magnify"
           size={30}
-          color="#297373"
+          color="#3d5a80"
           style={{ marginLeft: 1 }}
         />
       </TouchableOpacity>
@@ -183,41 +258,51 @@ const Search = () => {
    
 {/* search and filter */}
 
-{loading? <ActivityIndicator size="large" style={styles.indicator} color={'#FF8552'} />: 
+{loading? <Loader/>: 
 
 // overlay
 
 
     <View className=' w-screen'>
-      <View className='flex flex-row w-[96%] mx-auto'>
+      <View className={showFilter?'flex flex-row w-screen justify-between mt-3 ':'flex flex-row w-screen justify-center mt-3 ' }>
 
 
-      <TouchableOpacity onPress={showFilterBar} className='bg-main rounded-full text-center p-1'>
-                  <View className='flex flex-row  z-10 ' >
-                  <Icon
-                  name="filter-variant"
-                  size={30}
-                  color="grey"
-                  style={{ marginLeft: 1 }}
-                />
-                <Text  className="font-ageobold p-2 text-xl text-gray ">Filter Result</Text>
-                    </View>
-        </TouchableOpacity>
+    <TouchableOpacity onPress={showFilterBar} className={showFilter?'text-center bg-main p-2' : 'px-1 text-center'}>
+                <View className='flex flex-row  z-10 ' >
+                <Icon
+                name="filter-variant"
+                size={30}
+                color={ showFilter?'#ee6c4d':"grey"}
+                style={{ marginLeft: 1 , padding:2}}
+              />
+              <Text  className={showFilter?"font-ageobold p-2 text-xl text-orange " : 'hidden'}>Filter Result</Text>
+                  </View>
+      </TouchableOpacity>
 
-      <Text  className={showFilter? "hidden" : "font-ageobold p-2 px-8 text-xl text-grey-800"}>Search Result</Text>
-      </View>
-      {showFilter? <View className='bg-lightmain w-screen h-full'>
+    <Text  className={showFilter? 'hidden': "font-ageobold p-2 px-8 text-xl text-grey-800"}>Search Result</Text>
+    </View>
+      
+      {/* {showFilter? <View className='bg-blue w-[35%] h-full opacity-10'>
       </View> : ''}
+
 {/* filter area  */}
 
 
-<View  className='absolute top-10'>
+<View  className='flex '>
 
 
-    
-{showFilter? <View className='p-2 w-full'> 
-       <View>
-        <Text className='font-ageomedium p-2 text-xl text-grey-800'>Department</Text>
+<View className={showFilter?  ' p-2 bg-main rounded-b-lg  shadow-lg' : 'hidden'}> 
+<ScrollView
+horizontal={true}
+contentContainerStyle={{
+  justifyContent: 'space-between',
+  flex:1,
+  alignContent: 'center'
+
+}}
+>
+       <View className='w-[35%]'>
+        <Text className='font-ageomedium p-2 text-xl text-bgcolor'>Department</Text>
         <Dropdown  
             data={data.department.map((item) => ({ value: item, label: `${item.name}` }))}
             style={styles.dropdownContainer}
@@ -230,14 +315,14 @@ const Search = () => {
             maxHeight={300}
             labelField="label"
             valueField={department.current}
-            placeholder="Department"
+            placeholder={department.current}
             searchPlaceholder="Search..."         
         />
         </View>
 
         {/* level */}
-    <View>
-      <Text className='font-ageomedium p-2 text-xl text-grey-800'>Level</Text>
+    <View className='w-[30%]'>
+      <Text className='font-ageomedium p-2 text-xl text-bgcolor'>Level</Text>
       <Dropdown  
              data={levels.current.map((item)=>({ value: item , label: `${item}` }))}
              style={styles.dropdownContainer}
@@ -253,19 +338,35 @@ const Search = () => {
              }}
              labelField="label"
              valueField={level.current}
-             placeholder="Level"
+             placeholder={level.current}
              searchPlaceholder="Search..."     
         />
       </View>
 
        {/* type */}
-       <View>
-        <Text className='font-ageomedium p-2 text-xl text-grey-800'>Type</Text>
-      {
-      // setData(Data.map(item=> 
-      //   {
-      //     item.state =false;
-      //     return item;}))
+       <View className='w-[30%]'>
+        <Text className='font-ageomedium p-2 text-xl text-bgcolor'>Type</Text>
+        <Dropdown  
+             data={data.resourceType.map((item)=>({ value: item , label: `${item.name}` }))}
+             style={styles.dropdownContainer}
+             placeholderStyle={styles.placeholderStyle}
+             selectedTextStyle={styles.placeholderStyle}
+             inputSearchStyle={styles.placeholderStyle}
+             search
+             maxHeight={300}
+             value={type}
+             onChange={item => {
+               console.log(item)
+               type.current = item.value.name
+          
+             }}
+             labelField="label"
+             valueField={type.current}
+             placeholder={type.current}
+             searchPlaceholder="Search..."     
+        />
+      {/* {
+   
       Data.map((item)=>
         {
           return(
@@ -281,23 +382,23 @@ const Search = () => {
           )
         }
         
-        )} 
+        )}  */}
      
        </View>
+         
+</ScrollView>
       </View>
-      : 
-      ''
-}
-</View>
+
          
           {/* resource list */}
 
+{searchResult? 
       <View className='w-[98%] mx-auto pt-8 ' >
     
         <FlatList
                 data={searchResult}
                 renderItem = {({item})=>
-                  <Resource name={item.name} link={item.link} resourceId={item._id}/>    
+                  <Resource res={item}/>    
                 }
                 keyExtractor={item => item._id}
                 // contentContainerStyle={{
@@ -310,9 +411,32 @@ const Search = () => {
                 />
           
        </View>
+     :
+ <></>
+
+  }
+</View>
 
  </View>
+
 }
+  {/* online database button */}
+  <View style={styles.websearch} className=''>
+    <Pressable className='bg-main w-[20%] flex flex-row text-center rounded-tl-full p-2' onPress={()=>navigation.navigate('Web Search')}>
+    <Icon
+          name="search-web"
+          size={55}
+          color= '#ee6c4d'
+          style={{
+             marginLeft: 15,
+             width: '100%',
+             alignItems: 'center',
+             justifyContent: 'center',
+            }}
+        />
+        <Text className={websearch? 'flex text-bgcolor texl-xl': 'hidden'}>Search online libraries of academic resources</Text>
+      </Pressable>
+  </View>
   </View>
   )
 }
@@ -344,8 +468,8 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   placeholderStyle: {
-    color:'gray',
-    fontFamily: 'AgeoPersonalUse',
+    color:'#eaeaea',
+    fontFamily: 'tilda-sans_regular',
     fontSize: 18
   },
   dropdownContainer: {
@@ -354,9 +478,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 16,
     marginVertical: 4,
-    borderColor: 'grey',
+    borderColor: '#eaeaea',
     marginBottom: 16,
-    fontFamily: 'AgeoPersonalUse',
+    fontFamily: 'tilda-sans_regular',
     fontSize: 20
   },
   checkbox: {
@@ -368,5 +492,13 @@ const styles = StyleSheet.create({
   },
   Button:{
     fontSize: 20
+  }
+  ,
+  websearch:{
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 0,
+    alignContent:'flex-end',
+    alignItems: 'flex-end'
   }
 });

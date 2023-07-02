@@ -40,7 +40,7 @@ const generateToken = lecturer => {
     algorithm: 'HS256'
   })
  
- 
+const createRefreshToken = () => randToken.uid(256)
   return token
 }
 

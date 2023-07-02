@@ -54,6 +54,12 @@ admin.initializeApp({
 
 router.post('/api/send-resource',upload.single('resource'),attachStudent,async(req,res)=>{
     try{
+
+      const checkResource = Resource.find({name: req.file.originalname})
+      if(checkResource){
+        res.status(400).send('The file already exists.')
+      }
+
       const sender = await Student.findById(req.user.sub)
       console.log(sender)
       // console.log(req.file)
@@ -86,14 +92,54 @@ router.post('/api/send-resource',upload.single('resource'),attachStudent,async(r
 
         })
         console.log(tokens)
+        
 
-        await admin.messaging().sendMulticast({
-          tokens,
-          notification:{
-            body: 'testing application'
-          } 
-        });
-        res.status(200).json({ message: "Successfully sent notifications!" });
+        // const notification_options = {
+        //   priority: "high",
+        //   timeToLive: 60 * 60 * 24
+        // }
+
+        // await admin.messaging().sendMulticast({
+        //   tokens,
+        //   notification:{
+        //     title:'courseware notification',
+        //     body: 'testing application'
+        //   },
+        //   notification_options
+        // });
+
+        const notificationToAll = (title, body, tokens) => {
+          var notibody = {
+            notification: {
+              title: title,
+              body: body,
+            },
+            tokens: tokens,
+          };
+          return new Promise((resolve, reject) => {
+            admin
+              .messaging()
+              .sendMulticast(notibody)
+              .then((response) => {
+                console.log(response.responses);
+                if (response.responses[0].error != undefined) {
+                  console.log(JSON.stringify(response.responses[0].error));
+                }
+                resolve(response);
+              })
+              .catch((error) => {
+                console.log(JSON.stringify(error));
+                reject(error);
+              });
+          });
+          };
+
+          notificationToAll(
+            "This is a string",
+            `This is another string`,
+            ['dmqOpwHJSBGvP4lzP4vAK-:APA91bGox4HkVNQbkNCT5iX1ZLpu1tvAU3NySGi-TE_m05o0qvBSnb_WkIMmOFkCDHWBx7xDvC3Yv-YpfRiRYQtmOUO105_NMqXoy_HDYb9krGrVmIm4RjQHGHIa5DwleX6CY_1YfIvC']
+          )
+        // res.status(200).json({ message: "Successfully sent notifications!" });
 
     }
     catch(e){
@@ -163,13 +209,13 @@ router.get('/api/search-googlescholar' , async(req,res)=>{
       q: `${req.query.searchterm}`
     };
     
-    const callback = function(data) {
+    const callback = await function(data) {
       console.log(data["organic_results"]);
     };
     
     // Show result as JSON
-    const resultdata = search.json(params, callback)
-    res.status(200).send(JSON.stringify(resultdata))
+    const resultdata = await search.json(params, callback)
+    res.status(200).send(resultdata)
     console.log('testing')
     console.log(resultdata)
   }

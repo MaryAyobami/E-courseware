@@ -24,7 +24,7 @@ const InternetCheck = (prop) => {
       );
       
  return (
-    <View className="w-screen h-screen">
+    <View >
         <Modal 
             visible={isOffline} 
             animationType="slide"
