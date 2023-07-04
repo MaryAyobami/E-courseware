@@ -87,7 +87,7 @@ router.post('/api/register-lecturer' , async(req,res)=>{
                     department: newLecturer.department,
                     accessToken,
                     expiresAt,
-                    refreshToken: createRefreshToken(newStudent),
+                    refreshToken: createRefreshToken(newLecturer),
                    
                 }) 
             }
