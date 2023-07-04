@@ -8,7 +8,7 @@ const Lecturer = require('../models/lecturers')
 // get course materials
 router.get('/api/student-resources', attachStudent, async(req,res)=>{
     try{
-        const resources;
+        let resources;
         const student = req.user.sub
         const studentProfile = await Student.findById(student)
         console.log(studentProfile)      
