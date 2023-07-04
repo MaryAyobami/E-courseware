@@ -8,10 +8,17 @@ const Lecturer = require('../models/lecturers')
 // get course materials
 router.get('/api/student-resources', attachStudent, async(req,res)=>{
     try{
+        const resources;
         const student = req.user.sub
         const studentProfile = await Student.findById(student)
-  console.log(studentProfile)      
-        const resources = await Resources.find({level:studentProfile.level, department: studentProfile.department, type:req.query.type})
+        console.log(studentProfile)      
+        if (req.query.type == GNS){
+            resources = await Resources.find({type:req.query.type})
+        } 
+        else{
+            resources = await Resources.find({level:studentProfile.level, department: studentProfile.department, type:req.query.type})
+        }
+     
         console.log(resources)
         res.status(200).send({
             resources: resources
