@@ -25,10 +25,12 @@ const lecturer = mongoose.Schema({
         required: true,
         min:6
     },
-    bookmarks:{
-        type: Array,
-        required: false
-    }
+    token:{
+        type: String,
+        required: true,
+       
+    },
+   
 })
 
 module.exports = mongoose.model('lecturer', lecturer)
