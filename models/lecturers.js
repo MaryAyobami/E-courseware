@@ -20,10 +20,6 @@ const lecturer = mongoose.Schema({
         type: String,
         required: true,
     },
-    displayname:{
-        type: String,
-        required: false,
-    },
     password:{
         type: String,
         required: true,
