@@ -17,7 +17,6 @@ const registerSchema = Joi.object({
     name: Joi.string().min(3).required(),
     department: Joi.string().required(),
     email: Joi.string().required(),
-    displayname: Joi.string().required(),
     college: Joi.string().required(),
     password: Joi.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).required()
 })
