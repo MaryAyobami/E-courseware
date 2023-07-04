@@ -129,8 +129,7 @@ router.post('/api/login-lecturer', async (req,res)=>{
         await storedRefreshToken.save()
         res.status(200).json({
             message: "You have successfully log in",
-            _id: lecturer.id,
-            department: lecturer.department,
+            lecturer: lecturer,
             accessToken,
             expiresAt: accessTokenExpiresAt,
             refreshToken
