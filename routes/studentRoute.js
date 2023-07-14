@@ -78,7 +78,6 @@ router.post('/api/register-student' , async(req,res)=>{
                 department : req.body.department,
                 college : req.body.college,
                 level: req.body.level,
-                // displayname: req.body.displayname,
                 token: req.body.token,
 
             })
@@ -132,9 +131,13 @@ router.post('/api/login-student', async (req,res)=>{
         const decodedAccessToken = jwtDecode(accessToken)
         const accessTokenExpiresAt = decodedAccessToken.exp
         const refreshToken = getRefreshToken(student)
-    
+        
         const storedRefreshToken = new Token({ refreshToken, user: student._id })
         await storedRefreshToken.save()
+        // update token
+       
+        await Student.findByIdAndUpdate(student._id, {token: req.body.token})
+        
         res.status(200).json({
             message: "You have successfully log in",
             student: student,
@@ -225,5 +228,48 @@ router.post('/api/refreshToken', async (req, res) => {
  router.get('/api/testing', async(req,res)=>{
    res.send({message: 'hellooo testing'})
  })
+
+
+//  push notification
+router.put('api/push-notificaation',attachStudent, async(req,res)=>{
+      try{
+        const student = req.user.sub
+        // const studentProfile = await Student.findById(student)
+        if(req.body.pushnotification == false){
+          await Student.findByIdAndUpdate(student, {pushnotification: false})
+        }
+        else{
+          await Student.findByIdAndUpdate(student, {pushnotification: true})
+        }
+      
+        res.status(200).json({
+          message: 'push notification updated!'
+        })
+    }
+    catch(err){
+      console.log(err)
+      res.status(400).send(`An error ocurred. DETAILS : ${err}`);
+    }
+
+})
+
+// update fcm token
+router.put('api/update-token',attachStudent, async(req,res)=>{
+  try{
+    const student = req.user.sub
+    // const studentProfile = await Student.findById(student)
+    
+    await Student.findByIdAndUpdate(student, {token: req.body.token})
+   
+    res.status(200).json({
+      message: 'token updated!'
+    })
+}
+catch(err){
+  console.log(err)
+  res.status(400).send(`An error ocurred. DETAILS : ${err}`);
+}
+
+})
 
 module.exports= router

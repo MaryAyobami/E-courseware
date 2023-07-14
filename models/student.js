@@ -28,10 +28,6 @@ const student = mongoose.Schema({
         type: String,
         required: true,
     },
-    displayname:{
-        type: String,
-        required: false,
-    },
     password:{
         type: String,
         required: true,
@@ -41,10 +37,10 @@ const student = mongoose.Schema({
         type: String,
         required: true,
     },
-    bookmarks:{
-        type: Array,
-        required: false
-    }
+    pushnotification:{
+        type: Boolean,
+        default: true
+    },
 })
 
 module.exports = mongoose.model('student',student)

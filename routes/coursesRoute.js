@@ -47,4 +47,6 @@ router.get('/api/lecturer-resources', attachStudent, async(req,res)=>{
         res.status(400).send(`An error ocurred. DETAILS : ${err}`);
     }
 })
+
+
 module.exports = router

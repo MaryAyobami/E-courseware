@@ -82,7 +82,7 @@ router.post('/api/send-resource',upload.single('resource'),attachStudent,async(r
         //   message: 'Resource uploaded successfully'
         // })
        
-        const relatedStudents = await Student.find({department: sender.department})
+        const relatedStudents = await Student.find({department: sender.department, pushnotification: true})
 
         const tokens = []
         relatedStudents.map(item=>{
@@ -164,6 +164,24 @@ router.get('/api/search', async(req,res)=>{
 }
 })
 
+//search 
+router.get('/api/search-personal',attachStudent, async(req,res)=>{
+  try{
+    const student = req.user.sub
+    const studentProfile = await Student.findById(student)
+    const searchterm  = req.query.searchterm
+    let resources = await Resource.find({name : {$regex: `(?i)${searchterm}`}, department: studentProfile.department, level:studentProfile.level})
+    console.log(resources)
+    res.status(200).send(
+      resources
+    )
+  }
+  catch(e){
+    console.log(e)
+    res.status(404).send(`An error occured`)
+}
+})
+
 // filter
 router.get('/api/filter', async(req,res)=>{
   try{
@@ -184,19 +202,19 @@ router.get('/api/filter', async(req,res)=>{
 })
 
 //save resource
-router.put('/api/save-resource',attachStudent, async(req,res) => {
-  try{
+// router.put('/api/save-resource',attachStudent, async(req,res) => {
+//   try{
     
-    const resource_id = req.body.resourceId
-    console.log(req.body)
-    const lecturer = await Student.findByIdAndUpdate(req.user.sub,{bookmarks: resource_id })
-    res.status(200).send('Resourses saved sucessfully')
-  }
-  catch(e){
-    console.log(e)
-    res.status(404).send(`An error occured`)
-  }
-})
+//     const resource_id = req.body.resourceId
+//     console.log(req.body)
+//     const lecturer = await Student.findByIdAndUpdate(req.user.sub,{bookmarks: resource_id })
+//     res.status(200).send('Resourses saved sucessfully')
+//   }
+//   catch(e){
+//     console.log(e)
+//     res.status(404).send(`An error occured`)
+//   }
+// })
 
 // external api
 // serp- google scholar apu
