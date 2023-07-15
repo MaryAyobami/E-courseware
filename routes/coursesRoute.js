@@ -12,7 +12,7 @@ router.get('/api/student-resources', attachStudent, async(req,res)=>{
         const student = req.user.sub
         const studentProfile = await Student.findById(student)
         console.log(studentProfile)      
-        if (req.query.type == GNS){
+        if (req.query.type == 'GNS'){
             resources = await Resources.find({type:req.query.type})
         } 
         else{
