@@ -9,10 +9,10 @@ const resources = mongoose.Schema({
         type: String,
         required: true,
     },
-    // sender:{
-    //     type: String,
-    //     required: true,
-    // },
+    sender:{
+        type: String,
+        required: true,
+    },
     department:{
         type: String,
         required: true,
@@ -24,7 +24,15 @@ const resources = mongoose.Schema({
     type:{
         type: String,
         required: true,
-    }
+    },
+    filesize:{
+        type: String,
+        required: true,
+    },
+    fileformat:{
+        type: String,
+        required: true,
+    },
    
 })
 

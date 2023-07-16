@@ -59,28 +59,33 @@ router.post('/api/send-resource',upload.single('resource'),attachStudent,async(r
       if(checkResource){
         res.status(400).send('The file already exists.')
       }
-
-      const sender = await Student.findById(req.user.sub)
-      console.log(sender)
-      // console.log(req.file)
-      const resource = req.file.location
-        //console.log(req.body.resource)
-      console.log(resource)
-        // const lecturer = req.user.sub
-        // const lecturerProfile = await Lecturer.findById(lecturer)
-        const newResource = Resource({
-            link: resource,
-            name: req.file.originalname,
-            type: req.body.type,
-            department: req.body.department,
-            level: req.body.level,
-            sender: req.body.sender
-        })
-        await newResource.save()
-
-        // res.status(201).json({
-        //   message: 'Resource uploaded successfully'
-        // })
+      
+      else{
+        // const sender = await Student.findById(req.user.sub)
+        // console.log(sender)
+        console.log(req.file)
+        const resource = req.file.location
+          //console.log(req.body.resource)
+        console.log(resource)
+          // const lecturer = req.user.sub
+          // const lecturerProfile = await Lecturer.findById(lecturer)
+          const newResource = Resource({
+              link: resource,
+              name: req.file.originalname,
+              type: req.body.type,
+              department: req.body.department,
+              level: req.body.level,
+              sender: req.body.sender,
+              filesize: req.file.size,
+              fileformat : req.file.format
+          })
+          await newResource.save()
+  
+          res.status(201).json({
+            message: 'Resource uploaded successfully'
+          })
+      }
+     
        
         const relatedStudents = await Student.find({department: sender.department, pushnotification: true})
 
