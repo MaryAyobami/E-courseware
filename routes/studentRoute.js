@@ -134,6 +134,7 @@ router.post('/api/login-student', async (req,res)=>{
         
         const storedRefreshToken = new Token({ refreshToken, user: student._id })
         await storedRefreshToken.save()
+       
         // update token
        
         await Student.findByIdAndUpdate(student._id, {token: req.body.token})
