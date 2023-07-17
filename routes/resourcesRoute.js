@@ -52,10 +52,13 @@ admin.initializeApp({
 });
 
 
-router.post('/api/send-resource',upload.single('resource'),attachStudent,async(req,res)=>{
+router.post('/api/send-resource',upload.single('resource'), attachStudent,async(req,res)=>{
     try{
 
-      const checkResource = Resource.find({name: req.file.originalname})
+      console.log(req.file)
+
+      const checkResource = await Resource.findOne({name: req.file.originalname , type: req.body.type})
+
       if(checkResource){
         res.status(400).send('The file already exists.')
       }
@@ -63,21 +66,22 @@ router.post('/api/send-resource',upload.single('resource'),attachStudent,async(r
       else{
         // const sender = await Student.findById(req.user.sub)
         // console.log(sender)
-        console.log(req.file)
+        // console.log(req.file)
         const resource = req.file.location
-          //console.log(req.body.resource)
-        console.log(resource)
-          // const lecturer = req.user.sub
-          // const lecturerProfile = await Lecturer.findById(lecturer)
+        //   //console.log(req.body.resource)
+        // console.log(resource)
+          const lecturer = req.user.sub
+          const lecturerProfile = await Lecturer.findById(lecturer)
+          console.log(lecturerProfile)
           const newResource = Resource({
               link: resource,
               name: req.file.originalname,
               type: req.body.type,
               department: req.body.department,
               level: req.body.level,
-              sender: req.body.sender,
+              sender: lecturerProfile.name,
               filesize: req.file.size,
-              fileformat : req.file.format
+              fileformat : req.file.contentType
           })
           await newResource.save()
   
@@ -99,19 +103,19 @@ router.post('/api/send-resource',upload.single('resource'),attachStudent,async(r
         console.log(tokens)
         
 
-        // const notification_options = {
-        //   priority: "high",
-        //   timeToLive: 60 * 60 * 24
-        // }
+        const notification_options = {
+          priority: "high",
+          timeToLive: 60 * 60 * 24
+        }
 
-        // await admin.messaging().sendMulticast({
-        //   tokens,
-        //   notification:{
-        //     title:'courseware notification',
-        //     body: 'testing application'
-        //   },
-        //   notification_options
-        // });
+        await admin.messaging().sendMulticast({
+          tokens,
+          notification:{
+            title:'courseware notification',
+            body: 'testing application'
+          },
+          notification_options
+        });
 
         const notificationToAll = (title, body, tokens) => {
           var notibody = {
@@ -144,7 +148,7 @@ router.post('/api/send-resource',upload.single('resource'),attachStudent,async(r
             `This is another string`,
             ['dmqOpwHJSBGvP4lzP4vAK-:APA91bGox4HkVNQbkNCT5iX1ZLpu1tvAU3NySGi-TE_m05o0qvBSnb_WkIMmOFkCDHWBx7xDvC3Yv-YpfRiRYQtmOUO105_NMqXoy_HDYb9krGrVmIm4RjQHGHIa5DwleX6CY_1YfIvC']
           )
-        // res.status(200).json({ message: "Successfully sent notifications!" });
+        res.status(200).json({ message: "Successfully sent notifications!" });
 
     }
     catch(e){

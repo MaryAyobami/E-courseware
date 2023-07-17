@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({
-        limit: "50mb",
+        limit: "300kb",
         extended: true,
     })
     );
