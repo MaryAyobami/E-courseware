@@ -5,7 +5,7 @@ const ProfileHeader = (props) => {
     const {title} = props
   return (
     <View className='w-screen h-[10vh] p-4 bg-main '>
-      <Text className='font-ageoheavy text-white text-4xl text-center '>{title}</Text>
+      <Text className='font-ageoheavy text-white text-[27px] text-center '>{title}</Text>
     </View>
   )
 }

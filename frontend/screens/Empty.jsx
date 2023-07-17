@@ -11,7 +11,7 @@ const Empty = (props) => {
         </View>
        <View>
             <Text className="text-center font-ageoheavy text-gray p-2 text-5xl">Opps!</Text>
-            <Text className="text-center font-ageomedium text-gray text-2xl">{props.content}</Text>
+            <Text className="text-center font-ageomedium text-gray text-[25px]">{props.content}</Text>
        </View>
       </View>
     </View>

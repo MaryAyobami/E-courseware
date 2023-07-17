@@ -12,10 +12,18 @@ import Loader from '../Loader';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import NetInfo from "@react-native-community/netinfo";
 import InternetCheck from '../../components/InternetCheck';
+import { AuthContext } from '../../components/context/AuthContext';
+
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Search = ({navigation}) => {
+
+  const authContext = useContext(AuthContext)
   
   const {publicAxios} = useContext(AxiosContext);
+  
 
   const [ searchterm , setSearchterm] = useState('')
   const [ clicked, setClicked] = useState()
@@ -184,13 +192,17 @@ const [isOffline, setOfflineStatus] = useState(false)
 
     <View className='w-screen flex-1 bg-bgcolor'>
         <InternetCheck isOffline={isOffline} isRetry={handleSearch}/>
-       <View className='h-24  w-screen justify-center items-center flex flex-row'> 
-     {/* <Icon name="book-open-page-variant-outline" size={30} color='#ee6c4d'  style={{paddingVertical:4}} onPress={()=> navigation.goBack()} /> */}
-       <Text className='p-4 text-center text-main font-ageobold text-4xl'>Search</Text>
-     </View>
+        <View style={styles.header}>
+        <View className='h-full  bg-gray rounded-b-full w-screen'>
+        <TouchableOpacity onPress={()=>navigation.goBack()} className='pl-4'>
+          <Icon name='arrow-left' size={40} color='#3d5a80' />
+      </TouchableOpacity>
+        <Text className="text-[27px] font-ageobold text-main text-center  ">Search</Text>
+        </View>
+          
+        </View>
 
-
-    <View className= 'w-[96%] flex flex-row  py-2 mx-auto'>
+    <View className= 'w-[96%] flex flex-row  mt-6  py-2 mx-auto'>
     {clicked && (
       <View className='p-2'>
         <TouchableOpacity
@@ -202,12 +214,12 @@ const [isOffline, setOfflineStatus] = useState(false)
             setSearchResult('')
           }}
         >
-          <Text className="text-orange text-xl font-ageobold">Cancel</Text>
+          <Text className="text-orange text-[16px] font-ageobold">Cancel</Text>
         </TouchableOpacity>
       </View>
     )}
 
-    <View className={clicked? " border border-main rounded-full text-[20px] pl-4 pr-2  w-[80%] mx-auto text-black" : "border border-main rounded-full text-[20px] pl-4 pr-2  w-[100%] text-black" }>
+    <View className={clicked? " border border-main rounded-full text-[16px] pl-4 pr-2  w-[80%] mx-auto text-black" : "border border-main rounded-full text-[16px] pl-4 pr-2  w-[100%] text-black" }>
       
     <View
       style={
@@ -219,7 +231,7 @@ const [isOffline, setOfflineStatus] = useState(false)
         
       {/* Input field */}
       <TextInput
-        className="font-ageonormal text-black w-[90%] text-xl px-2"
+        className="font-ageonormal text-black w-[90%] h-[35px] text-[16px] px-2"
         // placeholder="Search"
         value={searchterm}
         onChangeText={text=>setSearchterm(text)}
@@ -264,23 +276,6 @@ const [isOffline, setOfflineStatus] = useState(false)
 
 
     <View className=' w-screen'>
-      <View className={showFilter?'flex flex-row w-screen justify-between mt-3 ':'flex flex-row w-screen justify-center mt-3 ' }>
-
-
-    <TouchableOpacity onPress={showFilterBar} className={showFilter?'text-center bg-main p-2' : 'px-1 text-center'}>
-                <View className='flex flex-row  z-10 ' >
-                <Icon
-                name="filter-variant"
-                size={30}
-                color={ showFilter?'#ee6c4d':"grey"}
-                style={{ marginLeft: 1 , padding:2}}
-              />
-              <Text  className={showFilter?"font-ageobold p-2 text-xl text-orange " : 'hidden'}>Filter Result</Text>
-                  </View>
-      </TouchableOpacity>
-
-    <Text  className={showFilter? 'hidden': "font-ageobold p-2 px-8 text-xl text-grey-800"}>Search Result</Text>
-    </View>
       
       {/* {showFilter? <View className='bg-blue w-[35%] h-full opacity-10'>
       </View> : ''}
@@ -289,9 +284,30 @@ const [isOffline, setOfflineStatus] = useState(false)
 
 
 <View  className='flex '>
+         
+          {/* resource list */}
+
+{searchResult? 
+      <View className='w-[98%] mx-auto pt-4 ' >
+            <View className={showFilter?'flex flex-row w-screen justify-between mt-3 ':'flex flex-row w-screen justify-center mt-3 ' }>
 
 
-<View className={showFilter?  ' p-2 bg-main rounded-b-lg  shadow-lg' : 'hidden'}> 
+        <TouchableOpacity onPress={showFilterBar} className={showFilter?'text-center bg-main p-2' : 'px-1 text-center'}>
+                    <View className='flex flex-row  z-10 ' >
+                    <Icon
+                    name="filter-variant"
+                    size={30}
+                    color={ showFilter?'#ee6c4d':"grey"}
+                    style={{ marginLeft: 1 , padding:2}}
+                  />
+                  <Text  className={showFilter?"font-ageobold p-2 text-[16px] text-orange " : 'hidden'}>Filter Result</Text>
+                      </View>
+          </TouchableOpacity>
+
+        <Text  className={showFilter? 'hidden': "font-ageobold p-2 px-8 text-[16px] text-grey-800"}>Search Result</Text>
+        </View>
+
+        <View className={showFilter?  ' p-2 bg-main rounded-b-lg  shadow-lg' : 'hidden'}> 
 <ScrollView
 horizontal={true}
 contentContainerStyle={{
@@ -302,7 +318,7 @@ contentContainerStyle={{
 }}
 >
        <View className='w-[35%]'>
-        <Text className='font-ageomedium p-2 text-xl text-bgcolor'>Department</Text>
+        <Text className='font-ageomedium p-2 text-[16px] text-bgcolor'>Department</Text>
         <Dropdown  
             data={data.department.map((item) => ({ value: item, label: `${item.name}` }))}
             style={styles.dropdownContainer}
@@ -322,7 +338,7 @@ contentContainerStyle={{
 
         {/* level */}
     <View className='w-[30%]'>
-      <Text className='font-ageomedium p-2 text-xl text-bgcolor'>Level</Text>
+      <Text className='font-ageomedium p-2 text-[16px] text-bgcolor'>Level</Text>
       <Dropdown  
              data={levels.current.map((item)=>({ value: item , label: `${item}` }))}
              style={styles.dropdownContainer}
@@ -345,7 +361,7 @@ contentContainerStyle={{
 
        {/* type */}
        <View className='w-[30%]'>
-        <Text className='font-ageomedium p-2 text-xl text-bgcolor'>Type</Text>
+        <Text className='font-ageomedium p-2 text-[16px] text-bgcolor'>Type</Text>
         <Dropdown  
              data={data.resourceType.map((item)=>({ value: item , label: `${item.name}` }))}
              style={styles.dropdownContainer}
@@ -377,7 +393,7 @@ contentContainerStyle={{
                 handleCheckbox(item)}}
               style={styles.checkbox}
             />
-            <Text className="font-ageonormal p-2 text-[18px] text-grey-800">{item.name}</Text>
+            <Text className="font-ageonormal p-2 text-[16px] text-grey-800">{item.name}</Text>
             </View>
           )
         }
@@ -387,13 +403,10 @@ contentContainerStyle={{
        </View>
          
 </ScrollView>
+
+
       </View>
 
-         
-          {/* resource list */}
-
-{searchResult? 
-      <View className='w-[98%] mx-auto pt-8 ' >
     
         <FlatList
                 data={searchResult}
@@ -422,7 +435,7 @@ contentContainerStyle={{
 }
   {/* online database button */}
   <View style={styles.websearch} className=''>
-    <Pressable className='bg-main w-[20%] flex flex-row text-center rounded-tl-full p-2' onPress={()=>navigation.navigate('Web Search')}>
+    <Pressable className='bg-gray w-[20%] flex flex-row text-center rounded-tl-full p-2' onPress={()=>navigation.navigate('Web Search')}>
     <Icon
           name="search-web"
           size={55}
@@ -500,5 +513,12 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     alignContent:'flex-end',
     alignItems: 'flex-end'
-  }
+  },
+  header:{
+    // backgroundColor: '#eaeaea',
+    height: windowHeight/10,
+    padding: 0,
+  
+
+},
 });

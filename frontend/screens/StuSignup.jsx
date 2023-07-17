@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TextInput, View,Image, Pressable, Button , } from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, View,Image, Pressable, Button , TouchableOpacity} from 'react-native'
 import React,{useState, useRef, useEffect, useContext} from 'react'
 import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -95,8 +95,8 @@ const StuSignup = ({navigation}) => {
       }
       else{
         setLoading(true)
-        await messaging().registerDeviceForRemoteMessages();
-        const token = await messaging().getToken();
+          await messaging().registerDeviceForRemoteMessages();
+          const token = await messaging().getToken();
 
         await publicAxios.post(`/api/register-student`,{
           name ,
@@ -177,8 +177,11 @@ const StuSignup = ({navigation}) => {
    
     <View className='h-full w-[94%] mx-auto'>
      
-      <View className='pb-12 pt-28 '>
-      <Text className="font-ageoheavy text-4xl text-main">Sign Up</Text>
+      <View className='pb-8 pt-6 '>
+      <TouchableOpacity onPress={()=>navigation.goBack()}>
+          <Icon name='arrow-left' size={40} color='#ee6c4d' />
+      </TouchableOpacity>
+      <Text className="font-ageoheavy text-[27px] pt-6 text-main">Sign Up</Text>
       </View>
       
       <ScrollView
@@ -190,15 +193,15 @@ const StuSignup = ({navigation}) => {
      
 
       >
-         <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >Name</Text>
+         <Text className='font-ageonormal  text-[16px] text-black py-0 px-1 m-0' >Name</Text>
          <TextInput className="font-ageonormal border border-main rounded-lg text-[20px] px-4 mt-0 mb-4 text-black focus:border-orange"  onChangeText={(text)=>setName(text)} />
-         <Text  className='font-ageonormal  text-xl text-grey-800 py-0 px-1 m-0'>Email</Text>
+         <Text  className='font-ageonormal  text-[16px] text-grey-800 py-0 px-1 m-0'>Email</Text>
          <TextInput className="font-ageonormal border border-main rounded-lg px-4 mt-0 mb-4 text-[20px]  text-black focus:border-orange" inputMode='email' onChangeText={(text)=>setEmail(text)} />
-         <Text  className='font-ageonormal  text-xl text-grey-800 py-0 px-1 m-0'>Matric Number</Text>
+         <Text  className='font-ageonormal  text-[16px] text-grey-800 py-0 px-1 m-0'>Matric Number</Text>
          <TextInput className="font-ageonormal border border-main rounded-lg px-4 mt-0 mb-4 text-[20px]  text-black  focus:border-orange"  onChangeText={(text)=>setMatricnumber(text)}/>
          
          {/* college */}
-         <Text  className='font-ageonormal  text-xl text-grey-800 py-0 px-1 m-0'>College</Text>
+         <Text  className='font-ageonormal  text-[16px] text-grey-800 py-0 px-1 m-0'>College</Text>
          <Dropdown
             data={data.college.map((item) => ({ value: item, label: `${item.collegeName}` }))}
             style={styles.dropdownContainer}
@@ -228,7 +231,7 @@ const StuSignup = ({navigation}) => {
 
           {/* department */}
 
-          <Text  className='font-ageonormal  text-xl text-grey-800 py-0 px-1 m-0'>Department</Text>
+          <Text  className='font-ageonormal  text-[16px] text-grey-800 py-0 px-1 m-0'>Department</Text>
           <Dropdown  
               data={departments.current.map((item) => ({ value: item , label: `${item.name}` }))}
               style={styles.dropdownContainer}
@@ -246,7 +249,7 @@ const StuSignup = ({navigation}) => {
           />
 
           {/* level */}
-          <Text  className='font-ageonormal  text-xl text-grey-800 py-0 px-1 m-0'>Level</Text>
+          <Text  className='font-ageonormal  text-[16px] text-grey-800 py-0 px-1 m-0'>Level</Text>
           <Dropdown  
               data={levels.current.map((item)=>({ value: item , label: `${item}` }))}
               style={styles.dropdownContainer}
@@ -266,11 +269,11 @@ const StuSignup = ({navigation}) => {
           />
 
 
-          {/* <Text  className='font-ageonormal  text-xl text-grey-800 py-0 px-1 m-0'>Displayname</Text>
+          {/* <Text  className='font-ageonormal  text-[16px] text-grey-800 py-0 px-1 m-0'>Displayname</Text>
          <TextInput className="font-ageonormal border border-main rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Displayname' onChangeText={(text)=>setDisplayname(text)}/> */}
          <View>
-         <Text  className='font-ageonormal  text-xl text-grey-800 py-0 px-1 m-0'>Password</Text>
-         <Text className={passwordmsg?'text-orange font-ageobold mb-4 mt-0 pt-0 text-center': 'hidden'}>Must include: At least one UPPERCASE LETTER and SYMBOL. </Text>
+         <Text  className='font-ageonormal  text-[16px] text-grey-800 py-0 px-1 m-0'>Password</Text>
+         <Text className={passwordmsg?'text-orange font-ageobold mb-4 mt-0 pt-0 text-justify': 'hidden'}>Must include: At least one UPPERCASE LETTER and SYMBOL, and must be up to 8 characters </Text>
           <TextInput className="font-ageonormal border border-main rounded-lg px-4 mb-4 mt-0 text-[20px]  text-black  focus:border-orange"  name="password" 
           textContentType="newPassword"
           secureTextEntry={passwordVisibility}
@@ -290,12 +293,12 @@ const StuSignup = ({navigation}) => {
         
          
           <Pressable className="items-center mt-4 rounded-lg bg-main" onPress={handleSignup}>
-            <Text className="text-lightmain text-xl font-ageomedium py-4 px-12  " >SIGNUP</Text>
+            <Text className="text-lightmain text-[16px] font-ageomedium py-4 px-12  " >SIGNUP</Text>
           </Pressable>
-         <View className="flex  items-center p-4">
-          <Text className="font-ageobold text-xl text-main">Register as a Lecturer</Text>
-          <Text className="font-ageobold text-xl text-main py-3">Have an account?   
-          <Text onPress={()=> navigation.navigate('Login')} className="font-ageobold text-xl underline px-4 text-orange focus:text-main">Sign In</Text>
+         <View className="flex  items-center p-6">
+          <Text className="font-ageobold text-[16px] text-main">Register as a Lecturer</Text>
+          <Text className="font-ageobold text-[16px] text-main py-3">Have an account?   
+          <Text onPress={()=> navigation.navigate('Login')} className="font-ageobold text-[16px] underline px-4 text-orange focus:text-main">Sign In</Text>
           </Text>
          </View>
       </ScrollView>

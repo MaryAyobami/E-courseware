@@ -40,25 +40,25 @@
 
 //       <ScrollView>
 //             <View className='my-4 '>
-//                 <Text className='font-ageonormal text-xl text-pink'>Name</Text>
+//                 <Text className='font-ageonormal text-[16px] text-pink'>Name</Text>
 //                 <TextInput className="font-ageonormal border border-main rounded-lg px-4 my-2 text-[20px]  text-black" value={name} onChange={e => setName(e)}/>
 //             </View>
 //             <View className='my-4 '>
-//                 <Text className='font-ageonormal text-xl text-pink'>Matric Number</Text>
+//                 <Text className='font-ageonormal text-[16px] text-pink'>Matric Number</Text>
 //                 <TextInput className="font-ageonormal border border-main rounded-lg px-4 my-2 text-[20px]  text-black" value={matricno} onChange={e => setMatricno(e)}/>
 //             </View>
 //             <View className='my-4 '>
-//                 <Text className='font-ageonormal text-xl text-pink'>Level</Text>
+//                 <Text className='font-ageonormal text-[16px] text-pink'>Level</Text>
 //                 <TextInput className="font-ageonormal border border-main rounded-lg px-4 my-2 text-[20px]  text-black" value={level} onChange={e => setLevel(e)} />
 //             </View>
 
 //             <View className='my-4 '>
-//                 <Text className='font-ageonormal text-xl text-pink'>Department</Text>
+//                 <Text className='font-ageonormal text-[16px] text-pink'>Department</Text>
 //                 <TextInput className="font-ageonormal border border-main rounded-lg px-4 my-2 text-[20px]  text-black" value={department} onChange={e => setDepartment(e)}/>
 //             </View>
 
 //             <View className='my-4 '>
-//                 <Text className='font-ageonormal text-xl text-pink'>Email</Text>
+//                 <Text className='font-ageonormal text-[16px] text-pink'>Email</Text>
 //                 <TextInput className="font-ageonormal border border-main rounded-lg px-4 my-2 text-[20px]  text-black" value={email} onChange={e => setEmail(e)} />
 //             </View>
 

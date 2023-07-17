@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Upload from '../../screens/UploadVerification/Upload';
@@ -14,11 +14,28 @@ import CustomDrawer from '../CustomDrawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import UploadStackNavigator from './UploadStackNavigator';
 import { storage } from '../../screens/StuLogin';
+import { createStackNavigator } from '@react-navigation/stack';
+import LecturerProfile from '../../screens/LecturerProfile';
 
+
+
+const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const ProfileDrawerNavigator = () => {
-  const [status , setStatus] = useState(storage.getString('user.userStaus'))
+  const [status , setStatus] = useState()
+  const [userType, setUsertype] = useState()
+  useEffect(()=>{
+
+    if(storage.getString('user.userType')){
+     setUsertype(JSON.parse(storage.getString('user.userType')))
+    }
+    console.log(userType)
+   })
+   
+
+  if (userType == 'Student'){
+
   return (
     <Drawer.Navigator
     initialRouteName="Profile"
@@ -155,6 +172,17 @@ const ProfileDrawerNavigator = () => {
         /> */}
    </Drawer.Navigator>
   )
+      }
+
+      else if(userType == 'Lecturer'){
+return(
+
+      <Stack.Navigator>
+      <Stack.Screen name="Profile" component={LecturerProfile} options={{headerShown: false}} />       
+    
+      </Stack.Navigator>
+    )
+      }
 }
 
 export default ProfileDrawerNavigator

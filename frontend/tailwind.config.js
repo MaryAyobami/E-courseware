@@ -20,14 +20,16 @@ module.exports = {
       // black: '#3b2e2a',
       main: '#3d5a80',
       darkmain: '#14213d',
-      orange: '#ee6c4d',
-      icons: '#febd84',
+      // orange: '#ee6c4d',
+      // icons: '#febd84',
+      orange: '#febd84',
       white: '#fff',
       black: '#293241',
       blue: '#98c1d9' ,
       lightmain: '#c9d1d3',
+      bgcolor: '#fff',
       //  '#e0fbfc' ,
-      bgcolor: '#eaeaea',
+      gray: '#eaeaea',
       bg: '#d3d3d3'
       // bg: '#f8f1e9'
 

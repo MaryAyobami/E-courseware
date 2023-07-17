@@ -100,7 +100,7 @@ const GoogleScholarSearch  = () => {
 
           }}
         >
-          <Text className="text-pink text-xl font-ageobold">Cancel</Text>
+          <Text className="text-pink text-[16px] font-ageobold">Cancel</Text>
         </TouchableOpacity>
       </View>
     )}
@@ -117,7 +117,7 @@ const GoogleScholarSearch  = () => {
         
       {/* Input field */}
       <TextInput
-        className="font-ageonormal text-black w-[90%] text-xl px-2"
+        className="font-ageonormal text-black w-[90%] text-[16px] px-2"
         // placeholder="Search"
         value={searchterm}
         onChangeText={text=>setSearchterm(text)}
@@ -156,7 +156,7 @@ const GoogleScholarSearch  = () => {
     <View className=' w-screen'>
       <View className='flex flex-row w-[96%] mx-auto'>
 
-      <Text  className="font-ageobold p-2  text-xl text-grey-800">Search Result</Text>
+      <Text  className="font-ageobold p-2  text-[16px] text-grey-800">Search Result</Text>
       </View>
 
           {/* resource list */}

@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TextInput, View,Image, Pressable, Button , } from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, View,Image, Pressable, Button, TouchableOpacity , } from 'react-native'
 import React,{useState, useRef, useEffect, useContext} from 'react'
 import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -8,9 +8,10 @@ import { useTogglePasswordVisibility } from '../components/hooks/useTogglePasswo
 import { showMessage, hideMessage } from "react-native-flash-message";
 import NetInfo from "@react-native-community/netinfo";
 import InternetCheck from '../components/InternetCheck';
-
-import { AxiosContext } from '../components/context/AxiosContext.js';
+import messaging from '@react-native-firebase/messaging';
 import Loader from './Loader.jsx';
+import { AxiosContext } from '../components/context/AxiosContext.js';
+
 
 const LectSignup = ({navigation}) => {
   const {publicAxios} = useContext(AxiosContext);
@@ -77,11 +78,11 @@ const LectSignup = ({navigation}) => {
   // handle signup
   const baseUrl = "http://localhost:8000"
 
-  const handleSignup= ()=>{
+  const handleSignup= async()=>{
 
     try{
       if(
-        name=='' || email== '' || password=='' || college=='' || department==''
+        name=='' || email== '' || password=='' || colege=='' || department==''
       ){
         showMessage({
           message: `The input fields cannot be empty!`,
@@ -97,12 +98,8 @@ const LectSignup = ({navigation}) => {
       }
       else{
         setLoading(true)
-        const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
-          const offline = !(state.isConnected && state.isInternetReachable);
-          setOfflineStatus(offline);
-        });
-      
-        removeNetInfoSubscription();
+        // await messaging().registerDeviceForRemoteMessages();
+        // const token = await messaging().getToken();
     
         publicAxios.post(`api/register-lecturer`,{
           name ,
@@ -110,42 +107,80 @@ const LectSignup = ({navigation}) => {
           password,
           department,
           college : colege,
-          displayname
+          token: '12345'
         }).
         then((response) => {
+
           if(response.status == 201){
              navigation.navigate('RegistrationSuccess')
           }
           console.log(response.data);
         }).
         catch((err)=>{   
-          if (axios.isAxiosError(err)) {
-                validationerror.current = err.response.data
-                console.error(validationerror.current)
-                showMessage({
-                  message: `${validationerror.current}`,
-                    type: "default",
-                    titleStyle: {
-                      fontFamily:"tilda-sans_medium",
-                      color:'#DFF0EB',
-                      fontSize: 17,
-                      padding: 4
-                    },
-                   backgroundColor: '#3b2e2a',
-                   color:'#DFF0EB',
-                })
-              
-           console.error("Axios request failed", err.response?.data, err.toJSON());
-          } else {
-            console.error(err);
+          console.log(err)
+          setLoading(false)
+          if (err.response.status == 400) {
+            validationerror.current = err.response.data
+            console.error(validationerror.current)
+            showMessage({
+              message:  `${validationerror.current}`,
+                type: "default",
+                backgroundColor:  '#ee6c4d',
+              titleStyle: {
+                fontFamily:"tilda-sans_medium",
+                color:'#f8f1e9',
+                fontSize: 16,
+                padding: 4
+              },
+            })
+        
           }
+          else if(err.request) {
+            setLoading(false)
+           const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+              const offline = !(state.isConnected && state.isInternetReachable);
+              setOfflineStatus(offline);
+            });
+             
+
+            removeNetInfoSubscription();
+            console.log(isOffline)
+          }
+          else{
+            setLoading(false)
+            showMessage({
+              message: `An error has occured, please try again!`,
+                type: "default",
+                backgroundColor:  '#ee6c4d',
+              titleStyle: {
+                fontFamily:"tilda-sans_medium",
+                color:'#f8f1e9',
+                fontSize: 16,
+                padding: 4
+              },
+            })
+          }
+          
     
         }).finally(()=>setLoading(false))
       }
     }
     catch(e){
+      setLoading(false)
       console.log(e)
+      showMessage({
+        message: `An error has occured, please try again!`,
+          type: "default",
+          backgroundColor:  '#ee6c4d',
+        titleStyle: {
+          fontFamily:"tilda-sans_medium",
+          color:'#f8f1e9',
+          fontSize: 16,
+          padding: 4
+        },
+      })
     }
+    
   }
 
 
@@ -156,8 +191,12 @@ const LectSignup = ({navigation}) => {
     
     
     <View className='h-full w-[94%] mx-auto'>
-      <View className='pb-12 pt-28'>
-      <Text className="font-ageoheavy text-4xl  text-main">Sign Up</Text>
+      <View className='pb-8 pt-6'>
+      <TouchableOpacity onPress={()=>navigation.goBack()}>
+          <Icon name='arrow-left' size={40} color='#ee6c4d' />
+      </TouchableOpacity>
+     
+      <Text className="font-ageoheavy text-[27px] pt-6 text-main">Sign Up</Text>
       </View>
      
       <ScrollView
@@ -168,14 +207,14 @@ const LectSignup = ({navigation}) => {
       keyboardDismissMode= "on-drag"
       scrollToOverflowEnabled= {true}
       >
-         <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >Name</Text>
+         <Text className='font-ageonormal  text-[16px] text-black py-0 px-1 m-0' >Name</Text>
          <TextInput className="font-ageonormal border border-main rounded-lg text-[20px] px-4 mt-0 mb-4 text-black focus:border-orange"  onChangeText={(text)=>setName(text)} />
-         <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >Email</Text>
+         <Text className='font-ageonormal  text-[16px] text-black py-0 px-1 m-0' >Email</Text>
          <TextInput className="font-ageonormal border border-main rounded-lg px-4 mt-0 mb-4 text-[20px]  text-black  focus:border-orange" inputMode='email' onChangeText={(text)=>setEmail(text)} />
 
          
          {/* college */}
-         <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >College</Text>
+         <Text className='font-ageonormal  text-[16px] text-black py-0 px-1 m-0' >College</Text>
          <Dropdown
             data={data.college.map((item) => ({ value: item, label: `${item.collegeName}` }))}
             style={styles.dropdownContainer}
@@ -199,7 +238,7 @@ const LectSignup = ({navigation}) => {
       />
 
           {/* department */}
-          <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >Department</Text>
+          <Text className='font-ageonormal  text-[16px] text-black py-0 px-1 m-0' >Department</Text>
           <Dropdown  
               data={departments.current.map((item) => ({ value: item , label: `${item.name}` }))}
               style={styles.dropdownContainer}
@@ -238,7 +277,7 @@ const LectSignup = ({navigation}) => {
 
          {/* <TextInput className="font-ageonormal border border-main rounded-full px-4 my-2 text-[20px]  text-black" placeholder='Displayname' onChangeText={(text)=>setDisplayname(text)}/> */}
          <View>
-         <Text className='font-ageonormal  text-xl text-black py-0 px-1 m-0' >Password</Text>
+         <Text className='font-ageonormal  text-[16px] text-black py-0 px-1 m-0' >Password</Text>
          <Text className={passwordmsg?'text-orange font-ageobold mb-4 mt-0 pt-0 text-center': 'hidden'}>Must include: At least one UPPERCASE LETTER and SYMBOL. </Text>
           <TextInput className="font-ageonormal border border-main rounded-lg  focus:border-orange px-4 my-2 text-[20px]  text-black" name="password" 
           textContentType="newPassword"
@@ -257,12 +296,12 @@ const LectSignup = ({navigation}) => {
         
          
           <Pressable className="items-center mt-6 rounded-lg bg-main" onPress={handleSignup}>
-            <Text className="text-bgcolor text-xl font-ageomedium py-4 px-12  " >SIGNUP</Text>
+            <Text className="text-bgcolor text-[16px] font-ageomedium py-4 px-12  " >SIGNUP</Text>
           </Pressable>
          <View className="flex  items-center p-4">
-          <Text className="font-ageobold text-xl text-main">Register as a Student</Text>
-          <Text className="font-ageobold text-xl text-main py-3">Have an account?   
-          <Text onPress={()=> navigation.navigate('Login')} className="font-ageobold text-xl underline px-4 text-orange focus:text-main">Sign In</Text>
+          <Text className="font-ageobold text-[16px] text-main">Register as a Student</Text>
+          <Text className="font-ageobold text-[16px] text-main py-3">Have an account?   
+          <Text onPress={()=> navigation.navigate('Login')} className="font-ageobold text-[16px] underline px-4 text-orange focus:text-main">Sign In</Text>
           </Text>
          </View>
       </ScrollView>

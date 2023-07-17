@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import * as TalkRn from '@talkjs/react-native';
 import { storage } from '../StuLogin';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Loader from '../Loader';
 
 const GroupChat = ({navigation,route}) => {
 
@@ -12,7 +14,7 @@ const GroupChat = ({navigation,route}) => {
     id: '1',
     name: storage.getString('user.name'),
     email: storage.getString('user.email'),
-    photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
+    photoUrl: '',
     // welcomeMessage: 'Hey there! How are you? :-)',
     role: 'default',
   };
@@ -29,7 +31,7 @@ const GroupChat = ({navigation,route}) => {
       id: item._id,
       name: item.name,
       email: item.email,
-      photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
+      photoUrl: '',
       // welcomeMessage: 'Hey there! How are you? :-)',
       role: 'default',
     };
@@ -55,9 +57,30 @@ const GroupChat = ({navigation,route}) => {
 // });
 
   return (
-        <TalkRn.Session appId='tsGSO0Vc' me={me}>
-        <TalkRn.Chatbox conversationBuilder={conversationBuilder} />
-      </TalkRn.Session>
+    <>
+       <View  className=' '>
+        <View className=' bg-gray  w-screen'>
+        <TouchableOpacity onPress={()=>navigation.goBack()} className='pl-4 mt-2'>
+          <Icon name='arrow-left' size={30} color= '#3d5a80' />
+      </TouchableOpacity>
+        <Text className="text-[27px] font-ageobold text-main text-center pb-2  ">{currentlevel} level</Text>
+        </View>
+          
+        </View>
+        {members.length === 0 ? (
+           <View className='flex-1 bg-gray justify-center items-center'> 
+           
+            <Icon name='chat-remove-outline' size={200} color='#e0fbfc' />
+            <Text  className="text-[16px] font-ageobold text-main text-center p-4  ">No available chat for this forum, as there are no registered participants.</Text>
+           </View>
+          ) : (
+            <TalkRn.Session appId='tsGSO0Vc' me={me}>
+            <TalkRn.Chatbox conversationBuilder={conversationBuilder}  loadingComponent=<Loader/> />
+          </TalkRn.Session>
+          )}
+      
+    </>
+       
   )
 }
 

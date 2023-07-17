@@ -13,7 +13,7 @@ import { MMKV } from 'react-native-mmkv'
 import Loader from './Loader';
 
 
-export const storage = new MMKV()
+
 const LectLogin = ({navigation}) => {
 
   const [loading , setLoading] = useState(false)
@@ -38,7 +38,7 @@ const LectLogin = ({navigation}) => {
 
   // handle login
 
-    const handleLogin = async ()=>{
+    const handleLecturerLogin = async ()=>{
       try{
             
             if(password == '' || email == ''){
@@ -137,15 +137,15 @@ const LectLogin = ({navigation}) => {
           <View className='w-[90%] mx-auto' >
     
           <View className='pb-12 pt-10' >
-          <Text className="font-ageoheavy text-4xl text-start text-main">Login</Text>
+          <Text className="font-ageoheavy text-[27px] text-start text-main">Login</Text>
           </View>
           <View>
           {/* matric number */}
-          <Text className='font-ageonormal  text-xl text-grey-800 p-0 m-0 '>Email</Text>
+          <Text className='font-ageonormal  text-[16px] text-grey-800 p-0 m-0 '>Email</Text>
           <TextInput className="font-ageonormal border border-main  rounded-lg text-[20px] px-4 my-3 text-black  focus:border-orange"  onChangeText={(text)=>setEmail(text)}/>
           {/* password */}
           <View>
-          <Text className='font-ageonormal  text-xl text-grey-800 p-0 m-0 '>Password</Text>
+          <Text className='font-ageonormal  text-[16px] text-grey-800 p-0 m-0 '>Password</Text>
               <TextInput className="font-ageonormal border border-main rounded-lg px-4 my-2 text-[20px]  text-black  focus:border-orange"  name="password" 
               textContentType="newPassword"
               secureTextEntry={passwordVisibility}
@@ -162,9 +162,9 @@ const LectLogin = ({navigation}) => {
       
       
       
-              <Pressable className="items-center rounded-lg mt-6 bg-main" onPress={handleLogin} >
+              <Pressable className="items-center rounded-lg mt-6 bg-main" onPress={handleLecturerLogin} >
       
-                <Text className="text-lightmain text-xl font-ageomedium py-4 px-12">LOGIN</Text>
+                <Text className="text-lightmain text-[16px] font-ageomedium py-4 px-12">LOGIN</Text>
            
               </Pressable>
       
@@ -178,8 +178,8 @@ const LectLogin = ({navigation}) => {
             </View>
         </View>
         <View className="absolute bottom-0 left-0 right-0 items-center p-4">
-              <Text className="font-ageobold text-xl text-main py-3">New Here??   
-              <Text onPress={()=> navigation.navigate('SignUp')} className="font-ageobold text-xl underline px-4 text-black focus:text-main">Sign Up</Text>
+              <Text className="font-ageobold text-[16px] text-main py-3">New Here??   
+              <Text onPress={()=> navigation.navigate('SignUp')} className="font-ageobold text-[16px] underline px-4 text-black focus:text-main">Sign Up</Text>
               </Text>
             </View>
     </View>

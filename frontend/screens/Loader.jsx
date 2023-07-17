@@ -20,7 +20,7 @@ const Loader = () => {
              
             }}
         />
-        {/* <Text className='text-main text-xl font-ageobold p-20'>Loading...</Text> */}
+        {/* <Text className='text-main text-[16px] font-ageobold p-20'>Loading...</Text> */}
     </View>
   )
 }

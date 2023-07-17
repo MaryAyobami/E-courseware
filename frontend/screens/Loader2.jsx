@@ -15,7 +15,7 @@ const Loader2 = () => {
             autoPlay
             // style={styles.animation}
         />
-        <Text className='text-bgcolor text-2xl font-ageoheavy absolute top-60 left-12 right-12  text-center px-4 py-4' >Fetching your learning materials...</Text>
+        <Text className='text-bgcolor text-[25px] font-ageoheavy absolute top-60 left-12 right-12  text-center px-4 py-4' >Fetching your learning materials...</Text>
     </View>
   )
 }

@@ -108,19 +108,19 @@ const Profile = ({navigation}) => {
    
             <View className='border-t  border-lightmain p-5 '>
               <Text className='text-[16px] font-ageonormal text-black mb-3'>Department</Text>
-              <Text className='text-xl font-ageomedium text-black'>{department}</Text>
+              <Text className='text-[16px] font-ageomedium text-black'>{department}</Text>
             </View>
             <View className='border-t border-lightmain p-5 '>
               <Text className='text-[16px] font-ageonormal text-black mb-3'>Level</Text>
-              <Text className='text-xl font-ageomedium text-black'>{level}</Text>
+              <Text className='text-[16px] font-ageomedium text-black'>{level}</Text>
             </View>
             <View className='border-t border-lightmain p-5 '>
               <Text className='text-[16px] font-ageonormal text-black mb-3'>Matric Number</Text>
-              <Text className='text-xl font-ageomedium text-black'>{matricno}</Text>
+              <Text className='text-[16px] font-ageomedium text-black'>{matricno}</Text>
             </View>
             <View className='border-t border-b border-lightmain p-5 '>
               <Text className='text-[16px] font-ageonormal text-black mb-3'>Email</Text>
-              <Text className='text-xl font-ageomedium text-black'>{email}</Text>
+              <Text className='text-[16px] font-ageomedium text-black'>{email}</Text>
             </View>
   
       </ScrollView>

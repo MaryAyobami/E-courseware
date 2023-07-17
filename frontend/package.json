@@ -27,6 +27,7 @@
     "@talkjs/react-native": "^0.5.1",
     "axios": "^1.4.0",
     "axios-auth-refresh": "^3.3.6",
+    "file-type": "^18.5.0",
     "lottie-react-native": "^5.1.6",
     "nativewind": "^2.0.11",
     "react": "18.2.0",

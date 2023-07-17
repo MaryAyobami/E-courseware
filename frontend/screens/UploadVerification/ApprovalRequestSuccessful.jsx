@@ -14,12 +14,12 @@ const ApprovalRequestSuccessful = ({navigation}) => {
          <Icon name="check-all" size={300} color='#3d5a80'/>
        </View>
         <View className='w-[90%] mx-auto'> 
-            <Text className="font-ageobold text-4xl text-main text-center">The request for approval was successful!</Text>
+            <Text className="font-ageobold text-[27px] text-main text-center">The request for approval was successful!</Text>
          
         </View>
         </View>
         <Pressable style={styles.button}>
-            <Text onPress={()=> navigation.navigate('Home')} className="font-ageonormal border-2 border-main rounded-full px-6 py-4 text-xl text-orange bg-main focus:text-main">Continue Learning</Text>
+            <Text onPress={()=> navigation.navigate('Home')} className="font-ageonormal border-2 border-main rounded-full px-6 py-4 text-[16px] text-orange bg-main focus:text-main">Continue Learning</Text>
             </Pressable>
     </SafeAreaView>
   )

@@ -12,7 +12,7 @@ const SearchGroup = ({navigation}) => {
     <View className='flex flex-row '>
       <View className='bg-gray w-[35%] h-screen p-4'>
    
-        <Text className='text-main font-ageobold text-xl mt-6 text-center '>Academic Libraries</Text>
+        <Text className='text-main font-ageobold text-[16px] mt-6 text-center '>Academic Libraries</Text>
           <View className="flex-1">
             
                  <View className='text-center mt-20'>
@@ -60,7 +60,7 @@ const SearchGroup = ({navigation}) => {
           }}>
             
                 {/* search Icon */}
-                <Text className='text-xl font-ageonormal  h-full'>
+                <Text className='text-[16px] font-ageonormal  h-full'>
                   Search...
                 </Text>
                     <Icon

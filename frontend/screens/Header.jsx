@@ -15,7 +15,7 @@ const Header = (props) => {
             <TouchableOpacity onPress={props.open}>
             <Icon name="reorder-horizontal" size={35} color='#ee6c4d' />
             </TouchableOpacity> 
-        <Text className="text-4xl font-ageobold text-main text-center flex-1 -ml-12">{props.name}</Text>
+        <Text className="text-[27px] font-ageobold text-main text-center flex-1 -ml-12">{props.name}</Text>
         </View>
           
     </View>

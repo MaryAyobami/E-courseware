@@ -1,6 +1,6 @@
-import { ScrollView, StyleSheet, Text, TextInput, View, Dimensions , Keyboard} from 'react-native'
-import React,{useContext, useEffect,useState} from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { ScrollView, StyleSheet, Text, TextInput, View, Dimensions ,FlatList, TouchableOpacity,Keyboard, Image, ActivityIndicator} from 'react-native'
+import React,{useContext, useEffect,useRef,useState} from 'react'
+
 import { AxiosContext} from '../../components/context/AxiosContext'
 import { storage } from '../StuLogin';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,6 +9,9 @@ import NetInfo from "@react-native-community/netinfo";
 import InternetCheck from '../../components/InternetCheck';
 import messaging from '@react-native-firebase/messaging';
 
+import { showMessage, hideMessage } from "react-native-flash-message";
+import Resource from '../../components/Resource';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -16,23 +19,88 @@ const windowHeight = Dimensions.get('window').height;
 const Courses = ({navigation}) => {
   const {authAxios} = useContext(AxiosContext);
   const [name, setName] = useState('')
-  const [loading, setLaoding] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const [ searchterm , setSearchterm] = useState('')
-  const [ clicked, setClicked] = useState()
+  const [ clicked, setClicked] = useState('')
 
+  const [ userType, setUsertype] = useState()
+ 
+  const resources = useRef()
+  const [ result, setResult] = useState()
+
+  const [ loadingR, setLoadingR] = useState(false)
+  const [errorR , seterrorR] = useState(false)
+  useEffect(()=>{
+
+   if(storage.getString('user.userType')){
+    setUsertype(JSON.parse(storage.getString('user.userType')))
+   }
+ 
+  })
   
 // internet check
 const [isOffline, setOfflineStatus] = useState(false); 
 
+const handleSearch = async(text) => {
+      setLoadingR(true)
+      setSearchterm(text)
+      await authAxios.get(`/api/search-personal/?searchterm=${searchterm}`)
+      .then((response)=>
+      {
+     
+      console.log(response.data)
+      resources.current = response.data
+      setResult(resources.current)
+     
+      }
+
+      )
+      .catch(err=>{
+        console.log(err)
+          if (err.response) {
+            // showMessage({
+            //   message: `A server error has occured, please try again!`,
+            //     type: "default",
+            //     backgroundColor:  '#ee6c4d',
+            //   titleStyle: {
+            //     fontFamily:"tilda-sans_medium",
+            //     color:'#f8f1e9',
+            //     fontSize: 16,
+            //     padding: 4
+            //   }
+            // })
+            setLoadingR(false)
+            seterrorR('A server error has occured, please try again!')
+           
+          }
+          else if(err.request) {
+            // showMessage({
+            //   message: `No internet connection . Try Again!`,
+            //     type: "default",
+            //     backgroundColor:  '#ee6c4d',
+            //   titleStyle: {
+            //     fontFamily:"tilda-sans_medium",
+            //     color:'#f8f1e9',
+            //     fontSize: 16,
+            //     padding: 4
+            //   },
+            // })
+            setLoadingR(false)
+            seterrorR('No internet connection . Try Again!')
+        }})
+     
+    
+
+  }
   const getResources = async(type)=>{
     try{
-      setLaoding(true)
+      setLoading(true)
       console.log('pressed!')
       await authAxios.get(`/api/student-resources/?type=${type}`)
       .then((response)=>{
        console.log(response.data)
-       setLaoding(false)
+       setLoading(false)
        navigation.navigate('AcademicResources',{
        title: type ,
        resources: response.data.resources
@@ -54,11 +122,10 @@ const [isOffline, setOfflineStatus] = useState(false);
         setOfflineStatus(true)
          console.log(isOffline)
        }
-       if (err.response.status == 400) {
-         validationerror.current = err.response.data
-         console.error(validationerror.current)
+       if (err.response.status === 400) {
+        
          showMessage({
-           message:  `${validationerror.current}`,
+           message:  `${err.response.data}`,
              type: "default",
              backgroundColor:  '#ee6c4d',
            titleStyle: {
@@ -99,40 +166,44 @@ const [isOffline, setOfflineStatus] = useState(false);
   },[name])
 
 
+  
+if (userType == "Student"){
 
   return (
-    <View className='bg-bgcolor w-screen h-screen'>
+    <View className='bg-bgcolor w-screen flex-1'>
         <InternetCheck isOffline={isOffline} onRetry={getResources}/>
       {
         loading? <Loader2/> :
       <React.Fragment>
-          <View className="pb-4 text-center  flex flex-row justify-end items-end   px-2" style={{height: windowHeight/4.8}}>
-            <View className='flex-1 px-1 justify-start text-start items-start '>
-            <Text className='font-ageoheavy text-darkmain text-[55px]'>Welcome,</Text>
-            <Text  className='font-ageonormal text-darkmain text-[18px] w-[100%]'>Access the learning materials for your courses below.</Text>
+          <View className="text-center justify-center  bg-main  px-4 py-8" style={{height: windowHeight/5}}>
+            <View className=' pb-4 px-1 justify-start text-start items-start '>
+            <Text className='font-ageoheavy text-bgcolor text-[26px]'>Welcome {name},</Text>
+            <Text  className='font-ageonormal text-bgcolor text-[14px] w-[100%]'>Access the learning materials for your courses below.</Text>
             </View>
             {/* <View className='bg-blue p-4 rounded-full h-[50%] mr-2'>
             <Icon name="account" color='#eaeaea' size={35} />
             </View> */}
-          </View>
+       
         
 {/* search bar */}
-<View className= 'w-[96%] flex flex-row  py-2 mx-auto'>
+<View className= 'w-[98%] flex flex-row pb-2 mx-auto'>
     {clicked && (
-      <View className='p-2'>
+      <View className='p-0'>
         <TouchableOpacity
           onPress={() => {
             setSearchterm("")
+            setResult('')
             Keyboard.dismiss();
-            setClicked(false);
+            ///setClicked(false);
+            setLoadingR(false)
           }}
         >
-          <Text className="text-orange text-xl font-ageobold">Cancel</Text>
+          <Text className="text-orange text-[16px] font-ageobold">Cancel</Text>
         </TouchableOpacity>
       </View>
     )}
 
-    <View className={clicked? " border border-main rounded-full text-[20px] pl-4 pr-2  w-[80%] mx-auto text-black" : "border border-main rounded-full text-[20px] pl-4 pr-2  w-[100%] text-black" }>
+    <View className={clicked? " border border-bgcolor bg-bgcolor rounded-lg text-[14px]  p-0  w-[80%] mx-auto text-black" : "border  border-bgcolor bg-bgcolor rounded-lg text-[14px] p-0 w-[100%] text-black" }>
       
     <View
       style={
@@ -144,10 +215,11 @@ const [isOffline, setOfflineStatus] = useState(false);
         
       {/* Input field */}
       <TextInput
-        className="font-ageonormal text-black w-[90%] text-xl px-2"
+        className="font-ageonormal text-black w-[90%] h-[36px] text-[16px] px-2"
         // placeholder="Search"
         value={searchterm}
-        onChangeText={text=>setSearchterm(text)}
+        onChangeText={
+          text=>handleSearch(text)}
         onFocus={() => {
           setClicked(true);
         }}
@@ -157,7 +229,7 @@ const [isOffline, setOfflineStatus] = useState(false);
         <TouchableOpacity>
         <Icon
           name="magnify"
-          size={30}
+          size={25}
           color="#3d5a80"
           style={{ marginLeft: 1 }}
         />
@@ -178,14 +250,63 @@ const [isOffline, setOfflineStatus] = useState(false);
    
   </View>
 
- 
   </View>
 
-        <ScrollView className=' flex-1 w-[98%] mx-auto  pt-4 pb-40'>
+
+  </View>
+  
+  {
+    result?
+      <View className=' bg-grey-800 w-[80%] mx-auto shadow-lg rounded-b-lg  z-50 h-48'>
+      <FlatList
+                      data={result}
+                      renderItem = {({item})=>
+                        <Resource res={item} />    
+                      }
+                      keyExtractor={item => item._id}
+                      // contentContainerStyle={{
+                      //   flexGrow: 1,
+                      //   }}
+                    //////////////////
+                      // refreshControl={
+                      //   <RefreshControl refreshing={refreshing} onRefresh={getTasks} size={'large'} colors={['gray']} />
+                      // }
+                      />
+      </View>
+    :
+    <View>
+      {
+        loadingR?
+        <View>
+
+        <ActivityIndicator color={'#ee6c4d'} style={{paddingTop:4}}/>
+        <Text className='text-center pb-4 font-ageomedium'>loading....</Text>
+        </View>
+        :
+        <View>
+         
+        </View>
+      }
+    </View>
+  
+ 
+  }
+
+  
+      <View className='h-48 p-4'>
+
+
+            <Image source={require('../../assets/books.png')} style={{width: '100%', height:'100%'}} resizeMode="contain"/>
+          </View>
+          <View>
+            <Text className='text-[25px] font-ageoheavy text-center text-main'>Available Resources</Text>
+          </View>
+
+        <ScrollView className=' flex-1 w-[98%] mx-auto  pt-4 pb-60'>
                   <TouchableOpacity  onPress={()=>getResources('Lecture Note')} className='bg-main  p-2 justify-center  rounded-lg h-40 w-[100%] my-2'>
                                         <View className='bg-grey p-2 justify-center  rounded-lg row-span-3'>
             
-                                        <Text className='text-bgcolor font-ageomedium text-xl text-center'>
+                                        <Text className='text-bgcolor font-ageomedium text-[16px] text-center'>
                                           Lecture Notes
                                         </Text>
             
@@ -197,11 +318,11 @@ const [isOffline, setOfflineStatus] = useState(false);
      <View className='w-[50%] px-1'>
                   
                   <TouchableOpacity  onPress={()=>getResources('Textbook')} 
-                  className=' h-60 bg-main 
+                  className=' h-48 bg-blue
                   p-2 justify-end  rounded-lg w-[100%] my-2'>
                     <View className='bg-grey p-2 justify-center  rounded-lg row-span-3'>
   
-                    <Text className='text-bgcolor font-ageomedium text-xl text-center'>
+                    <Text className='text-main font-ageomedium text-[16px] text-center'>
                         Textbooks
                     </Text>
   
@@ -211,10 +332,10 @@ const [isOffline, setOfflineStatus] = useState(false);
   
                 
   
-                <TouchableOpacity  onPress={()=>getResources('GNS')} className='bg-icons  p-2 justify-center  rounded-lg h-44 w-[100%] my-2'>
+                <TouchableOpacity  onPress={()=>getResources('GNS')} className='bg-main  p-2 justify-center  rounded-lg h-36 w-[100%] my-2'>
                   <View className='bg-grey p-2 juandrpoistify-center  rounded-lg row-span-3'>
   
-                <Text className='text-bgcolor font-ageomedium text-xl text-center'>
+                <Text className='text-bgcolor font-ageomedium text-[16px] text-center'>
                     GNS
                 </Text>
   
@@ -226,10 +347,10 @@ const [isOffline, setOfflineStatus] = useState(false);
   
            {/* view 2 */}
             <View className='w-[50%] px-1'>
-            <TouchableOpacity  onPress={()=>getResources('Past Question')} className='bg-orange p-2 justify-center  rounded-lg h-40 w-[100%] my-2'>
+            <TouchableOpacity  onPress={()=>getResources('Past Question')} className='bg-orange p-2 justify-center  rounded-lg h-36 w-[100%] my-2'>
                           <View className='bg-grey p-2 justify-center  rounded-lg row-span-3'>
   
-                          <Text className='text-bgcolor font-ageomedium text-xl text-center'>
+                          <Text className='text-bgcolor font-ageomedium text-[16px] text-center'>
                               Past Examination Questions
                           </Text>
   
@@ -238,10 +359,10 @@ const [isOffline, setOfflineStatus] = useState(false);
                         </TouchableOpacity>
               
                     
-                            <TouchableOpacity  onPress={()=>getResources('Course Material')} className='bg-blue  p-2 justify-end  rounded-lg h-60 w-[100%] my-2'>
+                            <TouchableOpacity  onPress={()=>getResources('Course Material')} className='bg-blue  p-2 justify-end  rounded-lg h-48 w-[100%] my-2'>
                               <View className='bg-grey p-2 justify-end  rounded-lg row-span-3'>
   
-                              <Text className='text-main font-ageomedium text-xl text-center'>
+                              <Text className='text-main font-ageomedium text-[16px] text-center'>
                                 Other Course Materials
                               </Text>
   
@@ -252,16 +373,19 @@ const [isOffline, setOfflineStatus] = useState(false);
              </View>
              
                     
-             <TouchableOpacity  onPress={()=>navigation.navigate('Assignments')} className='bg-black  p-2 justify-center  rounded-lg h-40 w-[100%] my-2'>
+             <TouchableOpacity  onPress={()=>navigation.navigate('Assignments')} className='bg-black  p-2 justify-center  rounded-lg h-40  w-[100%] my-2'>
                                         <View className='bg-grey p-2 justify-center  rounded-lg row-span-3'>
             
-                                        <Text className='text-bgcolor font-ageomedium text-xl text-center'>
+                                        <Text className='text-bgcolor font-ageomedium text-[16px] text-center'>
                                           Assignments
                                         </Text>
             
             
                                         </View>
                             </TouchableOpacity>
+                            <View className='p-4'>
+
+                            </View>
 
     </ScrollView>
     
@@ -270,6 +394,63 @@ const [isOffline, setOfflineStatus] = useState(false);
       }
     </View>
   )
+    }
+
+  else if (userType == 'Lecturer'){
+    return(
+      <View className='bg-bgcolor w-screen h-screen'>
+           <InternetCheck isOffline={isOffline} onRetry={getResources}/>
+           <View className="pb-4 text-center justify-end items-end  " >
+            <View className='justify-center text-start w-[100%] bg-main items-start p-2 rounded-br-full ' style={{height: windowHeight/6}}>
+            <Text className='font-ageoheavy  text-bgcolor text-[25px]'>Welcome {name},</Text>
+            <Text  className='font-ageonormal text-bgcolor text-[14px] '>Upload the learning materials for your students below.</Text>
+
+            </View>
+            {/* <View>
+              <Text className='text-orange  text-[16px] p-2  font-ageomedium text-right'>Activities</Text>
+            </View> */}
+            <View className='w-[70%] mx-auto '  style={{height: windowHeight - windowHeight/5}}> 
+
+            <TouchableOpacity  onPress={()=>navigation.navigate('LecturerUpload')} className='bg-icon  p-2 justify-center  rounded-lg  w-[100%] my-2 flex flex-row'>
+
+            <View className=' h-60 w-[60%]
+            '>
+            <Image source={require('../../assets/uploading.png')} style={{width: '100%', height:'100%'}} resizeMode="cover"/>
+           </View>
+
+                                        <View className='bg-grey p-2 justify-end w-[50%] rounded-lg row-span-3'>
+            
+                                        <Text className='text-main font-ageomedium p-4 rounded-full text-[16px] text-center'>
+                                          Upload academic resources
+                                        </Text>
+            
+            
+                                        </View>
+                            </TouchableOpacity>
+        
+
+                            <TouchableOpacity  onPress={()=>navigation.navigate('LecturerView')} className='bg-bgcolor  p-2 flex flex-row justify-center rounded-lg w-[100%] my-2'>
+                            <View className='p-2 justify-start w-[50%] row-span-3'>
+            
+                                      <Text className='text-main p-2 rounded-full font-ageomedium text-[16px] text-center'>
+                                        View available academic resources .
+                                      </Text>
+
+
+                                      </View>
+                              <View className='h-60  w-[60%] '>
+                                <Image source={require('../../assets/orangebook.png')} style={{width: '100%', height:'100%'}} resizeMode="cover"/>
+                              </View>
+                                       
+                                          
+                         
+                            </TouchableOpacity>
+                            </View>
+          </View>
+        
+      </View>
+    )
+  }
 }
 
 export default Courses
@@ -277,14 +458,14 @@ export default Courses
 const styles = StyleSheet.create({
 
   searchBar__unclicked: {
-    padding: 2,
+    padding: 0,
     flexDirection: "row",
     width: "100%",
     borderRadius: 15,
     alignItems: "center",
   },
   searchBar__clicked: {
-    padding: 2,
+    padding: 0,
     flexDirection: "row",
     width: "100%",
 
@@ -293,7 +474,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   input: {
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 10,
     width: "90%",
   },

@@ -1,21 +1,30 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import Empty from './Empty'
 import Header from './Header'
 import { storage } from './StuLogin'
 import Resource from '../components/Resource'
 import { DrawerActions } from '@react-navigation/native';
 import FileViewer from 'react-native-file-viewer';
+import { concat } from 'react-native-reanimated'
 
 const Saved = ({navigation}) => {
 
   const [savedResources,setSavedResources] = useState('')
-  const resources = storage.getString('savedResources')
-  if (resources != undefined){
-    const getResources = JSON.parse(storage.getString('savedResources'))
-    setSavedResources(getResources)
-  }
+  
+const resources = storage.getString('savedResources')
+  useEffect(()=>{
+    if (resources != undefined){
+      const getResources = JSON.parse(storage.getString('savedResources'))
+      setSavedResources(getResources)
+    }    
+  
+  },[])
+ 
+
   const openResource = (uri) =>{
+    console.log('hhhhh')
+     console.log(uri)
       FileViewer.open(uri, { showOpenWithDialog: true })
             .then(() => {
               console.log('Success');
@@ -36,10 +45,13 @@ const Saved = ({navigation}) => {
            <FlatList
             data={savedResources}
             renderItem = {({item})=>
-               <View onPress={openResource(item.uri)} className=' bg-bgcolor rounded-lg shadow-2xl '>
-                <Text   className="font-ageonormal text-xl text-grey-800">
+               <View  className=' bg-bgcolor rounded-lg shadow-2xl '>
+                <TouchableOpacity  onPress={openResource(item.uri)}>
+                <Text  className="font-ageonormal text-[16px] text-grey-800">
                   {item.name}
                 </Text>
+                </TouchableOpacity>
+
               </View>
             }
             keyExtractor={item => item._id}

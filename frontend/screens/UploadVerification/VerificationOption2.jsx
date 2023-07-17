@@ -102,7 +102,7 @@ const [isOffline, setOfflineStatus] = useState(false);
 
 
       <View className='w-[96%] mx-auto'>
-          <Text className='font-ageonormal text-xl text-black py-2 text-justify'>Enter the email address of a lecturer. An email will sent to them for approval. Once approved, you will be notified of your verification status via email.</Text>
+          <Text className='font-ageonormal text-[16px] text-black py-2 text-justify'>Enter the email address of a lecturer. An email will sent to them for approval. Once approved, you will be notified of your verification status via email.</Text>
           <TextInput placeholder='E-mail' className="font-ageonormal border border-main  rounded-lg text-[20px] px-4 my-3 text-black  focus:border-orange"  onChangeText={(text)=>setEmail(text)}/>
       </View>
 
@@ -111,7 +111,7 @@ const [isOffline, setOfflineStatus] = useState(false);
             loading? 
             <ActivityIndicator color={'#eaeaea'} />
             :
-            <Text className='text-xl text-bgcolor font-heavy text-center'>REQUEST APPROVAL</Text>
+            <Text className='text-[16px] text-bgcolor font-heavy text-center'>REQUEST APPROVAL</Text>
           }
 
         </TouchableOpacity>

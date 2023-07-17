@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native'
 import React, { useEffect, useRef, useContext, useState } from 'react'
 import { storage } from '../StuLogin'
 import { data } from '../../components/DepartmentData'
@@ -10,12 +10,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Loader2 from '../Loader2'
 import Loader from '../Loader'
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const Displaylevel= (props)=>{
    return(
-    <View className='bg-blue rounded-lg shadow-lg p-4 my-2 w-[98%] mx-auto'>
-      <TouchableOpacity onPress={props.pressed}>
-       <Icon name="chat" color= '#ee6c4d' size={30} />
-         <Text className='text-xl font-ageonormal text-main'>{props.item} LEVEL</Text>
+    <View className='bg-main rounded-lg shadow-sm p-4 my-2 w-[98%] mx-auto'>
+      <TouchableOpacity onPress={props.pressed} className='flex flex-col'>
+       <Icon name="forum" color= '#ee6c4d' size={30} />
+         <Text className='text-[16px] pl-8 font-ageonormal text-gray'>{props.item} LEVEL</Text>
       </TouchableOpacity>
        
     </View>
@@ -33,20 +36,21 @@ const MainChat = ({navigation}) => {
     const [isOffline, setOfflineStatus] = useState(false); 
 
 
-    let department
+    // let department;
 
     useEffect(()=>{
      
         const changeLevels = () => {
-            
-            department = storage.getString('user.department')
+         
+            setLoading(false)
+            const  department = storage.getString('user.department')
             console.log(department)
             let filterLevels = data.department.filter(item => item.name === department)
             console.log(filterLevels)
             levels.current = filterLevels[0].level;  
             setLevel(levels.current)
           }
-
+            setLoading(false)
         changeLevels()
         console.log(level)
     },[])
@@ -81,10 +85,10 @@ const MainChat = ({navigation}) => {
           console.log(isOffline)
         }
         if (err.response.status == 400) {
-          validationerror.current = err.response.data
-          console.error(validationerror.current)
+          const  validationerror = err.response.data
+          console.error(validationerror)
           showMessage({
-            message:  `${validationerror.current}`,
+            message:  `${validationerror}`,
               type: "default",
               backgroundColor:  '#ee6c4d',
             titleStyle: {
@@ -110,18 +114,27 @@ const MainChat = ({navigation}) => {
           })
         }
        }
-       )
-
+       ).finally(() => {
+        setLoading(false);
+      });
       // console.log(currentlevel)
     }
 
   return(
-    <View>
-      <View className='h-20 justify-center items-center mb-8'>
-      <Text className="text-4xl font-ageobold text-main text-center flex-1 justify-center items-center pt-6 ">Discussion Forums</Text>
-      </View>
+    <View className='h-screen'>
+   <View style={styles.header} className='rounded-b-full '>
+        <View className=' bg-gray rounded-b-full w-screen'>
+        <TouchableOpacity onPress={()=>navigation.goBack()} className='pl-4 mt-2'>
+          <Icon name='arrow-left' size={30} color= '#3d5a80' />
+      </TouchableOpacity>
+        <Text className="text-[27px] font-ageobold text-main text-center  ">Discussion Forum</Text>
+        </View>
+          
+        </View>
+    
     
    {loading? <Loader/>:
+   <View className='flex-1 pt-12'>
       <FlatList
               data={level}
               renderItem = {({item})=>
@@ -130,6 +143,7 @@ const MainChat = ({navigation}) => {
               keyExtractor={item => item}
              
               />
+          </View>
       }
   
     </View>
@@ -138,4 +152,11 @@ const MainChat = ({navigation}) => {
 
 export default MainChat
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  header:{
+    backgroundColor: '#eaeaea',
+    height: windowHeight/9,
+    padding: 0,
+
+},
+})

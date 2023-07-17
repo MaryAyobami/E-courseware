@@ -13,11 +13,11 @@ const AxiosProvider = ({children}) => {
   const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({
-    baseURL: 'https://ac01-105-113-20-251.ngrok-free.app',
+    baseURL: 'http://mcourseware.us-east-1.elasticbeanstalk.com',
   });
 
   const publicAxios = axios.create({
-    baseURL: "https://f78c-62-173-62-83.ngrok-free.app",
+    baseURL: "http://mcourseware.us-east-1.elasticbeanstalk.com",
   });
 
   authAxios.interceptors.request.use(
@@ -42,7 +42,7 @@ const AxiosProvider = ({children}) => {
     const options = {
       method: 'POST',
       data,
-      url: `https://f78c-62-173-62-83.ngrok-free.app/api/refreshToken`,
+      url: `http://mcourseware.us-east-1.elasticbeanstalk.com/api/refreshToken`,
     };
 
     return axios(options)

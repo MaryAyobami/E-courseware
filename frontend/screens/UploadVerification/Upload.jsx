@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,TextInput,Pressable, TouchableOpacity, Dimensions} from 'react-native'
+import { StyleSheet, Text, View,TextInput,Pressable, TouchableOpacity, Dimensions, ScrollView} from 'react-native'
 import React,{useState,useRef,useCallback,useContext} from 'react'
 import {data} from '../../components/DepartmentData.js'
 import { Spinner } from '../Spinner.jsx';
@@ -79,6 +79,22 @@ const handleDocumentSelection = useCallback(async () => {
 //  handle upload
 const handleUpload = async()=>{
    try{
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif"]
+    
+    console.log(fileResponse.current.type)
+    if(!allowedTypes.includes((fileResponse.current.type))){
+      showMessage({
+        message: `Only JPEG, PNG, and GIF images are allowed.`,
+          type: "default",
+          backgroundColor: '#3b2e2a',
+        titleStyle: {
+          fontFamily:"tilda-sans_medium",
+          color:'#f8f1e9',
+          fontSize: 16,
+          padding: 4
+        },
+      })
+    }
 
     if(type.current == '' || level.current == ''){
       showMessage({
@@ -138,6 +154,7 @@ const handleUpload = async()=>{
 
 const handlePreview = ()=>{
   const source = {uri: fileResponse.current}
+  console.log(source)
            return(
               <View style={styles.container}>
                   <Pdf
@@ -167,7 +184,7 @@ const handlePreview = ()=>{
             <TouchableOpacity onPress={()=> navigation.openDrawer()}>
                <Icon name="reorder-horizontal" size={35} color='#ee6c4d' />
             </TouchableOpacity> 
-        <Text className="text-4xl font-ageobold text-main text-center flex-1 -ml-12">Share</Text>
+        <Text className="text-[27px] font-ageobold text-main text-center flex-1 -ml-12">Share</Text>
         </View>
           
         </View>
@@ -182,23 +199,29 @@ const handlePreview = ()=>{
           
          
           <TouchableOpacity className="items-center rounded-full border border-main mt-2 bg-" onPress={handleDocumentSelection}>
-           <Text className="text-main  text-xl font-ageomedium py-4 px-12  ">Select File</Text>
+           <Text className="text-main  text-[16px] font-ageomedium py-4 px-12  ">Select File</Text>
           </TouchableOpacity>
             
-          <Text className="text-main  text-xl font-ageomedium py-4 px-12  ">{filename} </Text>
+          <Text className="text-main  text-[16px] font-ageomedium py-4 px-12  ">{filename} </Text>
           {
-            filename && <Text className="text-orange  text-xl font-ageoheavy py-1 px-12  ">PREVIEW FILE</Text>
+            filename &&
+            <TouchableOpacity>
+                  <Text className="text-orange text-center  font-ageoheavy py-1   " onPress={handlePreview}>PREVIEW FILE</Text>
+            </TouchableOpacity>
+       
           }
         
 
           {/* name */}
           {/* <View className='py-2'>
-            <Text className='text-xl font-ageomedium text-grey-800'>Name</Text>
+            <Text className='text-[16px] font-ageomedium text-grey-800'>Name</Text>
             <TextInput className="font-ageonormal border border-main rounded-full text-[20px] px-4 my-3 text-black" placeholder="e.g CSC 411 Lecture Note" onChangeText={(text)=>setName(text)}/>
           </View> */}
           {/* type */}
+          <ScrollView>
+    
           <View className='py-2'>
-            <Text className='text-xl font-ageomedium text-grey-800'>Type</Text>
+            <Text className='text-[16px] font-ageomedium text-grey-800'>Type</Text>
             <Dropdown  
               data={data.resourceType.map((item) => ({ value: item, label: `${item.name}` }))}
               style={styles.dropdownContainer}
@@ -222,7 +245,7 @@ const handlePreview = ()=>{
           {/* department */}
           
           <View className='py-2'>
-             <Text className='text-xl font-ageomedium text-grey-800'>Department</Text>
+             <Text className='text-[16px] font-ageomedium text-grey-800'>Department</Text>
              <Dropdown  
               data={data.department.map((item) => ({ value: item, label: `${item.name}` }))}
               style={styles.dropdownContainer}
@@ -243,7 +266,7 @@ const handlePreview = ()=>{
 
           {/* level */}
           <View className='py-2'>
-            <Text className='text-xl font-ageomedium text-grey-800'>Level</Text>
+            <Text className='text-[16px] font-ageomedium text-grey-800'>Level</Text>
             <Dropdown  
                data={levels.current.map((item)=>({ value: item , label: `${item}` }))}
                style={styles.dropdownContainer}
@@ -269,8 +292,12 @@ const handlePreview = ()=>{
 
         {/* upload button */}
         <TouchableOpacity className="items-center mt-4 rounded-lg bg-main justify-end " onPress={handleUpload}>
-            <Text className="text-lightmain text-xl font-ageomedium py-4 px-12  " >Upload</Text>
+            <Text className="text-lightmain text-[16px] font-ageomedium py-4 px-12  " >Upload</Text>
           </TouchableOpacity>
+            <View className='p-6'>
+
+            </View>
+      </ScrollView>
        </View>
     </View>
   )
@@ -282,7 +309,7 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     color: '#393937',
     fontFamily: 'tilda-sans_regular',
-    fontSize: 20,
+    fontSize: 16,
   },
   dropdownContainer: {
     borderRadius: 5,
@@ -297,7 +324,7 @@ const styles = StyleSheet.create({
   },
   header:{
     backgroundColor: '#eaeaea',
-    height: windowHeight/11,
+    height: windowHeight/10,
     padding: 4,
 
 },

@@ -13,16 +13,16 @@ const SignUp = ({navigation}) => {
       
       <View className="bg-main h-full rounded-tl-[100px] pt-6">
       <View className='items-center'>
-      <Text className="font-ageoheavy text-4xl text-start text-bgcolor ">SignUp</Text>
+      <Text className="font-ageoheavy text-[27px] text-start text-bgcolor ">SignUp</Text>
          <View className='w-[95%] mx-auto text-center justify-center items-center h-[300px]'>
-          <Pressable onPress={()=> navigation.navigate('StudentSignup') }className='py-4 w-[70%]  rounded-full border bg-bgcolor border-lightmain  '><Text className='font-ageomedium text-xl text-center text-main'> Student</Text></Pressable>
+          <Pressable onPress={()=> navigation.navigate('StudentSignup') }className='py-4 w-[70%]  rounded-full border bg-bgcolor border-lightmain  '><Text className='font-ageomedium text-[16px] text-center text-main'> Student</Text></Pressable>
           <Text className='my-2'></Text>
-          <Pressable onPress={()=> navigation.navigate('LecturerSignup')} className='py-4 w-[70%]  rounded-full border bg-bgcolor border-lightmain  '><Text className='font-ageomedium text-xl text-center text-main'> Lecturer </Text></Pressable>
+          <Pressable onPress={()=> navigation.navigate('LecturerSignup')} className='py-4 w-[70%]  rounded-full border bg-bgcolor border-lightmain  '><Text className='font-ageomedium text-[16px] text-center text-main'> Lecturer </Text></Pressable>
          </View>
         
       <Pressable style={styles.button}>
-      <Text className="font-ageonormal text-xl text-orange py-3 text-center  text-lightmain">Have an account?   
-          <Text onPress={()=> navigation.navigate('Login')} className="font-ageonormal text-xl underline px-4 text-orange"> Sign In</Text>
+      <Text className="font-ageonormal text-[16px] py-3 text-center  text-lightmain">Have an account?   
+          <Text onPress={()=> navigation.navigate('Login')} className="font-ageonormal text-[16px] underline px-4 text-orange">Log in</Text>
           </Text>
       </Pressable>
       </View>

@@ -75,11 +75,11 @@ const TabNavigator = () => {
         fontWeight: 'bold',
         padding: 8
       },
-      tabBarActiveTintColor: '#fff',
-      tabBarActiveBackgroundColor: '#fff',
+      tabBarActiveTintColor: '#ee6c4d',
+      tabBarActiveBackgroundColor:'#fff' ,
        
       tabBarHideOnKeyboard: true,
-      tabBarInactiveBackgroundColor:'#E6E6E6'
+      tabBarInactiveBackgroundColor:'#eaeaea' ,
     }}
   >
     <Tab.Screen
@@ -90,7 +90,7 @@ const TabNavigator = () => {
         tabBarLabelStyle:{
           fontSize: 13,
           fontFamily: 'tilda-sans_medium',
-          color: '#ee6c4d',
+          color:  '#ee6c4d',
           paddingBottom: 8 
       },
       
@@ -107,11 +107,11 @@ const TabNavigator = () => {
         tabBarLabelStyle:{
             fontSize: 13,
             fontFamily: 'tilda-sans_medium',
-            color: '#ee6c4d',
+            color:  '#ee6c4d',
             paddingBottom: 8 
         },
         tabBarIcon: ({ color, size }) => (
-          <Icon name="magnify" color= '#ee6c4d' size={30} />
+          <Icon name="magnify" color= '#ee6c4d'size={30} />
         ),
       
       }}
@@ -125,12 +125,12 @@ const TabNavigator = () => {
         tabBarLabelStyle:{
           fontSize: 13,
           fontFamily: 'tilda-sans_medium',
-          color: '#ee6c4d',
+          color:  '#ee6c4d',
           paddingBottom: 8 
       },
       
         tabBarIcon: ({ color, size }) => (
-          <Icon name="chat" color= '#ee6c4d' size={30} />
+          <Icon name="chat" color=  '#ee6c4d' size={30} />
         ),
         tabBarBadge: 3,
       }}
@@ -148,7 +148,7 @@ const TabNavigator = () => {
       },
       
         tabBarIcon: ({ color, size }) => (
-          <Icon name="account" color= '#ee6c4d' size={30} />
+          <Icon name="account" color=  '#ee6c4d'size={30} />
         ),
         // tabBarBadge: 3,
       }}
