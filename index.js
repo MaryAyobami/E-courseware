@@ -32,13 +32,9 @@ const app = express();
 //app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(
-    bodyParser.urlencoded({
-        limit: "300kb",
-        extended: true,
-    })
-    );
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use(cookieParser());
 app.use('/',studentRoute)
@@ -53,7 +49,7 @@ app.use('/',verificationRoute)
 app.use('*', (req, res) => {
     return res.status(404).json({
       success: false,
-      message: 'API endpoint doesnt exist'
+      message: 'API endpoint doesn't exist'
     })
   });
 
