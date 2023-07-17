@@ -28,7 +28,8 @@ const registerSchema = Joi.object({
 
 const loginSchema = Joi.object({
     matricnumber: Joi.string().required().messages({"any.required": "Matric number is required!"}),
-    password: Joi.string().required().messages({"any.required": "Password is required!", "any.only": "Incorrect Password"})
+    password: Joi.string().required().messages({"any.required": "Password is required!", "any.only": "Incorrect Password"}),
+    token: Joi.string().required(),
 })
 const SECRET = process.env.SECRET
 //token
