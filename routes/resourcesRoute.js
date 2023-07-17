@@ -64,12 +64,9 @@ router.post('/api/send-resource',upload.single('resource'), attachStudent,async(
       }
       
       else{
-        // const sender = await Student.findById(req.user.sub)
-        // console.log(sender)
-        // console.log(req.file)
+       
+        console.log(req.file)
         const resource = req.file.location
-        //   //console.log(req.body.resource)
-        // console.log(resource)
           const lecturer = req.user.sub
           const lecturerProfile = await Lecturer.findById(lecturer)
           console.log(lecturerProfile)
@@ -89,9 +86,12 @@ router.post('/api/send-resource',upload.single('resource'), attachStudent,async(
             message: 'Resource uploaded successfully'
           })
       }
-     
+        const sender = await Lecturer.findById(req.user.sub)
+        console.log(sender)
+        const department = sender.department[0]
+        console.log(department)
        
-        const relatedStudents = await Student.find({department: sender.department, pushnotification: true})
+        const relatedStudents = await Student.find({department: department, level: req.body.level})
 
         const tokens = []
         relatedStudents.map(item=>{
@@ -144,9 +144,9 @@ router.post('/api/send-resource',upload.single('resource'), attachStudent,async(
           };
 
           notificationToAll(
-            "This is a string",
-            `This is another string`,
-            ['dmqOpwHJSBGvP4lzP4vAK-:APA91bGox4HkVNQbkNCT5iX1ZLpu1tvAU3NySGi-TE_m05o0qvBSnb_WkIMmOFkCDHWBx7xDvC3Yv-YpfRiRYQtmOUO105_NMqXoy_HDYb9krGrVmIm4RjQHGHIa5DwleX6CY_1YfIvC']
+            "Notification",
+            `A new academic resource has been uploaded`,
+            ['fofcNG_YTwWqzIc2gcpF0b:APA91bEFgl6rtCcOp5-D-7QP6jyPoX4QTLMkayGXeDpqq4yl4oH2tzZLPilfqDwJ784XC1y1IrjUTpRzuk8OXRs8f0UCvdF0fmk2PzXiqtRU3gMR1YWutMkZRpye-U8ULBdyUnnxoKih']
           )
         res.status(200).json({ message: "Successfully sent notifications!" });
 
