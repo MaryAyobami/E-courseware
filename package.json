@@ -85,5 +85,6 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "engines": { "node": ">=16" }
 }
