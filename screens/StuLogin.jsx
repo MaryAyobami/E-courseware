@@ -179,17 +179,17 @@ const StuLogin = ({navigation,route}) => {
     catch(e){
       
       setLoading(false)
-      showMessage({
-        message: `An error has occured, please try again!`,
-          type: "default",
-          backgroundColor:  '#ee6c4d',
-        titleStyle: {
-          fontFamily:"tilda-sans_medium",
-          color:'#f8f1e9',
-          fontSize: 16,
-          padding: 4
-        },
-      })
+      // showMessage({
+      //   message: `An error has occured, please try again!`,
+      //     type: "default",
+      //     backgroundColor:  '#ee6c4d',
+      //   titleStyle: {
+      //     fontFamily:"tilda-sans_medium",
+      //     color:'#f8f1e9',
+      //     fontSize: 16,
+      //     padding: 4
+      //   },
+      // })
     }
   }
 

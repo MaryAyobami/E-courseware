@@ -161,7 +161,7 @@ const StuSignup = ({navigation}) => {
       }
     }
     catch(e){
-      
+      console.log(e)
     }
   }
 

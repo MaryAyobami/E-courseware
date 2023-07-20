@@ -143,7 +143,7 @@ const LecturerProfile = ({navigation}) => {
                 ])
             
                }} >
-                <Text className='text-center p-4 font-ageomedium border border-orange rounded-full w-[30%] text-orange1'>LOGOUT</Text>
+                <Text className='text-center p-4 font-ageomedium border border-orange1 rounded-full w-[30%] text-orange1'>LOGOUT</Text>
               </TouchableOpacity>
 
 

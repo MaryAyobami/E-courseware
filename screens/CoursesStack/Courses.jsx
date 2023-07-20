@@ -430,10 +430,10 @@ if (userType == "Student"){
 
             <View className=' h-60 w-[60%]
             '>
-            <Image source={require('../../assets/uploading.png')} style={{width: '100%', height:'100%'}} resizeMode="cover"/>
+            <Image source={require('../../assets/uploading.png')} style={{width: '110%', height:'100%'}} resizeMode="cover"/>
            </View>
 
-                                        <View className='bg-grey p-2 justify-end w-[50%] rounded-lg row-span-3'>
+                                        <View className='bg-grey p-2 justify-end w-[60%] rounded-lg row-span-3'>
             
                                         <Text className='text-darkmain font-ageo p-4 rounded-full text-[18px] text-center'>
                                           Upload academic resources.
@@ -454,7 +454,7 @@ if (userType == "Student"){
 
                                       </View>
                               <View className='h-60  w-[60%] '>
-                                <Image source={require('../../assets/orangebook.png')} style={{width: '100%', height:'100%'}} resizeMode="cover"/>
+                                <Image source={require('../../assets/orangebook.png')} style={{width: '120%', height:'120%'}} resizeMode="cover"/>
                               </View>
                                        
                                           

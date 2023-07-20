@@ -122,6 +122,9 @@ const LectureNotes = ({route,navigation}) => {
                     //   <RefreshControl refreshing={refreshing} onRefresh={getTasks} size={'large'} colors={['gray']} />
                     // }
                     />
+                <View className='p-8'>
+                  <Text>njdjjdj</Text>
+                  </View>
               
           </View>
           :

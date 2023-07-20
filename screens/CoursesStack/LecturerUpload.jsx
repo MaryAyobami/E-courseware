@@ -257,7 +257,7 @@ const handlePreview = ()=>{
 
        <View className='w-[95%] mx-auto py-4'>
          
-          <Text className='font-ageonormal text-[12px] text-center text-grey-800'>The learning materials uploaded here will be saved to the central database.</Text>
+          <Text className='font-ageonormal text-[12px] text-center text-grey-800'>Academic resources uploaded here will be saved to the central database.</Text>
        </View>
 
 {
