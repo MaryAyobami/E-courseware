@@ -52,7 +52,7 @@ admin.initializeApp({
 });
 
 
-router.post('/api/send-resource',upload.single('resource'), attachStudent,async(req,res)=>{
+router.post('/api/send-resource',upload.single('resource'),async(req,res)=>{
     try{
 
       console.log(req.file)
@@ -67,8 +67,9 @@ router.post('/api/send-resource',upload.single('resource'), attachStudent,async(
        
         console.log(req.file)
         const resource = req.file.location
-          const lecturer = req.user.sub
-          const lecturerProfile = await Lecturer.findById(lecturer)
+          // const lecturer = req.user.sub
+        /
+          // const lecturerProfile = await Lecturer.findById(lecturer)
           console.log(lecturerProfile)
           const newResource = Resource({
               link: resource,
@@ -76,7 +77,7 @@ router.post('/api/send-resource',upload.single('resource'), attachStudent,async(
               type: req.body.type,
               department: req.body.department,
               level: req.body.level,
-              sender: lecturerProfile.name,
+              sender: req.body.sender,
               filesize: req.file.size,
               fileformat : req.file.contentType
           })
@@ -111,8 +112,8 @@ router.post('/api/send-resource',upload.single('resource'), attachStudent,async(
         await admin.messaging().sendMulticast({
           tokens,
           notification:{
-            title:'courseware notification',
-            body: 'testing application'
+            title:'Notification from m-courseware',
+            body: 'Hello, A new resource has been uploaded'
           },
           notification_options
         });
