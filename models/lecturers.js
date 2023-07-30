@@ -30,6 +30,7 @@ const lecturer = mongoose.Schema({
         required: true,
        
     },
+    
    
 })
 

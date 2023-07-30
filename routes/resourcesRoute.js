@@ -13,6 +13,7 @@ const SerpApi = require('google-search-results-nodejs');
 const search = new SerpApi.GoogleSearch("3d8ded321f6009b48d30e82f287a0b2f23389ac006db4744f67df42aa45548fc");
 const admin = require("firebase-admin");
 const serviceAccount = require("../firebase.json");
+const Activity = require('../models/activities')
 
 // aws credentials
 AWS.config.update({
@@ -52,7 +53,7 @@ admin.initializeApp({
 });
 
 
-router.post('/api/send-resource',upload.single('resource'),async(req,res)=>{
+router.post('/api/send-resource',attachStudent,upload.single('resource'),async(req,res)=>{
     try{
 
       console.log(req.file)
@@ -67,6 +68,7 @@ router.post('/api/send-resource',upload.single('resource'),async(req,res)=>{
        
         console.log(req.file)
         const resource = req.file.location
+        
           const lecturer = req.user.sub
         
           const lecturerProfile = await Lecturer.findById(lecturer)
@@ -77,85 +79,109 @@ router.post('/api/send-resource',upload.single('resource'),async(req,res)=>{
               type: req.body.type,
               department: req.body.department,
               level: lecturerProfile.name,
-              sender: req.body.sender,
+              sender: lecturerProfile,
               filesize: req.file.size,
               fileformat : req.file.contentType
           })
           await newResource.save()
+
+          const activity = Activity({
+            title: 'upload',
+            resourceId: newResource._id,
+            resourceName: newResource.name,
+            sender: lecturerProfile._id
+          })
+          console.log(activity)
+          await activity.save()
   
           res.status(201).json({
             message: 'Resource uploaded successfully'
           })
       }
-        const sender = await Lecturer.findById(req.user.sub)
-        console.log(sender)
-        const department = sender.department[0]
-        console.log(department)
+        // const sender = await Lecturer.findById(req.user.sub)
+        // console.log(sender)
+        // const department = sender.department[0]
+        // console.log(department)
        
-        const relatedStudents = await Student.find({department: department, level: req.body.level})
+        // const relatedStudents = await Student.find({department: department, level: req.body.level})
 
-        const tokens = []
-        relatedStudents.map(item=>{
-          if(item.token != undefined){
-            tokens.push(item.token)
-          }
+        // const tokens = []
+        // relatedStudents.map(item=>{
+        //   if(item.token != undefined){
+        //     tokens.push(item.token)
+        //   }
 
-        })
-        console.log(tokens)
+        // })
+        // console.log(tokens)
         
 
-        const notification_options = {
-          priority: "high",
-          timeToLive: 60 * 60 * 24
-        }
+        // const notification_options = {
+        //   priority: "high",
+        //   timeToLive: 60 * 60 * 24
+        // }
 
-        await admin.messaging().sendMulticast({
-          tokens,
-          notification:{
-            title:'Notification from m-courseware',
-            body: 'Hello, A new resource has been uploaded'
-          },
-          notification_options
-        });
+        // await admin.messaging().sendMulticast({
+        //   tokens,
+        //   notification:{
+        //     title:'Notification from m-courseware',
+        //     body: 'Hello, A new resource has been uploaded'
+        //   },
+        //   notification_options
+        // });
 
-        const notificationToAll = (title, body, tokens) => {
-          var notibody = {
-            notification: {
-              title: title,
-              body: body,
-            },
-            tokens: tokens,
-          };
-          return new Promise((resolve, reject) => {
-            admin
-              .messaging()
-              .sendMulticast(notibody)
-              .then((response) => {
-                console.log(response.responses);
-                if (response.responses[0].error != undefined) {
-                  console.log(JSON.stringify(response.responses[0].error));
-                }
-                resolve(response);
-              })
-              .catch((error) => {
-                console.log(JSON.stringify(error));
-                reject(error);
-              });
-          });
-          };
+        // const notificationToAll = (title, body, tokens) => {
+        //   var notibody = {
+        //     notification: {
+        //       title: title,
+        //       body: body,
+        //     },
+        //     tokens: tokens,
+        //   };
+        //   return new Promise((resolve, reject) => {
+        //     admin
+        //       .messaging()
+        //       .sendMulticast(notibody)
+        //       .then((response) => {
+        //         console.log(response.responses);
+        //         if (response.responses[0].error != undefined) {
+        //           console.log(JSON.stringify(response.responses[0].error));
+        //         }
+        //         resolve(response);
+        //       })
+        //       .catch((error) => {
+        //         console.log(JSON.stringify(error));
+        //         reject(error);
+        //       });
+        //   });
+        //   };
 
-          notificationToAll(
-            "Notification",
-            `A new academic resource has been uploaded`,
-            tokens
-          )
-        res.status(200).json({ message: "Successfully sent notifications!" });
+        //   notificationToAll(
+        //     "Notification",
+        //     `A new academic resource has been uploaded`,
+        //     tokens
+        //   )
+        // res.status(200).json({ message: "Successfully sent notifications!" });
 
     }
     catch(e){
         console.log(e)
         res.status(404).send(`An error occured`)
     }
+})
+
+// delete
+router.post('/api/delete', attachStudent, async(req,res)=>{
+  try{
+    
+   await Resource.findbyIdandDelete(req.id)
+   res.status(200).send(
+    'resource has been successfully deleted'
+   )
+  }
+  catch(e){
+    console.log(e)
+    res.status(404).send(`An error occured`)
+}
 })
 
 //search 

@@ -10,7 +10,10 @@ const jwt = require('express-jwt');
 const axios = require('axios');
 const dotenv = require('dotenv')
 const randToken = require('rand-token'); 
+
 const attachStudent = require('../auth/attachStudent')
+const Activity = require('../models/activities')
+
 dotenv.config()
 // validation with joi
 const registerSchema = Joi.object({
@@ -136,6 +139,27 @@ router.post('/api/login-lecturer', async (req,res)=>{
         })
     }
 })
+
+//  get activities
+router.get('/api/get-activities', attachStudent, async(req,res)=>{
+  try{
+    
+   const activities = await Activity.find({sender:req.user.sub})
+
+   console.log(activities)
+   
+   res.status(200).send(
+    {
+      activities
+    }
+   )
+  }
+  catch(e){
+    console.log(e)
+    res.status(404).send(`An error occured`)
+}
+})
+
 
 // refresh token
 router.post('/api/refreshToken', async (req, res) => {

@@ -56,7 +56,7 @@ const createRefreshToken = () => randToken.uid(256)
 // registration
 router.post('/api/register-student' , async(req,res)=>{
     // validation
-    const { error } = registerSchema.validate(req.body)
+    const { error } = registerSchema.validate(req.query)
     if (error) {
         return res.status(400).send(error.details[0].message)
     }
@@ -69,17 +69,17 @@ router.post('/api/register-student' , async(req,res)=>{
         else{
             //  hash passwords
             const salt = await bcrypt.genSalt(0)
-            const hashedpassword = await bcrypt.hash(req.body.password,salt)
+            const hashedpassword = await bcrypt.hash(req.query.password,salt)
             
             const student = new Student({
-                name : req.body.name,
-                matricnumber : req.body.matricnumber, 
-                email : req.body.email,
+                name : req.query.name,
+                matricnumber : req.query.matricnumber, 
+                email : req.query.email,
                 password : hashedpassword,
-                department : req.body.department,
-                college : req.body.college,
-                level: req.body.level,
-                token: req.body.token,
+                department : req.query.department,
+                college : req.query.college,
+                level: req.query.level,
+                token: req.query.token,
 
             })
             const newStudent = await student.save()
