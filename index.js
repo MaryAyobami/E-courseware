@@ -12,7 +12,12 @@ import {AuthProvider} from './components/context/AuthContext';
 import {AxiosProvider} from './components/context/AxiosContext';
 
 
+
+
+
 const Root = () => {
+
+
     return (
     
           <AuthProvider>

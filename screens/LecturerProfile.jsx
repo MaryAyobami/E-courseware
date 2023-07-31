@@ -63,7 +63,7 @@ const LecturerProfile = ({navigation}) => {
         </TouchableOpacity>
         
   */}
-        <TouchableOpacity className='justify-end items-end px-4'>
+        <TouchableOpacity className='justify-end items-end px-4' onPress={()=> navigation.navigate("LecturerActivity")}>
             <Text className='xl font-ageoheavy text-orange1'
            
             >View Activity History</Text>

@@ -14,6 +14,7 @@ import {useFloating, shift} from '@floating-ui/react-native';
 import Resource from '../../components/Resource';
 import { set } from 'react-native-reanimated';
 
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -41,7 +42,7 @@ const Courses = ({navigation}) => {
  
   })
 
-// flaoting
+// flaotingb
 const {refs, floatingStyles} = useFloating({
   middleware: [shift()],
 });

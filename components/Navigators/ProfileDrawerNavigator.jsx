@@ -16,6 +16,7 @@ import UploadStackNavigator from './UploadStackNavigator';
 import { storage } from '../../screens/StuLogin';
 import { createStackNavigator } from '@react-navigation/stack';
 import LecturerProfile from '../../screens/LecturerProfile';
+import LecturerProfileStack from './LecturerProfileStack';
 
 
 
@@ -180,10 +181,7 @@ const ProfileDrawerNavigator = () => {
       else if(userType == 'Lecturer'){
 return(
 
-      <Stack.Navigator>
-      <Stack.Screen name="Profile" component={LecturerProfile} options={{headerShown: false}} />       
-    
-      </Stack.Navigator>
+      <LecturerProfileStack/>
     )
       }
 }

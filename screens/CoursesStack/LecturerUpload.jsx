@@ -284,7 +284,7 @@ const handlePreview = ()=>{
           {
             filename && 
             <TouchableOpacity
-            //  onPress={()=>setPreview(true)}
+            onPress={()=>setPreview(true)}
             >
               <Text className="text-orange1 text-center text-[14px] font-ageoheavy py-2 px-12  ">PREVIEW FILE</Text>
             </TouchableOpacity>

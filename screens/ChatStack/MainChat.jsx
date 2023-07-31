@@ -44,8 +44,8 @@ const MainChat = ({navigation}) => {
          
             setLoading(false)
             const  department = storage.getString('user.department')
-            
-            let filterLevels = data.department.filter(item => item.name === department)
+            console.log(department)
+            let filterLevels = data.department.filter(item => item.name == department)
             
             levels.current = filterLevels[0].level;  
             setLevel(levels.current)
@@ -60,8 +60,6 @@ const MainChat = ({navigation}) => {
          setLoading(true)
          await authAxios.get(`/api/forum-members/?level=${currentlevel}`).then((response)=>{
         
-        
- 
         navigation.navigate('Chatroom',{
         
         members: response.data.users,

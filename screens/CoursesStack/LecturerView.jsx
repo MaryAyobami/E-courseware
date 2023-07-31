@@ -34,7 +34,8 @@ const LecturerView = ({navigation}) => {
                setLoading(false)
                navigation.navigate('LecturerAR',{
                title: type ,
-               resources: response.data.resources
+               resources: response.data.resources,
+     
               })
               })
               .catch((err)=>

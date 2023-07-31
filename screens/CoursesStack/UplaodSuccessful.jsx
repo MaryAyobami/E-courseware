@@ -19,7 +19,7 @@ const UploadSuccessful = ({navigation}) => {
         </View>
         </View>
         <Pressable style={styles.button}>
-            <Text onPress={()=> navigation.navigate('Login')} className="font-ageonormal border-2 border-main rounded-full px-6 py-4 text-[18px] text-orange1 bg-main focus:text-main">SProceed to check</Text>
+            <Text onPress={()=> navigation.navigate('LecturerView')} className="font-ageonormal border-2 border-main rounded-full px-6 py-4 text-[18px] text-orange1 bg-main focus:text-main">Proceed to check</Text>
             </Pressable>
     </SafeAreaView>
   )

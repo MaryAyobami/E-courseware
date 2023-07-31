@@ -70,7 +70,7 @@ const LectureNotes = ({route,navigation}) => {
           {/* resources */}
           
           {
-            resources.length? 
+            resources? 
             <View className='w-[98%] mx-auto pt-8 ' >
                <ScrollView>
                 {level.map((item)=>(
@@ -123,7 +123,7 @@ const LectureNotes = ({route,navigation}) => {
                     // }
                     />
                 <View className='p-8'>
-                  <Text>njdjjdj</Text>
+               
                   </View>
               
           </View>

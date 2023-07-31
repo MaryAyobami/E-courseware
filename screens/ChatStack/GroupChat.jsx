@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as TalkRn from '@talkjs/react-native';
 import { storage } from '../StuLogin';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,12 +9,14 @@ const GroupChat = ({navigation,route}) => {
 
   const {members, currentuser , currentlevel}= route.params
   
-
+ useEffect(()=>{
+  console.log(currentuser)
+ })
   const me = {
-    id: '1',
+    id: currentuser._id,
     name: storage.getString('user.name'),
     email: storage.getString('user.email'),
-    // photoUrl: '',
+    photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJQ-NCMFIn2rSYyVUZDyaXP6yau90cTKhBk9BnARSrGQ&s',
     // welcomeMessage: 'Hey there! How are you? :-)',
     role: 'default',
   };
@@ -31,7 +33,7 @@ const GroupChat = ({navigation,route}) => {
       id: item._id,
       name: item.name,
       email: item.email,
-      // photoUrl: '',
+      // photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJQ-NCMFIn2rSYyVUZDyaXP6yau90cTKhBk9BnARSrGQ&s',
       // welcomeMessage: 'Hey there! How are you? :-)',
       role: 'default',
     };
@@ -63,7 +65,7 @@ const GroupChat = ({navigation,route}) => {
         <TouchableOpacity onPress={()=>navigation.goBack()} className='pl-4 mt-2'>
           <Icon name='arrow-left' size={30} color= '#3d5a80' />
       </TouchableOpacity>
-        <Text className="text-[27px] font-ageobold text-main text-center pb-2  ">{currentlevel} level</Text>
+        <Text className="text-[27px] font-ageobold text-main text-center pb-02  ">{currentlevel} level</Text>
         </View>
           
         </View>
@@ -75,7 +77,18 @@ const GroupChat = ({navigation,route}) => {
            </View>
           ) : (
             <TalkRn.Session appId='tsGSO0Vc' me={me}>
-            <TalkRn.Chatbox conversationBuilder={conversationBuilder}  loadingComponent=<Loader/> />
+            <TalkRn.Chatbox conversationBuilder={conversationBuilder}  loadingComponent=<Loader/> 
+            messageField={{
+              autofocus: 'smart',
+              enterSendsMessage: false,
+              placeholder: 'Send a message',
+              spellcheck: true,
+              visible: {
+                // Show the message field only if user access is set to 'ReadWrite'
+                access: ['==', 'ReadWrite']
+              }
+            }}
+            />
           </TalkRn.Session>
           )}
       

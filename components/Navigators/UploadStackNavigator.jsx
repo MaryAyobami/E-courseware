@@ -9,6 +9,7 @@ import ApprovalRequestSuccessful from '../../screens/UploadVerification/Approval
 import VerificationSuccessful from '../../screens/UploadVerification/VerificationSuccessful';
 import UploadSuccessful from '../../screens/CoursesStack/UplaodSuccessful';
 import LecturerUpload from '../../screens/CoursesStack/LecturerUpload';
+import LecturerView from '../../screens/CoursesStack/LecturerView';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,8 @@ const UploadStackNavigator = () => {
         <Stack.Screen name="VerificationSuccessful" component={VerificationSuccessful} options={{headerShown: false}} /> 
         <Stack.Screen name="ID Card Verification" component={VerificationOption1} options={{headerShown: true}} />             
         <Stack.Screen name="Instructor's Approval" component={VerificationOption2} options={{headerShown: true}} />        
-        <Stack.Screen name="ApprovalRequestSuccessful" component={ApprovalRequestSuccessful} options={{headerShown: false}} />        
+      
+        <Stack.Screen name="LecturerView" component={LecturerView} options={{headerShown: false}} />    <Stack.Screen name="ApprovalRequestSuccessful" component={ApprovalRequestSuccessful} options={{headerShown: false}} />        
     </Stack.Navigator>
   )
 }

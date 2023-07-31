@@ -10,44 +10,6 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler'
 
-const DisplayResources = (props) =>{
-  return(
-      <View className='w-[98%] mx-auto pt-8 ' >
-  
-      <FlatList
-              data={props.resources}
-              renderItem = {({item})=>
-                <Resource res={item}/>    
-              }
-              keyExtractor={item => item._id}
-              />
-        
-     </View>
-  )
-}
-
-const Displaylevel= (props)=>{
-    const [showResorces, setShow] = useState(props.show)
-    return(
-     <View className='bg-bgcolor rounded-lg shadow-lg p-4 my-2 w-[98%] mx-auto'>
-           <Text className='text-[18px] font-ageonormal text-main'>{props.item} LEVEL</Text>
-                <TouchableOpacity onPress={props.pressed}>
-                    <Icon name="chat" color= '#ee6c4d' size={30} />
-                </TouchableOpacity>
-     
-            <View>
-        {
-                              showResorces ?
-                              <DisplayResources resources={props.resources}/>
-                              :
-                              <>
-                              </>
-                              }
-        </View>
-     </View>
-    )
- }
-
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -61,7 +23,7 @@ const LecturersAR = ({navigation,route}) => {
     const levelResources = useRef([])
     const levels = useRef([])
    
-    // const [showResorces, setShow] = useState(false)
+    const [showResorces, setShow] = useState(false)
     
     useEffect(()=>{
      
@@ -79,55 +41,52 @@ const LecturersAR = ({navigation,route}) => {
         
     },[])
 
-    // const DisplayResources = (props) =>{
-    //   return(
-    //       <View className='w-[98%] mx-auto pt-8 ' >
+    const DisplayResources = () =>{
+      return(
+          <View className='w-[98%] mx-auto pt-12' >
       
-    //       <FlatList
-    //               data={props.resources}
-    //               renderItem = {({item})=>
-    //                 <Resource res={item}/>    
-    //               }
-    //               keyExtractor={item => item._id}
-    //               />
+          <FlatList
+                  data={levelResources.current}
+                  renderItem = {({item})=>
+                    <Resource res={item}/>    
+                  }
+                  keyExtractor={item => item._id}
+                  />
             
-    //      </View>
-    //   )
-    // }
+         </View>
+      )
+    }
     
-    // const Displaylevel= (props)=>{
-    //     const [showResorces, setShow] = useState(false)
-    //     
-
+    const Displaylevel= (props)=>{
+   
         
-    //     return(
-    //      <View className=' shadow-lg px-4 pt-8 mt-2 mx-12  '>
-    //            <Text className='text-[18px]  font-ageonormal text-main'>{props.item} LEVEL</Text>
-    //                 <TouchableOpacity onPress={props.pressed} className='text-center'>
-    //                     <Icon name="chevron-down" color= '#ee6c4d' size={30} />
-    //                 </TouchableOpacity>
-         
-    //             <View>
-    //         {
-    //                               showResorces ?
-    //                               <DisplayResources resources={levelResources.current}/>
-    //                               :
-    //                               <>
-    //                               </>
-    //                               }
-    //         </View>
-    //      </View>
-    //     )
-    //  }
+        return(
+          <View className='bg-main rounded-lg shadow-sm px-4 py-8 my-2 w-[98%] mx-auto'>
+          <TouchableOpacity onPress={props.pressed} className='flex flex-col'>
+           <Icon name="chat" color= '#ee6c4d' size={30} />
+             <Text className='text-[18px] pl-8 font-ageonormal text-gray'>{props.item} LEVEL</Text>
+          </TouchableOpacity>
+           
+        </View>
+        )
+     }
     
     const sortResources = (level)=>{
         
         
         const filterResources = resources.filter(item => item.level == level)
         levelResources.current = filterResources
+
+        console.log(levelResources)
       
         
-        // setShow(true)
+      navigation.navigate('AR',
+      {
+        resources: levelResources,
+        currentlevel: level,
+        currentAR:title
+      }
+      )
         
         // return(
         //     <DisplayResources resources={levelResources.current}/>
@@ -141,41 +100,31 @@ const LecturersAR = ({navigation,route}) => {
             <TouchableOpacity onPress={()=>navigation.goBack()} className='pl-4'>
               <Icon name='arrow-left' size={40} color='#3d5a80' />
           </TouchableOpacity>
-            <Text className="text-[27px] font-ageobold text-main text-center  ">Academic Resources</Text>
+            <Text className="text-[27px] font-ageobold text-main text-center  ">{title}</Text>
             </View>
               
             </View>
 
+            <View className='pt-8'>
             <FlatList
                         data={level}
                         renderItem = {({item})=>
                         <>
-                          <Displaylevel item={item} pressed={()=>sortResources(item)} show={true} resources={levelResources.current}/>
-                              {/* {
-                              showResorces && item ?
-                              <DisplayResources resources={levelResources.current}/>
-                              :
-                              <>
-                              </>
-                              } */}
+                          <Displaylevel item={item} pressed={()=>sortResources(item)} />
+       
                         </>
                            
                         }
                         keyExtractor={item => item}
-                        horizontal={true}
+                    
                         
                         />
-                <View className='p-4'>
-
-                </View>
-                    {/* {
-                                  showResorces ?
-                                  <DisplayResources resources={levelResources.current}/>
-                                  :
-                                  <>
-                                  </>
-                                  }  */}
-
+       
+            </View>
+    
+                
+                                
+                                
  
     </View>
   )

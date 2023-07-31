@@ -153,7 +153,7 @@ const Resource = (props) => {
             Title : ${title}
             Author:${publication_info.summary.split('-')[0]}
             Summary: ${publication_info.summary} 
-            ${snippet}
+            ${snippet}  
             
 
                      `
